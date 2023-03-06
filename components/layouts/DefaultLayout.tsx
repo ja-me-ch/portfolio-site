@@ -14,14 +14,33 @@ const RootStyle = styled("div")((props: {offset: string}) => ({
     overflow: 'hidden',
 }));
 
-const Canvas = styled("div")((props: {offset: string}) => ({
+const Canvas = styled("div")((props: { offset: string }) => ({
     borderRadius: "0.2rem",
-    borderTopRightRadius: 'unset',
+    borderTopRightRadius: "unset",
     padding: "1rem",
-    height: '100%',
+    height: "100%",
     maxHeight: `${100 - Number.parseInt(props.offset) * 2}vh`,
     background: "#d9d9d9",
     boxShadow: "3px 5px 5px 5px rgba(0, 0, 0, 0.35)",
+    overflow: "overlay",
+    "&::-webkit-scrollbar": {
+        width: "0px",
+        transition: "all 1s ease",
+    },
+    "&::-webkit-scrollbar-track": {
+        marginTop: "0.5rem",
+        marginBottom: "0.5rem",
+    },
+    "&::-webkit-scrollbar-thumb": {
+        background: "rgba(26, 26, 26, 0.3)",
+        borderRadius: "100vw",
+        position: "relative",
+    },
+    "&:hover": {
+        "&::-webkit-scrollbar": {
+            width: "5px",
+        },
+    },
 }));
 
 const AccentBar = styled("div")(() => ({

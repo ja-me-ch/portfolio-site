@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { styled } from "@mui/material";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const RootStyle = styled("div")(() => ({
     // border: "1px solid red",
@@ -14,8 +15,6 @@ const Title = styled("h1")(() => ({
     fontSize: "3rem",
     borderBottom: "2px solid #000",
 }));
-
-
 
 const Nav = styled("div")(() => ({
     display: "flex",
@@ -34,58 +33,58 @@ const NavItem = styled(Link)(() => ({
     padding: "0.3rem",
     fontSize: "1.5rem",
     borderRadius: "0.3rem",
-    transition: "all 0s",
+    transition: "all 0s linear",
     overflow: "hidden",
     "&:hover": {
         borderBottom: "2px solid #1C74BD",
         borderRight: "2px solid #1C74BD",
-        '.wave': {
-            // top: '10px',
-            opacity: '25%',
-        }
+        ".wave": {
+            top: "5px",
+            opacity: "25%",
+        },
     },
 }));
 
 const Wave = styled("span")(
-    (props?: { duration?: number; scale?: number }) => ({
+    (props?: { duration?: number | number[]; scale?: number | number[] }) => ({
         position: "absolute",
-        top: "10%",
-        left: "-50%",
+        top: "15px",
+        left: "-55%",
         height: "12rem",
         width: "12rem",
         backgroundColor: "#1C74BD",
-        opacity: "10%",
+        opacity: "20%",
         borderRadius: "43%",
-        border: '1px solid white',
-        transition: "1s all linear",
-        animation: `wave ${
+        border: "1px solid white",
+        transition: "all 1s ease-in-out",
+        animation: `waves ${
             props.duration ? props.duration : "5"
         }s infinite linear`,
-        "@keyframes wave": {
+        "@keyframes waves": {
             "0%": {
                 transform: `rotate(0deg) scale(${
-                    props.scale ? props.scale : 1
-                })`,
+                    props.scale ? props.scale[0] : 1
+                }) translateX(-5%)`,
             },
             "25%": {
                 transform: `rotate(90deg) scale(${
-                    props.scale ? props.scale : 0.95
-                })`,
+                    props.scale ? props.scale[1] : 0.95
+                }) translateX(5%)`,
             },
             "50%": {
                 transform: `rotate(180deg) scale(${
-                    props.scale ? props.scale : 1
-                })`,
+                    props.scale ? props.scale[2] : 1
+                }) translateX(-5%)`,
             },
             "75%": {
                 transform: `rotate(270deg) scale(${
-                    props.scale ? props.scale : 0.9
-                })`,
+                    props.scale ? props.scale[3] : 0.9
+                }) translateX(5%)`,
             },
             "100%": {
                 transform: `rotate(360deg) scale(${
-                    props.scale ? props.scale : 1
-                })`,
+                    props.scale ? props.scale[0] : 1
+                }) translateX(-5%)`,
             },
         },
     })
@@ -94,17 +93,33 @@ const Wave = styled("span")(
 function Navbar(props: { title: string }) {
     const { title } = props;
 
-    const waveDuration = [8, 15];
-    const waveScale = [0.85, 1];
+    const params = useRouter();
+    // console.log(params);
+    let rndWaveDuration = 10;
+    let rndWaveScales = [1, 0.95, 1, 0.95];
 
-    const getRandomNumber = function (array) {
-        const minNum = array[0];
-        const maxNum = array[1];
-        const rnd = Math.random() * (maxNum - minNum) + minNum;
-        if (Number.isSafeInteger(minNum) && Number.isSafeInteger(maxNum))
-            return Math.floor(rnd);
-        return rnd;
-    };
+
+    useEffect(() => {
+        const waveDuration = [8, 12];
+        const waveScale = [0.85, 1];
+        const getRandomNumber = function (array): number[] | number {
+            // const minNum = array[0];
+            // const maxNum = array[1];
+
+            const rnd = function (array: number): number {
+                return Math.random() * (array[1] - array[0]) + array[0];
+            };
+            if (
+                Number.isSafeInteger(array[0]) &&
+                Number.isSafeInteger(array[1])
+            )
+                return Math.floor(rnd(array));
+            return [rnd(array), rnd(array), rnd(array), rnd(array)];
+        };
+
+        rndWaveDuration = getRandomNumber(waveDuration) as number;
+        rndWaveScales = getRandomNumber(waveScale) as number[];
+    }, []);
 
     return (
         <RootStyle>
@@ -114,32 +129,34 @@ function Navbar(props: { title: string }) {
                     Home
                     <Wave
                         className="wave"
-                        duration={getRandomNumber(waveDuration)}
-                        scale={getRandomNumber(waveScale)}
+                        duration={rndWaveDuration}
+                        scale={rndWaveScales}
                     />
                 </NavItem>
                 <NavItem className="NavItem" href={"/projects"}>
                     Projects
                     <Wave
                         className="wave"
-                        duration={getRandomNumber(waveDuration)}
-                        scale={getRandomNumber(waveScale)}
+                        duration={rndWaveDuration}
+                        scale={rndWaveScales}
                     />
                 </NavItem>
                 <NavItem className="NavItem" href={"/"}>
-                    About
-                    <Wave
-                        className="wave"
-                        duration={getRandomNumber(waveDuration)}
-                        scale={getRandomNumber(waveScale)}
-                    />
+                    <div>
+                        About
+                        <Wave
+                            className="wave"
+                            duration={rndWaveDuration}
+                            scale={rndWaveScales}
+                        />
+                    </div>
                 </NavItem>
                 <NavItem className="NavItem" href={"/"}>
                     Glossary
                     <Wave
                         className="wave"
-                        duration={getRandomNumber(waveDuration)}
-                        scale={getRandomNumber(waveScale)}
+                        duration={rndWaveDuration}
+                        scale={rndWaveScales}
                     />
                 </NavItem>
             </Nav>
