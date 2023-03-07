@@ -17,22 +17,11 @@ const ProjectItem = styled("div")(() => ({
 }));
 
 const previews = master.map((pv, index) => {
-    return <Project preview={pv} key={index} />;
+    return <Project preview={pv} key={index} index={index} />;
 });
 
 const ProjectsIndex: React.FC = function () {
-    return (
-        <RootStyle>
-            <ProjectItem>
-                {previews}
-                {/* <Project preview={master[0]} /> */}
-            </ProjectItem>
-            <ProjectItem></ProjectItem>
-            <ProjectItem></ProjectItem>
-            <ProjectItem></ProjectItem>
-            <ProjectItem></ProjectItem>
-        </RootStyle>
-    );
+    return <RootStyle>{previews}</RootStyle>;
 };
 
 export default ProjectsIndex

@@ -1,7 +1,8 @@
 export default interface Preview {
-    imageUrl: string,
+    title: string,
+    imageUrl?: string,
     description: string,
-    siteUrl: string,
+    siteUrl?: string,
     github: string,
     tags: string[]
 }

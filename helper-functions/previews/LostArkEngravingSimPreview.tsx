@@ -1,6 +1,7 @@
 import Preview from "../../interfaces/preview.interface";
 
 const LostArkEngravingSimPreview: Preview = {
+    title: 'Lost Ark Engraving Simulator',
     imageUrl: "",
     description:
         "A single page application that simulates the engraving system for the game Lost Ark.",
