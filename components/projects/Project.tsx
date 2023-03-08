@@ -38,7 +38,7 @@ interface IProps {
 const Project = function (props: IProps) {
     const { preview, index } = props;
     const { title, imageUrl, description, siteUrl, github, tags } = preview;
-    console.log(props);
+    // console.log(props);
 
     const projectReadMore = <LinkTag text={"Read More"} link={"/"} />;
     LinkTag;
@@ -51,7 +51,7 @@ const Project = function (props: IProps) {
     return (
         <RootStyle index={index}>
             <PreviewImageContainer>
-                <Image src={imageUrl} alt={`Preview of ${title}`} />
+                {/* <Image src={''} alt={`Preview of ${title}`} /> */}
             </PreviewImageContainer>
             <ProjectPreviewContent>
                 <Title>{title}</Title>
