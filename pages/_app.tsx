@@ -4,16 +4,17 @@ import { ThemeProvider } from "@emotion/react";
 import theme from "../styles/theme";
 import { CustomTheme, styled } from "@mui/material";
 
-const RootStyle = styled("div")((props: {theme: CustomTheme}) => ({
-  backgroundColor: 'red',
+const RootStyle = styled("div")(() => ({
+  // backgroundColor: theme.themes.modes.dark.main,
   // border: '1px solid red',
-  padding: '0',
+  padding: `0`,
   margin: '0',
 }));
 
 function MyApp({ Component, pageProps }) {
+  const a = 1;
   return (
-    <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}>
           <RootStyle>
               <DefaultLayout>
                   <Component {...pageProps} />

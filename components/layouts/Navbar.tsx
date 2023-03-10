@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { styled } from "@mui/material";
+import { CustomTheme, styled } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -46,7 +46,11 @@ const NavItem = styled(Link)(() => ({
 }));
 
 const Wave = styled("span")(
-    (props?: { duration?: number | number[]; scale?: number | number[] }) => ({
+    (props?: {
+        duration?: number | number[];
+        scale?: number | number[];
+        theme: CustomTheme;
+    }) => ({
         position: "absolute",
         top: "15px",
         left: "-55%",
@@ -98,7 +102,6 @@ function Navbar(props: { title: string }) {
     let rndWaveDuration = 10;
     let rndWaveScales = [1, 0.95, 1, 0.95];
 
-
     useEffect(() => {
         const waveDuration = [8, 12];
         const waveScale = [0.85, 1];
@@ -117,7 +120,9 @@ function Navbar(props: { title: string }) {
             return [rnd(array), rnd(array), rnd(array), rnd(array)];
         };
 
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         rndWaveDuration = getRandomNumber(waveDuration) as number;
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         rndWaveScales = getRandomNumber(waveScale) as number[];
     }, []);
 

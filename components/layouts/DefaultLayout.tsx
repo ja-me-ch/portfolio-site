@@ -1,55 +1,62 @@
 import React from "react";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-import { styled } from "@mui/material";
+import { OffsetProps } from "../../types/common";
+import { CustomTheme, styled, alpha } from "@mui/material";
 
-const RootStyle = styled("div")((props: {offset: string}) => ({
-    display: "grid",
-    gridTemplateRows: `${props.offset}% 1fr ${props.offset}%`,
-    width: "100%",
-    maxHeight: '100vh',
-    height: "100%",
-    position: "absolute",
-    backgroundColor: "#535353",
-    overflow: 'hidden',
-}));
+const RootStyle = styled("div")<OffsetProps>(
+    ({ theme, offset }: { theme: CustomTheme; offset: string }) => ({
+        display: "grid",
+        gridTemplateRows: `${offset}% 1fr ${offset}%`,
+        width: "100%",
+        maxHeight: "100vh",
+        height: "100%",
+        position: "absolute",
+        // backgroundColor: "#535353",
+        backgroundColor: theme.themes.modes.light.light,
+        overflow: "hidden",
+    })
+);
 
-const Canvas = styled("div")((props: { offset: string }) => ({
-    borderRadius: "0.2rem",
-    borderTopRightRadius: "unset",
-    padding: "1rem",
-    height: "100%",
-    maxHeight: `${100 - Number.parseInt(props.offset) * 2}vh`,
-    background: "#d9d9d9",
-    boxShadow: "3px 5px 5px 5px rgba(0, 0, 0, 0.35)",
-    overflow: "overlay",
-    "&::-webkit-scrollbar": {
-        width: "0px",
-        transition: "all 1s ease",
-    },
-    "&::-webkit-scrollbar-track": {
-        marginTop: "0.5rem",
-        marginBottom: "0.5rem",
-    },
-    "&::-webkit-scrollbar-thumb": {
-        background: "rgba(26, 26, 26, 0.3)",
-        borderRadius: "100vw",
-        position: "relative",
-    },
-    "&:hover": {
+const Canvas = styled("div")<OffsetProps>(
+    ({ offset, theme }: { offset: string; theme: CustomTheme }) => ({
+        borderRadius: "0.2rem",
+        borderTopRightRadius: "unset",
+        padding: "1rem",
+        height: "100%",
+        maxHeight: `${100 - Number.parseInt(offset) * 2}vh`,
+        background: theme.themes.modes[theme.palette.mode].main,
+        boxShadow: "3px 5px 5px 5px rgba(0, 0, 0, 0.35)",
+        overflow: "overlay",
         "&::-webkit-scrollbar": {
-            width: "5px",
+            width: "0px",
+            transition: "all 1s ease",
         },
-    },
-}));
+        "&::-webkit-scrollbar-track": {
+            marginTop: "0.5rem",
+            marginBottom: "0.5rem",
+        },
+        "&::-webkit-scrollbar-thumb": {
+            background: "rgba(26, 26, 26, 0.3)",
+            borderRadius: "100vw",
+            position: "relative",
+        },
+        "&:hover": {
+            "&::-webkit-scrollbar": {
+                width: "5px",
+            },
+        },
+    })
+);
 
-const AccentBar = styled("div")(() => ({
+const AccentBar = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     // marginLeft: "5%",
     height: "1rem",
     position: "relative",
     // width: "100%",
     // overflow: 'hidden',
-    backgroundColor: "#4272BA",
+    // backgroundColor: "#4272BA",
+    backgroundColor: theme.themes[theme.themes.selectedTheme].main,
 }));
 
 const HorizontalSpacer = styled("div")(() => ({
@@ -68,31 +75,51 @@ const VerticalSpacer = styled("div")(() => ({
     // border: '1px solid red',
 }));
 
-const CenterColumns = styled("div")((props: {offset: string}) => ({
+const CenterColumns = styled("div")(({ offset }: { offset: string }) => ({
     display: "grid",
-    gridTemplateColumns: `${props.offset}% 1fr ${props.offset}%`,
+    gridTemplateColumns: `${offset}% 1fr ${offset}%`,
 }));
 
-const HorizontalWave = styled("div")(() => ({
+const HorizontalWave = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     width: "100%",
     height: "12px",
     // opacity: "100%",
-    background:
-        "linear-gradient(90deg, rgba(66, 114, 186, 0) 0%, rgba(66, 114, 186, 0.4) 0.01%, #4272BA 60%, #4272BA 100%)",
+    // background:
+    //     "linear-gradient(90deg, rgba(66, 114, 186, 0) 0%, rgba(66, 114, 186, 0.4) 0.01%, #4272BA 60%, #4272BA 100%)",
+    background: `linear-gradient(90deg, ${alpha(
+        theme.themes[theme.themes.selectedTheme].light,
+        0
+    )} 0%, ${alpha(
+        theme.themes[theme.themes.selectedTheme].light,
+        0.4
+    )} 0.01%, ${alpha(
+        theme.themes[theme.themes.selectedTheme].light,
+        1
+    )} 60%, ${alpha(theme.themes[theme.themes.selectedTheme].light, 1)} 100%)`,
     // transform: "rotate(-90deg)",
 }));
 
-const VerticalWave = styled("div")((props: {offset}) => ({
-    position: 'relative',
-    top: `-${props.offset}vh`,
-    width: "12px",
-    height: "100vh",
-    // overflow: 'visible',
-    // opacity: "100%",
-    background:
-        "linear-gradient(0deg, rgba(66, 114, 186, 0) 0%, rgba(66, 114, 186, 0.4) 0.01%, #4272BA 60%, #4272BA 100%)",
-    // transform: "rotate(-90deg)",
-}));
+const VerticalWave = styled("div")<OffsetProps>(
+    ({ theme, offset }: { theme: CustomTheme; offset: string }) => ({
+        position: "relative",
+        top: `-${offset}vh`,
+        width: "12px",
+        height: "100vh",
+        background: `linear-gradient(0deg, ${alpha(
+            theme.themes[theme.themes.selectedTheme].light,
+            0
+        )} 0%, ${alpha(
+            theme.themes[theme.themes.selectedTheme].light,
+            0.4
+        )} 0.01%, ${alpha(
+            theme.themes[theme.themes.selectedTheme].light,
+            1
+        )} 60%, ${alpha(
+            theme.themes[theme.themes.selectedTheme].light,
+            1
+        )} 100%)`,
+    })
+);
 
 function DefaultLayout({ children }) {
     const verticalOffset = '5'
