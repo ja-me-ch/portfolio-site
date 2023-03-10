@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { CustomTheme, styled } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { WaveProps } from "../../types/common";
 
 const RootStyle = styled("div")(() => ({
     // border: "1px solid red",
@@ -45,10 +46,14 @@ const NavItem = styled(Link)(() => ({
     },
 }));
 
-const Wave = styled("span")(
-    (props?: {
-        duration?: number | number[];
-        scale?: number | number[];
+const Wave = styled("span")<WaveProps>(
+    ({
+        duration,
+        scale,
+        theme,
+    }: {
+        duration: number;
+        scale: number[];
         theme: CustomTheme;
     }) => ({
         position: "absolute",
@@ -56,38 +61,36 @@ const Wave = styled("span")(
         left: "-55%",
         height: "12rem",
         width: "12rem",
-        backgroundColor: "#1C74BD",
+        backgroundColor: theme.themes[theme.themes.selectedTheme].main,
         opacity: "20%",
         borderRadius: "43%",
         border: "1px solid white",
         transition: "all 1s ease-in-out",
-        animation: `waves ${
-            props.duration ? props.duration : "5"
-        }s infinite linear`,
+        animation: `waves ${duration ? duration : "5"}s infinite linear`,
         "@keyframes waves": {
             "0%": {
                 transform: `rotate(0deg) scale(${
-                    props.scale ? props.scale[0] : 1
+                    scale ? scale[0] : 1
                 }) translateX(-5%)`,
             },
             "25%": {
                 transform: `rotate(90deg) scale(${
-                    props.scale ? props.scale[1] : 0.95
+                    scale ? scale[1] : 0.95
                 }) translateX(5%)`,
             },
             "50%": {
                 transform: `rotate(180deg) scale(${
-                    props.scale ? props.scale[2] : 1
+                    scale ? scale[2] : 1
                 }) translateX(-5%)`,
             },
             "75%": {
                 transform: `rotate(270deg) scale(${
-                    props.scale ? props.scale[3] : 0.9
+                    scale ? scale[3] : 0.9
                 }) translateX(5%)`,
             },
             "100%": {
                 transform: `rotate(360deg) scale(${
-                    props.scale ? props.scale[0] : 1
+                    scale ? scale[0] : 1
                 }) translateX(-5%)`,
             },
         },

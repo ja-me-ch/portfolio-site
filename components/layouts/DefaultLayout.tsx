@@ -12,7 +12,6 @@ const RootStyle = styled("div")<OffsetProps>(
         maxHeight: "100vh",
         height: "100%",
         position: "absolute",
-        // backgroundColor: "#535353",
         backgroundColor: theme.themes.modes.light.light,
         overflow: "hidden",
     })
@@ -50,21 +49,14 @@ const Canvas = styled("div")<OffsetProps>(
 );
 
 const AccentBar = styled("div")(({ theme }: { theme: CustomTheme }) => ({
-    // marginLeft: "5%",
     height: "1rem",
     position: "relative",
-    // width: "100%",
-    // overflow: 'hidden',
-    // backgroundColor: "#4272BA",
     backgroundColor: theme.themes[theme.themes.selectedTheme].main,
 }));
 
 const HorizontalSpacer = styled("div")(() => ({
     height: "100%",
     width: "100%",
-    // position: 'absolute',
-    // transform: 'translateY(-8vh)',
-    // border: "1px solid blue",
 }));
 
 const VerticalSpacer = styled("div")(() => ({
@@ -72,7 +64,6 @@ const VerticalSpacer = styled("div")(() => ({
     width: "100%",
     display: "flex",
     flexDirection: "column-reverse",
-    // border: '1px solid red',
 }));
 
 const CenterColumns = styled("div")(({ offset }: { offset: string }) => ({
@@ -83,9 +74,6 @@ const CenterColumns = styled("div")(({ offset }: { offset: string }) => ({
 const HorizontalWave = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     width: "100%",
     height: "12px",
-    // opacity: "100%",
-    // background:
-    //     "linear-gradient(90deg, rgba(66, 114, 186, 0) 0%, rgba(66, 114, 186, 0.4) 0.01%, #4272BA 60%, #4272BA 100%)",
     background: `linear-gradient(90deg, ${alpha(
         theme.themes[theme.themes.selectedTheme].light,
         0
@@ -96,7 +84,6 @@ const HorizontalWave = styled("div")(({ theme }: { theme: CustomTheme }) => ({
         theme.themes[theme.themes.selectedTheme].light,
         1
     )} 60%, ${alpha(theme.themes[theme.themes.selectedTheme].light, 1)} 100%)`,
-    // transform: "rotate(-90deg)",
 }));
 
 const VerticalWave = styled("div")<OffsetProps>(

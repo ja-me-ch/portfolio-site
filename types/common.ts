@@ -4,3 +4,9 @@ export type OffsetProps = {
     offset: string;
     theme?: CustomTheme;
 };
+
+export type WaveProps = {
+    duration: number;
+    scale: number[];
+    theme?: CustomTheme;
+}
