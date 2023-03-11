@@ -13,18 +13,18 @@ const RootStyle = styled("div")<OffsetProps>(
         height: "100%",
         position: "absolute",
         overflow: "hidden",
-        backgroundColor: theme.themes.modes.light.light,
+        backgroundColor: theme.themes.modes.light.dark,
         [theme.breakpoints.down("sm")]: {
             gridTemplateRows: "1fr",
-            maxWidth: "100vw",
-            overflow: 'auto',
+            // maxWidth: "100dvw",
+            overflow: 'scroll',
         },
     })
 );
 
 const Canvas = styled("div")<OffsetProps>(
     ({ offset, theme }: { offset: string; theme: CustomTheme }) => ({
-        display: "flex",
+        display: 'flex',
         flexDirection: "column",
         borderRadius: "0.2rem",
         borderTopRightRadius: "unset",
@@ -105,9 +105,9 @@ const VerticalWave = styled("div")<OffsetProps>(
 
 const ChildrenContainer = styled("div")(({ theme }) => ({
     padding: "1rem",
-    height: "auto",
+    height: '100%',
     // margin: 'auto',
-    overflow: "overlay",
+    // overflow: "scroll",
     // border: '1px solid blue',
     // overflowY: 'auto',
     overflowX: "hidden",

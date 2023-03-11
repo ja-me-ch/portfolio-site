@@ -5,11 +5,13 @@ import { useRouter } from "next/router";
 import { WaveProps, NavItemProps } from "../../types/common";
 import { lighten } from "@mui/material";
 
-const RootStyle = styled("div")(() => ({
-    // border: "1px solid red",
+const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
+    position: "sticky",
+    top: "0",
+    backgroundColor: theme.themes.modes[theme.palette.mode].main,
 }));
 
-const Title = styled("h1")(() => ({
+const Title = styled("h1")(({ theme }) => ({
     margin: "0",
     // paddingBottom: "0rem",
     textAlign: "right",
@@ -18,6 +20,9 @@ const Title = styled("h1")(() => ({
     borderBottom: "2px solid #000",
     fontWeight: "400",
     fontFamily: "Yrsa, Roboto",
+    [theme.breakpoints.down("sm")]: {
+        fontSize: "2.5rem",
+    },
 }));
 
 const Nav = styled("div")(({ theme }) => ({
@@ -27,46 +32,59 @@ const Nav = styled("div")(({ theme }) => ({
     paddingRight: "1rem",
     marginTop: "1rem",
     // border: '1px solid red',
-    marginBottom: '1rem',
-    position: 'sticky',
+    marginBottom: "1rem",
     [theme.breakpoints.down("sm")]: {
         flexDirection: "column",
-        top: '0.5rem',
-        // display: 'sticky',
-        paddingRight: '0',
+        padding: "0",
+        marginTop: '2px',
+        marginBottom: '0',
+        gap: '2px'
     },
 }));
 
-const NavItem = styled(Link)<NavItemProps>(({ theme }: {theme: CustomTheme}) => ({
-    // border: "1px solid blue",
-    position: "relative",
-    borderBottom: "2px solid #000",
-    borderRight: "2px solid #000",
-    backgroundColor: lighten(theme.themes.modes[theme.palette.mode].light, 0.2),
-    marginLeft: "0.5rem",
-    padding: "0.3rem",
-    fontSize: "1.5rem",
-    borderRadius: "0.3rem",
-    transition: "all 0s ease",
-    overflow: "hidden",
-    "&:hover": {
-        borderBottom: `2px solid ${theme.themes[theme.themes.selectedTheme].light}`,
-        borderRight: `2px solid ${theme.themes[theme.themes.selectedTheme].light}`,
-        ".wave": {
-            top: "10px",
-            opacity: "25%",
+const NavItem = styled(Link)<NavItemProps>(
+    ({ theme }: { theme: CustomTheme }) => ({
+        // border: "1px solid blue",
+        position: "relative",
+        borderBottom: "2px solid #000",
+        borderRight: "2px solid #000",
+        backgroundColor: lighten(
+            theme.themes.modes[theme.palette.mode].light,
+            0.2
+        ),
+        marginLeft: "0.5rem",
+        padding: "0.3rem",
+        fontSize: "1.5rem",
+        borderRadius: "0.3rem",
+        transition: "all 0s ease",
+        overflow: "hidden",
+        "&:hover": {
+            borderBottom: `2px solid ${
+                theme.themes[theme.themes.selectedTheme].light
+            }`,
+            borderRight: `2px solid ${
+                theme.themes[theme.themes.selectedTheme].light
+            }`,
+            ".wave": {
+                top: "10px",
+                opacity: "25%",
+            },
         },
-    },
-    [theme.breakpoints.down("sm")]: {
-        textAlign: "center",
-        width: "95%",
-        border: "unset",
-        marginBottom: "0.5rem",
-        '&:hover': {
-            border: 'unset'
-        }
-    },
-}));
+        [theme.breakpoints.down("sm")]: {
+            textAlign: "center",
+            width: "100%",
+            border: "unset",
+            paddingBlock: '0.4rem',
+            margin: '0',
+            borderRadius: '0',
+            fontWeight: '600',
+            "&:hover": {
+                border: "unset",
+                background: lighten(theme.themes.modes[theme.palette.mode].light, 0),
+            },
+        },
+    })
+);
 
 const Wave = styled("span")<WaveProps>(
     ({

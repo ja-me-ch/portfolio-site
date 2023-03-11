@@ -10,9 +10,9 @@ const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     borderRadius: "0.5rem",
     color: theme.themes[theme.themes.selectedTheme].contrastText,
     backgroundColor: alpha(theme.themes[theme.themes.selectedTheme].main, 0.8),
-    boxShadow: "2px 2px 1px 1px rgba(0, 0, 0, 0.2)",
+    boxShadow: "2px 2px 1px 1px rgba(0, 0, 0, 0.15)",
     padding: "0.2rem 0.6rem 0.3rem 0.6rem",
-    transition: "all 0.8s ease",
+    transition: "all 0.6s ease",
     "&:hover": {
         borderRadius: "0.4rem",
         backgroundColor: alpha(

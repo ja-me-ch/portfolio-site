@@ -9,7 +9,7 @@ const RootStyle = styled("div")(() => ({
     display: "flex",
     flexDirection: "column",
     marginTop: "1rem",
-    height: '100%',
+    // height: '100%',
     // border: '1px solid red',
     overflow: 'hidden'
 }));
@@ -25,6 +25,9 @@ const previews = master.map((pv, index) => {
 
 const ProjectsIndex = function () {
     return <RootStyle>
+        {previews}
+        {previews}
+        {previews}
         {previews}
         {previews}
         {previews}

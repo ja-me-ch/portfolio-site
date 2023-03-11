@@ -24,7 +24,7 @@ const darkMode: ThemeMode = {
 
 const lightMode: ThemeMode = {
     main: "#d9d9d9",
-    light: "#535353",
+    light: "#C2B4AE",
     dark: "#363636",
     contrastText: "",
 };
