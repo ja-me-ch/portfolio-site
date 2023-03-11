@@ -1,6 +1,8 @@
+import { StaticImageData } from "next/image";
+
 export default interface Preview {
     title: string,
-    imageUrl?: string,
+    imageUrl?: StaticImageData,
     description: string,
     siteUrl?: string,
     github: string,

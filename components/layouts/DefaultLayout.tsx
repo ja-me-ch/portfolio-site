@@ -12,64 +12,59 @@ const RootStyle = styled("div")<OffsetProps>(
         maxHeight: "100vh",
         height: "100%",
         position: "absolute",
-        backgroundColor: theme.themes.modes.light.light,
         overflow: "hidden",
+        backgroundColor: theme.themes.modes.light.light,
+        [theme.breakpoints.down("sm")]: {
+            gridTemplateRows: "1fr",
+            maxWidth: "100vw",
+            overflow: 'auto',
+        },
     })
 );
 
 const Canvas = styled("div")<OffsetProps>(
     ({ offset, theme }: { offset: string; theme: CustomTheme }) => ({
+        display: "flex",
+        flexDirection: "column",
         borderRadius: "0.2rem",
         borderTopRightRadius: "unset",
-        padding: "1rem",
-        height: "100%",
+        // height: "100%",
         maxHeight: `${100 - Number.parseInt(offset) * 2}vh`,
         background: theme.themes.modes[theme.palette.mode].main,
         boxShadow: "3px 5px 5px 5px rgba(0, 0, 0, 0.35)",
-        overflow: "overlay",
-        "&::-webkit-scrollbar": {
-            width: "0px",
-            transition: "all 1s ease",
-        },
-        "&::-webkit-scrollbar-track": {
-            marginTop: "0.5rem",
-            marginBottom: "0.5rem",
-        },
-        "&::-webkit-scrollbar-thumb": {
-            background: "rgba(26, 26, 26, 0.3)",
-            borderRadius: "100vw",
-            position: "relative",
-        },
-        "&:hover": {
-            "&::-webkit-scrollbar": {
-                width: "5px",
-            },
+        [theme.breakpoints.down("sm")]: {
+            maxHeight: "unset",
         },
     })
 );
 
-const AccentBar = styled("div")(({ theme }: { theme: CustomTheme }) => ({
-    height: "1rem",
-    position: "relative",
-    backgroundColor: theme.themes[theme.themes.selectedTheme].main,
-}));
-
-const HorizontalSpacer = styled("div")(() => ({
+const HorizontalSpacer = styled("div")(({ theme }) => ({
     height: "100%",
     width: "100%",
+    [theme.breakpoints.down("sm")]: {
+        display: "none",
+    },
 }));
 
-const VerticalSpacer = styled("div")(() => ({
+const VerticalSpacer = styled("div")(({ theme }) => ({
     height: "100%",
     width: "100%",
     display: "flex",
     flexDirection: "column-reverse",
+    [theme.breakpoints.down("sm")]: {
+        display: "none",
+    },
 }));
 
-const CenterColumns = styled("div")(({ offset }: { offset: string }) => ({
-    display: "grid",
-    gridTemplateColumns: `${offset}% 1fr ${offset}%`,
-}));
+const CenterColumns = styled("div")<OffsetProps>(
+    ({ theme, offset }: { theme: CustomTheme; offset: string }) => ({
+        display: "grid",
+        gridTemplateColumns: `${offset}% 1fr ${offset}%`,
+        [theme.breakpoints.down("sm")]: {
+            gridTemplateColumns: "1fr",
+        },
+    })
+);
 
 const HorizontalWave = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     width: "100%",
@@ -108,19 +103,50 @@ const VerticalWave = styled("div")<OffsetProps>(
     })
 );
 
+const ChildrenContainer = styled("div")(({ theme }) => ({
+    padding: "1rem",
+    height: "auto",
+    // margin: 'auto',
+    overflow: "overlay",
+    // border: '1px solid blue',
+    // overflowY: 'auto',
+    overflowX: "hidden",
+    "&::-webkit-scrollbar": {
+        width: "0px",
+        transition: "all 1s ease",
+    },
+    "&::-webkit-scrollbar-track": {
+        marginTop: "0.5rem",
+        marginBottom: "0.5rem",
+    },
+    "&::-webkit-scrollbar-thumb": {
+        background: "rgba(26, 26, 26, 0.3)",
+        borderRadius: "100vw",
+        position: "relative",
+    },
+    "&:hover": {
+        "&::-webkit-scrollbar": {
+            width: "5px",
+        },
+    },
+    [theme.breakpoints.down("sm")]: {
+        overflow: 'hidden'
+    },
+}));
+
 function DefaultLayout({ children }) {
-    const verticalOffset = '5'
-    const horizontalOffset = '5'
+    const verticalOffset = "5";
+    const horizontalOffset = "5";
     return (
         <RootStyle offset={verticalOffset}>
             <VerticalSpacer>
-                <HorizontalWave/>
+                <HorizontalWave />
             </VerticalSpacer>
             <CenterColumns offset={horizontalOffset}>
                 <HorizontalSpacer></HorizontalSpacer>
                 <Canvas offset={verticalOffset}>
                     <Navbar title={"Home"} />
-                    {children}
+                    <ChildrenContainer>{children}</ChildrenContainer>
                     <Footer />
                 </Canvas>
                 <HorizontalSpacer>

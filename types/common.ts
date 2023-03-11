@@ -10,3 +10,8 @@ export type WaveProps = {
     scale: number[];
     theme?: CustomTheme;
 }
+
+export type NavItemProps = {
+    theme?: CustomTheme;
+    href: string
+}

@@ -2,47 +2,69 @@ import React, { useEffect } from "react";
 import { CustomTheme, styled } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { WaveProps } from "../../types/common";
+import { WaveProps, NavItemProps } from "../../types/common";
+import { lighten } from "@mui/material";
 
 const RootStyle = styled("div")(() => ({
     // border: "1px solid red",
 }));
 
 const Title = styled("h1")(() => ({
-    margin: "0 0 0.5rem 0",
-    paddingBottom: "0.3rem",
+    margin: "0",
+    // paddingBottom: "0rem",
     textAlign: "right",
     paddingRight: "1rem",
-    fontSize: "3rem",
+    fontSize: "4rem",
     borderBottom: "2px solid #000",
+    fontWeight: "400",
+    fontFamily: "Yrsa, Roboto",
 }));
 
-const Nav = styled("div")(() => ({
+const Nav = styled("div")(({ theme }) => ({
     display: "flex",
+    // justifyContent: 'center',
     flexDirection: "row-reverse",
     paddingRight: "1rem",
-    paddingTop: "0.5rem",
+    marginTop: "1rem",
+    // border: '1px solid red',
+    marginBottom: '1rem',
+    position: 'sticky',
+    [theme.breakpoints.down("sm")]: {
+        flexDirection: "column",
+        top: '0.5rem',
+        // display: 'sticky',
+        paddingRight: '0',
+    },
 }));
 
-const NavItem = styled(Link)(() => ({
+const NavItem = styled(Link)<NavItemProps>(({ theme }: {theme: CustomTheme}) => ({
     // border: "1px solid blue",
     position: "relative",
     borderBottom: "2px solid #000",
     borderRight: "2px solid #000",
-    backgroundColor: "#e8e8e8",
+    backgroundColor: lighten(theme.themes.modes[theme.palette.mode].light, 0.2),
     marginLeft: "0.5rem",
     padding: "0.3rem",
     fontSize: "1.5rem",
     borderRadius: "0.3rem",
-    transition: "all 0s linear",
+    transition: "all 0s ease",
     overflow: "hidden",
     "&:hover": {
-        borderBottom: "2px solid #1C74BD",
-        borderRight: "2px solid #1C74BD",
+        borderBottom: `2px solid ${theme.themes[theme.themes.selectedTheme].light}`,
+        borderRight: `2px solid ${theme.themes[theme.themes.selectedTheme].light}`,
         ".wave": {
-            top: "5px",
+            top: "10px",
             opacity: "25%",
         },
+    },
+    [theme.breakpoints.down("sm")]: {
+        textAlign: "center",
+        width: "95%",
+        border: "unset",
+        marginBottom: "0.5rem",
+        '&:hover': {
+            border: 'unset'
+        }
     },
 }));
 
@@ -65,7 +87,7 @@ const Wave = styled("span")<WaveProps>(
         opacity: "20%",
         borderRadius: "43%",
         border: "1px solid white",
-        transition: "all 1s ease-in-out",
+        transition: "all 1s ease",
         animation: `waves ${duration ? duration : "5"}s infinite linear`,
         "@keyframes waves": {
             "0%": {
@@ -94,6 +116,9 @@ const Wave = styled("span")<WaveProps>(
                 }) translateX(-5%)`,
             },
         },
+        [theme.breakpoints.down('sm')]: {
+            display: 'none'
+        }
     })
 );
 
@@ -106,6 +131,7 @@ function Navbar(props: { title: string }) {
     let rndWaveScales = [1, 0.95, 1, 0.95];
 
     useEffect(() => {
+        console.log("useEffect!");
         const waveDuration = [8, 12];
         const waveScale = [0.85, 1];
         const getRandomNumber = function (array): number[] | number {
@@ -133,7 +159,7 @@ function Navbar(props: { title: string }) {
         <RootStyle>
             <Title>{title}</Title>
             <Nav>
-                <NavItem className="NavItem" href={"/"}>
+                <NavItem href={"/"}>
                     Home
                     <Wave
                         className="wave"
@@ -141,7 +167,7 @@ function Navbar(props: { title: string }) {
                         scale={rndWaveScales}
                     />
                 </NavItem>
-                <NavItem className="NavItem" href={"/projects"}>
+                <NavItem href={"/projects"}>
                     Projects
                     <Wave
                         className="wave"
@@ -149,7 +175,7 @@ function Navbar(props: { title: string }) {
                         scale={rndWaveScales}
                     />
                 </NavItem>
-                <NavItem className="NavItem" href={"/"}>
+                <NavItem href={"/"}>
                     <div>
                         About
                         <Wave
@@ -159,7 +185,7 @@ function Navbar(props: { title: string }) {
                         />
                     </div>
                 </NavItem>
-                <NavItem className="NavItem" href={"/"}>
+                <NavItem href={"/"}>
                     Glossary
                     <Wave
                         className="wave"

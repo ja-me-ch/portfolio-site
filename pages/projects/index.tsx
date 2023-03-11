@@ -9,6 +9,9 @@ const RootStyle = styled("div")(() => ({
     display: "flex",
     flexDirection: "column",
     marginTop: "1rem",
+    height: '100%',
+    // border: '1px solid red',
+    overflow: 'hidden'
 }));
 
 const ProjectItem = styled("div")(() => ({
@@ -20,8 +23,14 @@ const previews = master.map((pv, index) => {
     return <Project preview={pv} key={index} index={index} />;
 });
 
-const ProjectsIndex: React.FC = function () {
-    return <RootStyle>{previews}</RootStyle>;
+const ProjectsIndex = function () {
+    return <RootStyle>
+        {previews}
+        {previews}
+        {previews}
+        {previews}
+        {previews}
+    </RootStyle>;
 };
 
 export default ProjectsIndex

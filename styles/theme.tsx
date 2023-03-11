@@ -31,10 +31,10 @@ const lightMode: ThemeMode = {
 
 
 const aquamarine: ThemePalette = {
-    main: "#1C74BD",
+    main: "#3FA0D1",
     light: "#4272BA",
-    dark: "",
-    contrastText: "",
+    dark: "#3F53D1",
+    contrastText: "#FFFFFF",
 };
 const theme = createTheme({
     palette: {
