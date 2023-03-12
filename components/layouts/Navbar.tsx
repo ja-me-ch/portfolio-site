@@ -1,14 +1,31 @@
-import React, { useEffect } from "react";
-import { CustomTheme, styled } from "@mui/material";
+import React, { useEffect, useContext } from "react";
+import { MainContext } from "../../contexts/MainContext";
+import { CustomTheme, styled, Collapse } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { WaveProps, NavItemProps } from "../../types/common";
+import { WaveProps, NavItemProps, NavProps } from "../../types/common";
 import { lighten } from "@mui/material";
+import NavbarSvg from "../../public/svg/navbar";
 
 const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     position: "sticky",
     top: "0",
     backgroundColor: theme.themes.modes[theme.palette.mode].main,
+}));
+
+const TopBar = styled("div")(() => ({
+    // display: 'flex',
+    // flexDirection: 'row',
+    // justifyContent: 'space-between'
+}));
+
+const HamburgerIconContainer = styled("div")(({ theme }) => ({
+    position: "absolute",
+    paddingLeft: "0.1rem",
+    visibility: "hidden",
+    [theme.breakpoints.down("sm")]: {
+        visibility: "visible",
+    },
 }));
 
 const Title = styled("h1")(({ theme }) => ({
@@ -25,22 +42,27 @@ const Title = styled("h1")(({ theme }) => ({
     },
 }));
 
-const Nav = styled("div")(({ theme }) => ({
-    display: "flex",
-    // justifyContent: 'center',
-    flexDirection: "row-reverse",
-    paddingRight: "1rem",
-    marginTop: "1rem",
-    // border: '1px solid red',
-    marginBottom: "1rem",
-    [theme.breakpoints.down("sm")]: {
-        flexDirection: "column",
-        padding: "0",
-        marginTop: '2px',
-        marginBottom: '0',
-        gap: '2px'
-    },
-}));
+const Nav = styled("div")<NavProps>(
+    ({ theme, showNavbar }: { theme: CustomTheme; showNavbar: boolean }) => ({
+        display: "flex",
+        // justifyContent: 'center',
+        flexDirection: "row-reverse",
+        paddingRight: "1rem",
+        marginTop: "1rem",
+        // visibility: showNavbar ? "visible" : "hidden",
+        // border: '1px solid red',
+        marginBottom: "1rem",
+        transition: "1s all",
+        [theme.breakpoints.down("sm")]: {
+            flexDirection: "column",
+            padding: "0",
+            marginTop: "2px",
+            marginBottom: "0",
+            gap: "2px",
+            // height: showNavbar ? "auto" : "0",
+        },
+    })
+);
 
 const NavItem = styled(Link)<NavItemProps>(
     ({ theme }: { theme: CustomTheme }) => ({
@@ -50,7 +72,7 @@ const NavItem = styled(Link)<NavItemProps>(
         borderRight: "2px solid #000",
         backgroundColor: lighten(
             theme.themes.modes[theme.palette.mode].light,
-            0.2
+            0.4
         ),
         marginLeft: "0.5rem",
         padding: "0.3rem",
@@ -74,13 +96,16 @@ const NavItem = styled(Link)<NavItemProps>(
             textAlign: "center",
             width: "100%",
             border: "unset",
-            paddingBlock: '0.4rem',
-            margin: '0',
-            borderRadius: '0',
-            fontWeight: '600',
+            paddingBlock: "0.4rem",
+            margin: "0",
+            borderRadius: "0",
+            fontWeight: "600",
             "&:hover": {
                 border: "unset",
-                background: lighten(theme.themes.modes[theme.palette.mode].light, 0),
+                background: lighten(
+                    theme.themes.modes[theme.palette.mode].light,
+                    0
+                ),
             },
         },
     })
@@ -102,7 +127,7 @@ const Wave = styled("span")<WaveProps>(
         height: "12rem",
         width: "12rem",
         backgroundColor: theme.themes[theme.themes.selectedTheme].main,
-        opacity: "20%",
+        opacity: "15%",
         borderRadius: "43%",
         border: "1px solid white",
         transition: "all 1s ease",
@@ -134,22 +159,26 @@ const Wave = styled("span")<WaveProps>(
                 }) translateX(-5%)`,
             },
         },
-        [theme.breakpoints.down('sm')]: {
-            display: 'none'
-        }
+        [theme.breakpoints.down("sm")]: {
+            display: "none",
+        },
     })
 );
 
-function Navbar(props: { title: string }) {
-    const { title } = props;
-
+function Navbar() {
+    const { showNavbar } = useContext(MainContext);
     const params = useRouter();
-    // console.log(params);
+
+    const getPageTitle = function (params) {
+        if (params.pathname === "/") return "Home";
+        const path = params.pathname.split("/")[1];
+        return path[0].toUpperCase() + path.slice(1);
+    };
+
     let rndWaveDuration = 10;
     let rndWaveScales = [1, 0.95, 1, 0.95];
 
     useEffect(() => {
-        console.log("useEffect!");
         const waveDuration = [8, 12];
         const waveScale = [0.85, 1];
         const getRandomNumber = function (array): number[] | number {
@@ -173,45 +202,54 @@ function Navbar(props: { title: string }) {
         rndWaveScales = getRandomNumber(waveScale) as number[];
     }, []);
 
+    const onHamburgerClick = () => showNavbar.toggle();
+
     return (
         <RootStyle>
-            <Title>{title}</Title>
-            <Nav>
-                <NavItem href={"/"}>
-                    Home
-                    <Wave
-                        className="wave"
-                        duration={rndWaveDuration}
-                        scale={rndWaveScales}
-                    />
-                </NavItem>
-                <NavItem href={"/projects"}>
-                    Projects
-                    <Wave
-                        className="wave"
-                        duration={rndWaveDuration}
-                        scale={rndWaveScales}
-                    />
-                </NavItem>
-                <NavItem href={"/"}>
-                    <div>
-                        About
+            <TopBar>
+                <HamburgerIconContainer onClick={onHamburgerClick}>
+                    <NavbarSvg toggle={showNavbar.value} />
+                </HamburgerIconContainer>
+                <Title>{getPageTitle(params)}</Title>
+            </TopBar>
+            <Collapse in={showNavbar.value} collapsedSize={0}>
+                <Nav showNavbar={showNavbar.value}>
+                    <NavItem href={"/"}>
+                        Home
                         <Wave
                             className="wave"
                             duration={rndWaveDuration}
                             scale={rndWaveScales}
                         />
-                    </div>
-                </NavItem>
-                <NavItem href={"/"}>
-                    Glossary
-                    <Wave
-                        className="wave"
-                        duration={rndWaveDuration}
-                        scale={rndWaveScales}
-                    />
-                </NavItem>
-            </Nav>
+                    </NavItem>
+                    <NavItem href={"/projects"}>
+                        Projects
+                        <Wave
+                            className="wave"
+                            duration={rndWaveDuration}
+                            scale={rndWaveScales}
+                        />
+                    </NavItem>
+                    <NavItem href={"/"}>
+                        <div>
+                            About
+                            <Wave
+                                className="wave"
+                                duration={rndWaveDuration}
+                                scale={rndWaveScales}
+                            />
+                        </div>
+                    </NavItem>
+                    <NavItem href={"/"}>
+                        Glossary
+                        <Wave
+                            className="wave"
+                            duration={rndWaveDuration}
+                            scale={rndWaveScales}
+                        />
+                    </NavItem>
+                </Nav>
+            </Collapse>
         </RootStyle>
     );
 }

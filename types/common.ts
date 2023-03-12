@@ -15,3 +15,8 @@ export type NavItemProps = {
     theme?: CustomTheme;
     href: string
 }
+
+export type NavProps = {
+    theme?: CustomTheme;
+    showNavbar: boolean;
+}

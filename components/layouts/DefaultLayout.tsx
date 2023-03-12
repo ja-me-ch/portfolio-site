@@ -105,11 +105,12 @@ const VerticalWave = styled("div")<OffsetProps>(
 
 const ChildrenContainer = styled("div")(({ theme }) => ({
     padding: "1rem",
-    height: '100%',
+    height: "100%",
     // margin: 'auto',
     // overflow: "scroll",
     // border: '1px solid blue',
     // overflowY: 'auto',
+    overflow: "overlay",
     overflowX: "hidden",
     "&::-webkit-scrollbar": {
         width: "0px",
@@ -130,7 +131,7 @@ const ChildrenContainer = styled("div")(({ theme }) => ({
         },
     },
     [theme.breakpoints.down("sm")]: {
-        overflow: 'hidden'
+        overflow: "hidden",
     },
 }));
 
@@ -145,7 +146,7 @@ function DefaultLayout({ children }) {
             <CenterColumns offset={horizontalOffset}>
                 <HorizontalSpacer></HorizontalSpacer>
                 <Canvas offset={verticalOffset}>
-                    <Navbar title={"Home"} />
+                    <Navbar />
                     <ChildrenContainer>{children}</ChildrenContainer>
                     <Footer />
                 </Canvas>
