@@ -60,6 +60,7 @@ const NavBarSvgStyle = styled("svg")(() => ({
 const NavbarSvg = function ({toggle}) {
     const width = 80;
     const height = 10;
+    const rx = 2;
     // console.log(`Toggle: ${toggle}`);
     return (
         <NavBarSvgStyle
@@ -72,7 +73,7 @@ const NavbarSvg = function ({toggle}) {
                 height={height}
                 x={10}
                 y={20}
-                rx={5}
+                rx={rx}
                 className={`top line ${
                     toggle ? "top-toggle line-toggle" : ""
                 }`}
@@ -82,7 +83,7 @@ const NavbarSvg = function ({toggle}) {
                 height={height}
                 x={10}
                 y={45}
-                rx={5}
+                rx={rx}
                 className={`middle line ${
                     toggle ? "middle-toggle line-toggle" : ""
                 }`}
@@ -92,7 +93,7 @@ const NavbarSvg = function ({toggle}) {
                 height={height}
                 x={10}
                 y={70}
-                rx={5}
+                rx={rx}
                 className={`bottom line ${
                     toggle ? "bottom-toggle line-toggle" : ""
                 }`}

@@ -1,6 +1,12 @@
 import React, { useEffect, useContext } from "react";
 import { MainContext } from "../../contexts/MainContext";
-import { CustomTheme, styled, Collapse } from "@mui/material";
+import {
+    CustomTheme,
+    styled,
+    Collapse,
+    useMediaQuery,
+    useTheme,
+} from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { WaveProps, NavItemProps, NavProps } from "../../types/common";
@@ -49,7 +55,7 @@ const Nav = styled("div")<NavProps>(
         flexDirection: "row-reverse",
         paddingRight: "1rem",
         marginTop: "1rem",
-        // visibility: showNavbar ? "visible" : "hidden",
+        visibility: "visible",
         // border: '1px solid red',
         marginBottom: "1rem",
         transition: "1s all",
@@ -100,6 +106,10 @@ const NavItem = styled(Link)<NavItemProps>(
             margin: "0",
             borderRadius: "0",
             fontWeight: "600",
+            backgroundColor: lighten(
+                theme.themes.modes[theme.palette.mode].light,
+                0.3
+            ),
             "&:hover": {
                 border: "unset",
                 background: lighten(
@@ -168,6 +178,11 @@ const Wave = styled("span")<WaveProps>(
 function Navbar() {
     const { showNavbar } = useContext(MainContext);
     const params = useRouter();
+    const theme = useTheme();
+    const matches = useMediaQuery(theme.breakpoints.up("sm"));
+    if (matches && showNavbar.value === false) {
+        showNavbar.toggle();
+    }
 
     const getPageTitle = function (params) {
         if (params.pathname === "/") return "Home";
