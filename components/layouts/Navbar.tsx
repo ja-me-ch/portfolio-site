@@ -245,7 +245,7 @@ function Navbar() {
                             scale={rndWaveScales}
                         />
                     </NavItem>
-                    <NavItem href={"/"}>
+                    <NavItem href={"/about"}>
                         <div>
                             About
                             <Wave
