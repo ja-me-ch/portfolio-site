@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext, useEffect } from "react";
 import Link from "next/link";
 import { styled } from "@mui/material";
 import master from "../../helper-functions/previews/master";
 import Project from "../../components/projects/Project";
 import Preview from "../../interfaces/preview.interface";
+import { MainContext } from "../../contexts/MainContext";
 
 const RootStyle = styled("div")(() => ({
     display: "flex",
@@ -11,7 +12,7 @@ const RootStyle = styled("div")(() => ({
     marginTop: "1rem",
     // height: '100%',
     // border: '1px solid red',
-    overflow: 'hidden'
+    overflow: "hidden",
 }));
 
 const ProjectItem = styled("div")(() => ({
@@ -19,14 +20,17 @@ const ProjectItem = styled("div")(() => ({
     height: "20rem",
 }));
 
-const previews = master.map((pv, index) => {
-    return <Project preview={pv} key={index} index={index} />;
-});
-
 const ProjectsIndex = function () {
-    return <RootStyle>
-        {previews}
-    </RootStyle>;
+    const { selectedTheme } = useContext(MainContext);
+    const previews = master.map((pv, index) => {
+        return (
+            <Project preview={pv} key={`${pv.title}-${index}`} index={index} />
+        );
+    });
+    useEffect(() => {
+        console.log("rerender projects index");
+    }, [selectedTheme.value]);
+    return <RootStyle>{previews}</RootStyle>;
 };
 
-export default ProjectsIndex
+export default ProjectsIndex;

@@ -29,7 +29,7 @@ export function MainContextProvider(props) {
     };
 
     const updateSelectedTheme = function (themeName: string): void {
-        setSelectedTheme((s) => (themeName));
+        setSelectedTheme(themeName);
     };
 
     return (
@@ -42,7 +42,7 @@ export function MainContextProvider(props) {
                     },
                     selectedTheme: {
                         value: selectedTheme,
-                        update: setSelectedTheme,
+                        update: updateSelectedTheme,
                     },
                 } as MainContextProps
             }

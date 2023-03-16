@@ -114,7 +114,7 @@ const Project = function (props: IProps) {
             <TagsContainer>
                 <TagsSpan>Tags:</TagsSpan>
                 {tags.map((t, index) => {
-                    return <Tag text={t} key={`${index}-${t}`} />
+                    return <Tag text={t} key={`${title}-${index}-${t}`} />
                 })}
             </TagsContainer>
         </RootStyle>

@@ -108,18 +108,21 @@ const ThemeSwitcher = function () {
                         prop={prop[1]}
                         onClick={handleOnClick}
                         id={"aquamarine"}
+                        key={"aquamarine"}
                     />
                     <Shape
                         tabIndex={999}
                         prop={prop[2]}
                         onClick={handleOnClick}
                         id={"rozenQueen"}
+                        key={"rozenQueen"}
                     />
                     <Shape
                         tabIndex={999}
                         prop={prop[3]}
                         onClick={handleOnClick}
                         id={"orangePrincess"}
+                        key={"orangePrincess"}
                     />
                 </CircleContents>
             </CircleContainer>
