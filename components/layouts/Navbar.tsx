@@ -12,6 +12,7 @@ import { useRouter } from "next/router";
 import { WaveProps, NavItemProps, NavProps } from "../../types/common";
 import { lighten } from "@mui/material";
 import NavbarSvg from "../../public/svg/navbar";
+import ThemeSwitcher from "../ThemeSwitcher";
 
 const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     position: "sticky",
@@ -20,9 +21,10 @@ const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
 }));
 
 const TopBar = styled("div")(() => ({
-    // display: 'flex',
-    // flexDirection: 'row',
-    // justifyContent: 'space-between'
+    borderBottom: '2px solid black',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
 }));
 
 const HamburgerIconContainer = styled("div")(({ theme }) => ({
@@ -36,11 +38,13 @@ const HamburgerIconContainer = styled("div")(({ theme }) => ({
 
 const Title = styled("h1")(({ theme }) => ({
     margin: "0",
+    display: 'inline',
     // paddingBottom: "0rem",
     textAlign: "right",
     paddingRight: "1rem",
     fontSize: "4rem",
-    borderBottom: "2px solid #000",
+    paddingTop: '0.6rem',
+    // borderBottom: "2px solid #000",
     fontWeight: "400",
     fontFamily: "Yrsa, Roboto",
     [theme.breakpoints.down("sm")]: {
@@ -88,10 +92,10 @@ const NavItem = styled(Link)<NavItemProps>(
         overflow: "hidden",
         "&:hover": {
             borderBottom: `2px solid ${
-                theme.themes[theme.themes.selectedTheme].light
+                theme.themes.themePalettes[theme.themes.selectedTheme].light
             }`,
             borderRight: `2px solid ${
-                theme.themes[theme.themes.selectedTheme].light
+                theme.themes.themePalettes[theme.themes.selectedTheme].light
             }`,
             ".wave": {
                 top: "10px",
@@ -136,11 +140,11 @@ const Wave = styled("span")<WaveProps>(
         left: "-55%",
         height: "12rem",
         width: "12rem",
-        backgroundColor: theme.themes[theme.themes.selectedTheme].main,
+        backgroundColor: theme.themes.themePalettes[theme.themes.selectedTheme].main,
         opacity: "15%",
         borderRadius: "43%",
         border: "1px solid white",
-        transition: "all 1s ease",
+        transition: "all 2s ease",
         animation: `waves ${duration ? duration : "5"}s infinite linear`,
         "@keyframes waves": {
             "0%": {
@@ -178,7 +182,7 @@ const Wave = styled("span")<WaveProps>(
 function Navbar() {
     const { showNavbar } = useContext(MainContext);
     const params = useRouter();
-    const theme = useTheme();
+    const theme: CustomTheme = useTheme();
     const matches = useMediaQuery(theme.breakpoints.up("sm"));
     if (matches && showNavbar.value === false) {
         showNavbar.toggle();
@@ -225,6 +229,7 @@ function Navbar() {
                 <HamburgerIconContainer onClick={onHamburgerClick}>
                     <NavbarSvg toggle={showNavbar.value} />
                 </HamburgerIconContainer>
+                <ThemeSwitcher />
                 <Title>{getPageTitle(params)}</Title>
             </TopBar>
             <Collapse in={showNavbar.value} collapsedSize={0}>

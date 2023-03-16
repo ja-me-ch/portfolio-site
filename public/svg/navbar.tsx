@@ -61,7 +61,6 @@ const NavbarSvg = function ({toggle}) {
     const width = 80;
     const height = 10;
     const rx = 2;
-    // console.log(`Toggle: ${toggle}`);
     return (
         <NavBarSvgStyle
             xmlns="http://www.w3.org/2000/svg"

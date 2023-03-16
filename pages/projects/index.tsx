@@ -26,13 +26,6 @@ const previews = master.map((pv, index) => {
 const ProjectsIndex = function () {
     return <RootStyle>
         {previews}
-        {previews}
-        {previews}
-        {previews}
-        {previews}
-        {previews}
-        {previews}
-        {previews}
     </RootStyle>;
 };
 

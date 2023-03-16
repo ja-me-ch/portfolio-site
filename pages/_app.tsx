@@ -1,7 +1,7 @@
 import '../styles/globals.css';
 import { MainContextProvider } from '../contexts/MainContext';
 import DefaultLayout from "../components/layouts/DefaultLayout";
-import { ThemeProvider } from "@emotion/react";
+import { ThemeProvider } from "@mui/material/styles";
 import theme from "../styles/theme";
 import { CustomTheme, styled } from "@mui/material";
 import Head from "next/head";

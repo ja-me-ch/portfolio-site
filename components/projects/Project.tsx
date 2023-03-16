@@ -9,8 +9,8 @@ import Tag from "../Tag";
 const RootStyle = styled("div")(({ index }: { index: number }) => ({
     display: "flex",
     flexDirection: "column",
-    // flexDirection: index % 2 ? "row-reverse" : "row",
     marginBlock: "1.3rem",
+    alignItems: index % 2 === 0 ? 'flex-start' : 'flex-end'
 }));
 
 const PreviewImageContainer = styled("div")(() => ({
@@ -28,6 +28,7 @@ const ProjectPreviewContent = styled("div")(() => ({
     flexBasis: "70%",
     flexGrow: "1",
     marginBlock: "0",
+    
 }));
 
 const Title = styled("h3")(({ index }: { index: number }) => ({

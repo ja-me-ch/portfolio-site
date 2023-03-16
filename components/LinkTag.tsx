@@ -8,15 +8,18 @@ const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: "0.5rem",
-    color: theme.themes[theme.themes.selectedTheme].contrastText,
-    backgroundColor: alpha(theme.themes[theme.themes.selectedTheme].main, 0.8),
+    color: theme.themes.themePalettes[theme.themes.selectedTheme].contrastText,
+    backgroundColor: alpha(
+        theme.themes.themePalettes[theme.themes.selectedTheme].main,
+        0.8
+    ),
     boxShadow: "2px 2px 1px 1px rgba(0, 0, 0, 0.15)",
     padding: "0.3rem 0.6rem 0.3rem 0.6rem",
     transition: "all 0.6s ease",
     "&:hover": {
         borderRadius: "0.4rem",
         backgroundColor: alpha(
-            theme.themes[theme.themes.selectedTheme].dark,
+            theme.themes.themePalettes[theme.themes.selectedTheme].dark,
             0.8
         ),
         boxShadow: "2px 2px 1px 1px rgba(0, 0, 0, 0.1)",

@@ -12,7 +12,7 @@ class MyDocument extends Document {
                     <link
                         rel="preconnect"
                         href="https://fonts.gstatic.com"
-                        crossOrigin={true}
+                        crossOrigin={"true"}
                     />
                     <link
                         href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Yrsa&display=swap"
