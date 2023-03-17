@@ -125,8 +125,11 @@ const VerticalWave = styled("div")<OffsetProps>(
 
 const ChildrenContainer = styled("div")(
     ({ theme }: { theme: CustomTheme }) => ({
+        display: 'flex',
+        justifyContent: 'center',
         padding: "1rem",
         height: "100%",
+        // maxWidth: '1280px',
         // margin: 'auto',
         // overflow: "scroll",
         // border: '1px solid blue',

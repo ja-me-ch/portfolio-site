@@ -1,15 +1,17 @@
 import React, { useContext, useEffect } from "react";
 import Link from "next/link";
-import { styled } from "@mui/material";
+import { CustomTheme, styled } from "@mui/material";
 import master from "../../helper-functions/previews/master";
 import Project from "../../components/projects/Project";
 import Preview from "../../interfaces/preview.interface";
 import { MainContext } from "../../contexts/MainContext";
 
-const RootStyle = styled("div")(() => ({
+const RootStyle = styled("div")(({ theme } : {theme: CustomTheme}) => ({
     display: "flex",
     flexDirection: "column",
     marginTop: "1rem",
+    maxWidth: `${theme.breakpoints.keys['lg']}px`,
+    justifySelf: 'center',
     // height: '100%',
     // border: '1px solid red',
     overflow: "hidden",

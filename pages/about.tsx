@@ -7,6 +7,7 @@ import LinkedInSvg from "../public/svg/linkedin";
 const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     display: "flex",
     flexDirection: "row",
+    border: '1px solid red',
     [theme.breakpoints.down("sm")]: {
         flexDirection: "column",
     },
