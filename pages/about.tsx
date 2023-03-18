@@ -1,4 +1,6 @@
-import { CustomTheme, styled } from "@mui/material";
+import { useContext } from 'react';
+import { CustomTheme, styled, useTheme } from "@mui/material";
+import { MainContext } from '../contexts/MainContext';
 import Link from "next/link";
 import EmailSvg from "../public/svg/email";
 import GitHubSvg from "../public/svg/github";
@@ -7,6 +9,8 @@ import LinkedInSvg from "../public/svg/linkedin";
 const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     display: "flex",
     flexDirection: "row",
+    color: theme.themes.modes[theme.themes.selectedMode].contrastText,
+    transition: '1s all ease',
     maxWidth: `${theme.breakpoints.values["lg"]}px`,
     // border: '1px solid red',
     [theme.breakpoints.down("sm")]: {
@@ -30,22 +34,24 @@ const Title = styled("h3")(() => ({
     marginBottom: "1rem",
 }));
 
-const ContactContent = styled("section")(({ theme }: { theme: CustomTheme }) => ({
-    // border: "1px solid green",
-    // flexBasis: "30%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    // alignItems: "flex-start",
-    gap: '1rem',
-    padding: "1rem",
-    paddingTop: "0",
-    [theme.breakpoints.down("sm")]: {
-        justifyContent: "center",
-    },
-}));
+const ContactContent = styled("section")(
+    ({ theme }: { theme: CustomTheme }) => ({
+        // border: "1px solid green",
+        // flexBasis: "30%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "flex-start",
+        // alignItems: "flex-start",
+        gap: "1rem",
+        padding: "1rem",
+        paddingTop: "0",
+        [theme.breakpoints.down("sm")]: {
+            justifyContent: "center",
+        },
+    })
+);
 
-const ContactRow = styled("div")(() => ({
+const ContactRow = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     // display: "flex",
     // flexDirection: "row",
     // justifyContent: 'space-between',
@@ -53,13 +59,17 @@ const ContactRow = styled("div")(() => ({
     // gap: "0.5rem",
     // border: '1px solid red',
     // width: '100%',
-    boxSizing: 'border-box',
+    boxSizing: "border-box",
     // marginBottom: '1rem',
     padding: "0",
-    borderBottom: "1px solid black",
+    borderBottom: `1px solid ${
+        theme.themes.modes[theme.themes.selectedMode].contrastText
+    }`,
     "&:hover": {
-        marginBottom: '-1px',
-        borderBottom: '2px solid black',
+        marginBottom: "-1px",
+        borderBottom: `2px solid ${
+            theme.themes.modes[theme.themes.selectedMode].contrastText
+        }`,
         "h4, svg": {
             textShadow: "3px 3px 4px rgba(0, 0, 0, 0.25)",
         },
@@ -69,7 +79,7 @@ const ContactRow = styled("div")(() => ({
 const Contact = styled("div")(() => ({
     display: "flex",
     flexDirection: "row",
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     alignItems: "center",
     paddingBlock: "0.5rem",
     // marginBlock: "0.5rem",
@@ -79,10 +89,12 @@ const ContactHeading = styled("h4")(() => ({
     fontSize: "1.3rem",
     padding: "0",
     margin: "0",
-    marginRight: '0.5rem'
+    marginRight: "0.5rem",
 }));
 
 export default function About() {
+    const theme: CustomTheme = useTheme();
+    const { selectedTheme, themeMode } = useContext(MainContext);
     return (
         <RootStyle>
             <AboutContent>
@@ -145,7 +157,13 @@ export default function About() {
                     >
                         <Contact>
                             <ContactHeading>LinkedIn</ContactHeading>
-                            <LinkedInSvg />
+                            <LinkedInSvg
+                                modeColor={
+                                    theme.themes.modes[
+                                        theme.themes.selectedMode
+                                    ].contrastText
+                                }
+                            />
                         </Contact>
                     </Link>
                 </ContactRow>
@@ -158,7 +176,13 @@ export default function About() {
                     >
                         <Contact>
                             <ContactHeading>GitHub</ContactHeading>
-                            <GitHubSvg />
+                            <GitHubSvg
+                                modeColor={
+                                    theme.themes.modes[
+                                        theme.themes.selectedMode
+                                    ].contrastText
+                                }
+                            />
                         </Contact>
                     </Link>
                 </ContactRow>
@@ -171,7 +195,13 @@ export default function About() {
                     >
                         <Contact>
                             <ContactHeading>Email</ContactHeading>
-                            <EmailSvg />
+                            <EmailSvg
+                                modeColor={
+                                    theme.themes.modes[
+                                        theme.themes.selectedMode
+                                    ].contrastText
+                                }
+                            />
                         </Contact>
                     </Link>
                 </ContactRow>

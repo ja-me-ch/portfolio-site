@@ -1,7 +1,8 @@
 import { styled, useTheme, CustomTheme } from "@mui/material";
 import React, { useContext } from "react";
 import { MainContext } from "../contexts/MainContext";
-
+import ModeNightIcon from "@mui/icons-material/ModeNight";
+import LightModeIcon from "@mui/icons-material/LightMode";
 const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     display: "inline flex",
     // aspectRatio: '1 / 1',
@@ -32,58 +33,84 @@ const CircleContents = styled("div")(() => ({
     // border: "1px solid green",
 }));
 
-const Shape = styled("div")(({ prop }: { prop?: ICircleProps }) => ({
-    transformOrigin: "center",
-    backgroundColor: prop?.color ?? "red",
-    position: "absolute",
-    margin: "auto",
-    padding: "0",
-    top: prop ? `${prop.offset[2]}%` : "0",
-    right: prop ? `${prop.offset[3]}%` : "0",
-    bottom: prop ? `${prop.offset[0]}%` : "0",
-    left: prop ? `${prop.offset[1]}%` : "0",
-    border: "2px solid white",
-    width: "23%",
-    rotate: "45deg",
-    // transform: 'translateX(-50%) translateY(-50%)',
-    aspectRatio: "1 / 1",
-    ":focus": {
-        animation: "elastic-spin 1s ease-in-out",
-    },
-    ":active": {
-        animation: "none",
-    },
-    "@keyframes elastic-spin": {
-        "0%": {
-            transform: "rotate(0deg) scale(1)",
+const Shape = styled("div")<ICircleProps>(
+    ({
+        prop,
+        theme,
+    }: {
+        prop?: { color: string; offset: number[] };
+        theme: CustomTheme;
+    }) => ({
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        transformOrigin: "center",
+        backgroundColor: prop?.color ?? "red",
+        position: "absolute",
+        margin: "auto",
+        padding: "0",
+        top: prop ? `${prop.offset[2]}%` : "0",
+        right: prop ? `${prop.offset[3]}%` : "0",
+        bottom: prop ? `${prop.offset[0]}%` : "0",
+        left: prop ? `${prop.offset[1]}%` : "0",
+        border:
+            theme.themes.selectedMode === "light"
+                ? `2px solid ${theme.themes.modes.light.contrastText}`
+                : `2px solid ${theme.themes.modes.dark.contrastText}`,
+        width: "23%",
+        overflow: "hidden",
+        rotate: "45deg",
+        // transform: 'translateX(-50%) translateY(-50%)',
+        aspectRatio: "1 / 1",
+        ":focus": {
+            animation: "elastic-spin 1s ease-in-out",
         },
-        "50%": {
-            transform: "rotate(360deg) scale(1.2)",
+        ":active": {
+            animation: "none",
         },
-        "100%": {
-            transform: "rotate(720deg) scale(1)",
+        "@keyframes elastic-spin": {
+            "0%": {
+                transform: "rotate(0deg) scale(1)",
+            },
+            "50%": {
+                transform: "rotate(360deg) scale(1.2)",
+            },
+            "100%": {
+                transform: "rotate(720deg) scale(1)",
+            },
         },
-    },
-}));
+    })
+);
 
 interface ICircleProps {
-    offset: number[];
-    color: string;
+    tabIndex?: number;
+    prop: { offset: number[]; color: string };
+    theme?: CustomTheme;
 }
 
 const ThemeSwitcher = function () {
-    const { selectedTheme } = useContext(MainContext);
+    const { selectedTheme, themeMode } = useContext(MainContext);
     const theme: CustomTheme = useTheme();
 
     const handleOnClick = function (e) {
-        console.log(e.target.id);
-        selectedTheme.update(e.target.id);
+        if (
+            Object.getOwnPropertyNames(theme.themes.themePalettes).includes(
+                e.target.id
+            )
+        ) {
+            selectedTheme.update(e.target.id);
+        } else {
+            themeMode.toggle();
+        }
     };
 
-    const prop: ICircleProps[] = [
+    const prop = [
         {
             offset: [0, 0, 40, 0],
-            color: "#000",
+            color:
+                theme.themes.selectedMode === "light"
+                    ? `2px solid ${theme.themes.modes.light.contrastText}`
+                    : `2px solid ${theme.themes.modes.dark.contrastText}`,
         },
         {
             offset: [40, 0, 0, 0],
@@ -102,23 +129,47 @@ const ThemeSwitcher = function () {
         <RootStyle>
             <CircleContainer>
                 <CircleContents>
-                    <Shape prop={prop[0]} onClick={handleOnClick} id={"mode"} />
                     <Shape
-                        tabIndex={999}
+                        tabIndex={-1}
+                        prop={prop[0]}
+                        onClick={handleOnClick}
+                        id={"mode"}
+                        key={"mode"}
+                    >
+                        {themeMode.value === "light" ? (
+                            <ModeNightIcon
+                                sx={{
+                                    height: "100%",
+                                    width: "100%",
+                                    rotate: "-30deg",
+                                }}
+                            />
+                        ) : (
+                            <LightModeIcon
+                                sx={{
+                                    height: "100%",
+                                    width: "100%",
+                                    rotate: "-45deg",
+                                }}
+                            />
+                        )}
+                    </Shape>
+                    <Shape
+                        tabIndex={-1}
                         prop={prop[1]}
                         onClick={handleOnClick}
                         id={"aquamarine"}
                         key={"aquamarine"}
                     />
                     <Shape
-                        tabIndex={999}
+                        tabIndex={-1}
                         prop={prop[2]}
                         onClick={handleOnClick}
                         id={"rozenQueen"}
                         key={"rozenQueen"}
                     />
                     <Shape
-                        tabIndex={999}
+                        tabIndex={-1}
                         prop={prop[3]}
                         onClick={handleOnClick}
                         id={"orangePrincess"}

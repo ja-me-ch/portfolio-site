@@ -18,9 +18,10 @@ import ThemeSwitcher from "../ThemeSwitcher";
 const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     position: "sticky",
     top: "0",
-    color: theme.themes.modes[theme.palette.mode].contrastText,
+    color: theme.themes.modes[theme.themes.selectedMode].contrastText,
+    transition: "1s all ease",
     // maxWidth: '1280px',
-    backgroundColor: theme.themes.modes[theme.palette.mode].main,
+    backgroundColor: theme.themes.modes[theme.themes.selectedMode].main,
 }));
 
 const TopBar = styled("div")(() => ({
@@ -63,11 +64,11 @@ const Nav = styled("nav")<NavProps>(
         display: "flex",
         // justifySelf: 'center',
         // justifyContent: 'center',
-        width: '100%',
+        width: "100%",
         flexDirection: "row-reverse",
         paddingRight: "1rem",
         marginTop: "1rem",
-        marginInline: 'auto',
+        marginInline: "auto",
         visibility: "visible",
         // border: '1px solid red',
         maxWidth: `${theme.breakpoints.values["lg"]}px`,
@@ -90,8 +91,9 @@ const NavItem = styled(Link)<NavItemProps>(
         position: "relative",
         borderBottom: "2px solid #000",
         borderRight: "2px solid #000",
+        color: theme.themes.modes[theme.themes.selectedMode].contrastText,
         backgroundColor: lighten(
-            theme.themes.modes[theme.palette.mode].light,
+            theme.themes.modes[theme.themes.selectedMode].light,
             0.4
         ),
         marginLeft: "0.5rem",
@@ -121,13 +123,13 @@ const NavItem = styled(Link)<NavItemProps>(
             borderRadius: "0",
             fontWeight: "600",
             backgroundColor: lighten(
-                theme.themes.modes[theme.palette.mode].main,
+                theme.themes.modes[theme.themes.selectedMode].main,
                 0.4
             ),
             "&:hover": {
                 border: "unset",
                 background: darken(
-                    theme.themes.modes[theme.palette.mode].main,
+                    theme.themes.modes[theme.themes.selectedMode].main,
                     0.1
                 ),
             },
@@ -138,7 +140,7 @@ const NavItem = styled(Link)<NavItemProps>(
 const NavContainer = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     display: "flex",
     flexDirection: "column",
-    justifyItems: 'center',
+    justifyItems: "center",
     // alignItems: 'flex-end',
     // border: '1px solid blue',
 }));
@@ -203,8 +205,6 @@ function Navbar() {
     const params = useRouter();
     const theme: CustomTheme = useTheme();
 
-    console.log(theme.breakpoints.values["lg"]);
-
     const matches = useMediaQuery(theme.breakpoints.up("sm"));
     if (matches && showNavbar.value === false) {
         showNavbar.toggle();
@@ -252,7 +252,13 @@ function Navbar() {
                 <Title>{getPageTitle(params)}</Title>
             </TopBar>
             <HamburgerIconContainer onClick={onHamburgerClick}>
-                <NavbarSvg toggle={showNavbar.value} />
+                <NavbarSvg
+                    toggle={showNavbar.value}
+                    modeColor={
+                        theme.themes.modes[theme.themes.selectedMode]
+                            .contrastText
+                    }
+                />
             </HamburgerIconContainer>
             <Collapse in={showNavbar.value} collapsedSize={0}>
                 <NavContainer>

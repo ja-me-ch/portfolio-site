@@ -30,11 +30,13 @@ const Canvas = styled("div")<OffsetProps>(
         flexDirection: "column",
         borderRadius: "0.2rem",
         borderTopRightRadius: "unset",
+        color: theme.themes.modes[theme.themes.selectedMode].contrastText,
         // height: "100%",
         maxHeight: `${100 - Number.parseInt(offset) * 2}vh`,
-        background: theme.themes.modes[theme.palette.mode].main,
+        background: theme.themes.modes[theme.themes.selectedMode].main,
         boxShadow: "3px 5px 5px 5px rgba(0, 0, 0, 0.35)",
         // zIndex: "0",
+        transition: '1s all ease',
         [theme.breakpoints.down("sm")]: {
             maxHeight: "unset",
         },
@@ -163,9 +165,10 @@ const ChildrenContainer = styled("div")(
 );
 
 function DefaultLayout({ children }) {
-    const { selectedTheme } = useContext(MainContext);
+    const { selectedTheme, themeMode } = useContext(MainContext);
     const verticalOffset = "5";
     const horizontalOffset = "5";
+    // children.props = {s: 's'}
     // useEffect(() => {
     //     console.log('useeffect!')
     // }, [selectedTheme.value]);

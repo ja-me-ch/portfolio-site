@@ -1,10 +1,10 @@
-const GitHubSvg = function () {
+const GitHubSvg = function ({ modeColor }: { modeColor: string }) {
     return (
         <svg
             viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
-            fill="#000000"
-            width='40'
+            fill={modeColor}
+            width="40"
             // data-darkreader-inline-fill=""
             // style="--darkreader-inline-fill:#000000;"
         >

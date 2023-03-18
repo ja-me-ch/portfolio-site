@@ -1,6 +1,14 @@
-const EmailSvg = function () {
+import { CustomTheme } from "@mui/material/styles";
+import { useTheme } from "@mui/system";
+
+const EmailSvg = function ({ modeColor } : { modeColor: string }) {
     return (
-        <svg viewBox="0 0 24 24" fill="none" width='40' xmlns="http://www.w3.org/2000/svg">
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            width="40"
+            xmlns="http://www.w3.org/2000/svg"
+        >
             <g id="EmailSvg_bgCarrier" strokeWidth="0"></g>
             <g
                 id="EmailSvg_tracerCarrier"
@@ -11,7 +19,7 @@ const EmailSvg = function () {
                 {" "}
                 <path
                     d="M4 7.00005L10.2 11.65C11.2667 12.45 12.7333 12.45 13.8 11.65L20 7"
-                    stroke="#000000"
+                    stroke={modeColor}
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -24,7 +32,7 @@ const EmailSvg = function () {
                     width="18"
                     height="14"
                     rx="2"
-                    stroke="#000000"
+                    stroke={modeColor}
                     strokeWidth="2"
                     strokeLinecap="round"
                     // data-darkreader-inline-stroke=""

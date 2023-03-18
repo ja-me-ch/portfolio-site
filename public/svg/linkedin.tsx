@@ -1,8 +1,9 @@
-const LinkedInSvg = function () {
+const LinkedInSvg = function ({ modeColor }: { modeColor: string }) {
     return (
         <svg
-            fill="#000000"
-            width='40'            version="1.1"
+            fill={modeColor}
+            width="40"
+            version="1.1"
             id="LinkedInSvg"
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"

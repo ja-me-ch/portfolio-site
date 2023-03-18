@@ -17,6 +17,11 @@ export interface IThemes {
         dark: IThemeMode;
         light: IThemeMode;
     };
+    selectedMode: string;
     selectedTheme: string;
-    themePalettes?: Record<string, IThemePalette>;
+    themePalettes?: {
+        aquamarine: IThemePalette,
+        rozenQueen: IThemePalette,
+        orangePrincess: IThemePalette,
+    };
 }

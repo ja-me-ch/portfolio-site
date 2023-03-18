@@ -57,7 +57,7 @@ const NavBarSvgStyle = styled("svg")(() => ({
     },
 }));
 
-const NavbarSvg = function ({toggle}) {
+const NavbarSvg = function ({toggle, modeColor} : {toggle: boolean, modeColor: string}) {
     const width = 80;
     const height = 10;
     const rx = 2;
@@ -66,6 +66,7 @@ const NavbarSvg = function ({toggle}) {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 100 100"
             width={50}
+            fill={modeColor}
         >
             <rect
                 width={width}

@@ -7,14 +7,14 @@ const darkMode: IThemeMode = {
     main: "#4D4645",
     light: "#363636",
     dark: "#17171A",
-    contrastText: "white",
+    contrastText: "#FFFFFF",
 };
 
 const lightMode: IThemeMode = {
     main: "#d9d9d9",
     light: "#F0E4D8",
     dark: "#363636",
-    contrastText: "black",
+    contrastText: "#000000",
 };
 
 const aquamarine: IThemePalette = {
@@ -35,7 +35,7 @@ const orangePrincess: IThemePalette = {
     main: "#E8AF5D",
     light: "#F2C661",
     dark: "#DCC362",
-    contrastText: "#000",
+    contrastText: "#000000",
 };
 
 const theme: CustomTheme = createTheme({
@@ -51,6 +51,7 @@ const theme: CustomTheme = createTheme({
             dark: darkMode,
             light: lightMode,
         },
+        selectedMode: 'light',
         selectedTheme: "jade",
         themePalettes: {
             aquamarine: aquamarine,

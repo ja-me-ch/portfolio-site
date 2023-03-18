@@ -10,9 +10,10 @@ const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     display: "flex",
     flexDirection: "column",
     marginTop: "1rem",
+    color: theme.themes.modes[theme.themes.selectedMode].contrastText,
     maxWidth: `${theme.breakpoints.values["lg"]}px`,
-
     justifySelf: "center",
+    transition: '1s all ease',
     ".project-preview:not(:last-child)": {
         borderBlockEnd: "5px solid",
         paddingBlockEnd: "1rem",
@@ -22,8 +23,8 @@ const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
         },
         ${theme.themes.themePalettes[theme.themes.selectedTheme].main}, ${
             theme.themes.themePalettes[theme.themes.selectedTheme].dark
-            })`,
-        marginBottom: '2rem'
+        })`,
+        marginBottom: "2rem",
     },
 }));
 
