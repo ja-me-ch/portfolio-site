@@ -6,6 +6,7 @@ import {
     Collapse,
     useMediaQuery,
     useTheme,
+    darken,
 } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -17,6 +18,7 @@ import ThemeSwitcher from "../ThemeSwitcher";
 const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     position: "sticky",
     top: "0",
+    color: theme.themes.modes[theme.palette.mode].contrastText,
     // maxWidth: '1280px',
     backgroundColor: theme.themes.modes[theme.palette.mode].main,
 }));
@@ -29,15 +31,14 @@ const TopBar = styled("div")(() => ({
 }));
 
 const HamburgerIconContainer = styled("div")(({ theme }) => ({
-    display: 'none',
+    display: "none",
     // border: '1px solid red',
-    // position: "absolute",
+    position: "absolute",
+    top: "0.2rem",
     // visibility: "hidden",
     [theme.breakpoints.down("sm")]: {
         paddingLeft: "0.1rem",
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
+        display: "unset",
     },
 }));
 
@@ -57,17 +58,19 @@ const Title = styled("h1")(({ theme }) => ({
     },
 }));
 
-const Nav = styled("div")<NavProps>(
+const Nav = styled("nav")<NavProps>(
     ({ theme, showNavbar }: { theme: CustomTheme; showNavbar: boolean }) => ({
         display: "flex",
+        // justifySelf: 'center',
         // justifyContent: 'center',
         width: '100%',
         flexDirection: "row-reverse",
         paddingRight: "1rem",
         marginTop: "1rem",
+        marginInline: 'auto',
         visibility: "visible",
         // border: '1px solid red',
-        maxWidth: '1280px',
+        maxWidth: `${theme.breakpoints.values["lg"]}px`,
         marginBottom: "1rem",
         transition: "1s all",
         [theme.breakpoints.down("sm")]: {
@@ -76,7 +79,7 @@ const Nav = styled("div")<NavProps>(
             marginTop: "2px",
             marginBottom: "0",
             gap: "2px",
-            // height: showNavbar ? "auto" : "0",
+            height: showNavbar ? "auto" : "0",
         },
     })
 );
@@ -113,32 +116,31 @@ const NavItem = styled(Link)<NavItemProps>(
             textAlign: "center",
             width: "100%",
             border: "unset",
-            paddingBlock: "0.4rem",
+            paddingBlock: "0.5rem",
             margin: "0",
             borderRadius: "0",
             fontWeight: "600",
             backgroundColor: lighten(
-                theme.themes.modes[theme.palette.mode].light,
-                0.3
+                theme.themes.modes[theme.palette.mode].main,
+                0.4
             ),
             "&:hover": {
                 border: "unset",
-                background: lighten(
-                    theme.themes.modes[theme.palette.mode].light,
-                    0
+                background: darken(
+                    theme.themes.modes[theme.palette.mode].main,
+                    0.1
                 ),
             },
         },
     })
 );
 
-const NavContainer = styled("div")(({ theme } : {theme: CustomTheme}) => ({
+const NavContainer = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     display: "flex",
-    flexDirection: "row-reverse",
-    justifyContent: 'center',
-    [theme.breakpoints.down("sm")]: {
-        flexDirection: "column",
-    },
+    flexDirection: "column",
+    justifyItems: 'center',
+    // alignItems: 'flex-end',
+    // border: '1px solid blue',
 }));
 
 const Wave = styled("span")<WaveProps>(
@@ -201,7 +203,7 @@ function Navbar() {
     const params = useRouter();
     const theme: CustomTheme = useTheme();
 
-    console.log(theme.breakpoints);
+    console.log(theme.breakpoints.values["lg"]);
 
     const matches = useMediaQuery(theme.breakpoints.up("sm"));
     if (matches && showNavbar.value === false) {
@@ -246,14 +248,15 @@ function Navbar() {
     return (
         <RootStyle>
             <TopBar>
-                <HamburgerIconContainer onClick={onHamburgerClick}>
-                    <NavbarSvg toggle={showNavbar.value} />
-                </HamburgerIconContainer>
                 <ThemeSwitcher />
                 <Title>{getPageTitle(params)}</Title>
             </TopBar>
+            <HamburgerIconContainer onClick={onHamburgerClick}>
+                <NavbarSvg toggle={showNavbar.value} />
+            </HamburgerIconContainer>
             <Collapse in={showNavbar.value} collapsedSize={0}>
                 <NavContainer>
+                    {/* CHANGE TO LIST */}
                     <Nav showNavbar={showNavbar.value}>
                         <NavItem href={"/"}>
                             Home

@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import { OffsetProps } from "../../types/common";
 import { CustomTheme, styled, alpha } from "@mui/material";
 import { MainContext } from "../../contexts/MainContext";
+import Head from "next/head";
 
 const RootStyle = styled("div")<OffsetProps>(
     ({ theme, offset }: { theme: CustomTheme; offset: string }) => ({
@@ -129,6 +130,7 @@ const ChildrenContainer = styled("div")(
         justifyContent: 'center',
         padding: "1rem",
         height: "100%",
+        color: theme.themes.modes[theme.palette.mode].contrastText,
         // maxWidth: '1280px',
         // margin: 'auto',
         // overflow: "scroll",

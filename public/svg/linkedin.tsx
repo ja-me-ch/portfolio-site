@@ -3,7 +3,7 @@ const LinkedInSvg = function () {
         <svg
             fill="#000000"
             width='40'            version="1.1"
-            id="Layer_1"
+            id="LinkedInSvg"
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
             viewBox="0 0 455 455"

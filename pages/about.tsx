@@ -7,7 +7,8 @@ import LinkedInSvg from "../public/svg/linkedin";
 const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     display: "flex",
     flexDirection: "row",
-    border: '1px solid red',
+    maxWidth: `${theme.breakpoints.values["lg"]}px`,
+    // border: '1px solid red',
     [theme.breakpoints.down("sm")]: {
         flexDirection: "column",
     },
@@ -87,23 +88,55 @@ export default function About() {
             <AboutContent>
                 <Title>About</Title>
                 <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet maxime eaque magni fugiat fugit! Quidem placeat obcaecati modi officiis, cupiditate aperiam laboriosam fugiat labore optio velit et, blanditiis exercitationem dolore?
-                    Iusto corrupti maiores illo quae veritatis exercitationem harum eaque nihil, dolore fugit magni perspiciatis ratione recusandae est! Cumque ad similique, deserunt eaque quaerat est atque quo, animi dolores autem fuga.
-                    Itaque sit perferendis totam cupiditate perspiciatis laboriosam soluta iste sint neque officiis odit, enim nemo rem et omnis eos nisi autem, deleniti ratione consequuntur vel odio optio, suscipit repellendus! Quasi?
-                    Maxime officiis ea deserunt itaque quae quos hic libero, nemo, sequi aperiam dolor. Dignissimos, pariatur! Deserunt, distinctio. Deserunt optio non excepturi molestias quos! Aliquam expedita numquam blanditiis possimus deleniti corporis.
-                    Nihil reiciendis excepturi sit dolor reprehenderit eius, blanditiis molestiae hic est! Et est laborum suscipit asperiores nemo, magnam deleniti ipsa veritatis rem maiores vitae ullam quidem dolores, animi voluptas beatae.
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Amet maxime eaque magni fugiat fugit! Quidem placeat
+                    obcaecati modi officiis, cupiditate aperiam laboriosam
+                    fugiat labore optio velit et, blanditiis exercitationem
+                    dolore? Iusto corrupti maiores illo quae veritatis
+                    exercitationem harum eaque nihil, dolore fugit magni
+                    perspiciatis ratione recusandae est! Cumque ad similique,
+                    deserunt eaque quaerat est atque quo, animi dolores autem
+                    fuga. Itaque sit perferendis totam cupiditate perspiciatis
+                    laboriosam soluta iste sint neque officiis odit, enim nemo
+                    rem et omnis eos nisi autem, deleniti ratione consequuntur
+                    vel odio optio, suscipit repellendus! Quasi? Maxime officiis
+                    ea deserunt itaque quae quos hic libero, nemo, sequi aperiam
+                    dolor. Dignissimos, pariatur! Deserunt, distinctio. Deserunt
+                    optio non excepturi molestias quos! Aliquam expedita numquam
+                    blanditiis possimus deleniti corporis. Nihil reiciendis
+                    excepturi sit dolor reprehenderit eius, blanditiis molestiae
+                    hic est! Et est laborum suscipit asperiores nemo, magnam
+                    deleniti ipsa veritatis rem maiores vitae ullam quidem
+                    dolores, animi voluptas beatae.
                 </p>
 
                 <Title>Credits</Title>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, quisquam deleniti aut amet, magnam minus ducimus eos hic sed molestias repellendus! Quaerat ullam aliquam magnam tempore consequatur dolorum placeat itaque?
-                At, ad doloribus consequatur eius animi, earum dolorum omnis doloremque cum enim, quaerat nobis debitis ipsa voluptate deleniti laboriosam? Dolorum vel tempora nemo eveniet sequi vitae, quod odio neque necessitatibus?
-                Officia quidem ea necessitatibus mollitia dolor ab, tempore cum voluptatem adipisci id, beatae alias harum quo tenetur suscipit aliquid enim asperiores voluptates blanditiis sequi odit velit animi ipsum fuga. Aperiam?
-                Praesentium cupiditate placeat dolorem architecto labore voluptas mollitia blanditiis maiores cumque, modi accusamus nesciunt magnam odio aut, eaque corporis iusto, impedit voluptate a odit quas delectus dolore ea deserunt! Vero?
-                Nihil pariatur velit eligendi qui eveniet nostrum sed dolores, possimus, minima fuga aspernatur cumque quam cupiditate odio. Obcaecati qui amet, repudiandae sequi possimus corrupti quasi aliquam rerum velit architecto maiores!</p>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Ratione, quisquam deleniti aut amet, magnam minus ducimus
+                    eos hic sed molestias repellendus! Quaerat ullam aliquam
+                    magnam tempore consequatur dolorum placeat itaque? At, ad
+                    doloribus consequatur eius animi, earum dolorum omnis
+                    doloremque cum enim, quaerat nobis debitis ipsa voluptate
+                    deleniti laboriosam? Dolorum vel tempora nemo eveniet sequi
+                    vitae, quod odio neque necessitatibus? Officia quidem ea
+                    necessitatibus mollitia dolor ab, tempore cum voluptatem
+                    adipisci id, beatae alias harum quo tenetur suscipit aliquid
+                    enim asperiores voluptates blanditiis sequi odit velit animi
+                    ipsum fuga. Aperiam? Praesentium cupiditate placeat dolorem
+                    architecto labore voluptas mollitia blanditiis maiores
+                    cumque, modi accusamus nesciunt magnam odio aut, eaque
+                    corporis iusto, impedit voluptate a odit quas delectus
+                    dolore ea deserunt! Vero? Nihil pariatur velit eligendi qui
+                    eveniet nostrum sed dolores, possimus, minima fuga
+                    aspernatur cumque quam cupiditate odio. Obcaecati qui amet,
+                    repudiandae sequi possimus corrupti quasi aliquam rerum
+                    velit architecto maiores!
+                </p>
             </AboutContent>
             <ContactContent>
                 <Title>Contact</Title>
-
+                {/* CHANGE TO LIST */}
                 <ContactRow>
                     <Link
                         href="https://www.linkedin.com/in/jamech/"

@@ -9,7 +9,8 @@ import Tag from "../Tag";
 const RootStyle = styled("div")(({ index }: { index: number }) => ({
     display: "flex",
     flexDirection: "column",
-    marginBlock: "1.3rem",
+    // marginBlock: "1.3rem",
+    paddingBlock: '1.3rem',
     alignItems: index % 2 === 0 ? 'flex-start' : 'flex-end'
 }));
 
@@ -92,7 +93,7 @@ const Project = function (props: IProps) {
     const projectLinkGithub = <LinkTag text={"GitHub"} link={github} />;
 
     return (
-        <RootStyle index={index}>
+        <RootStyle index={index} className={'project-preview'}>
             {/* <PreviewImageContainer>
                 <ImageStyle src={imageUrl} alt={`Preview of ${title}`} />
             </PreviewImageContainer> */}
@@ -101,6 +102,7 @@ const Project = function (props: IProps) {
                     <Link href={"/"}>{title}</Link>
                 </Title>
                 <ProjectLinks index={index}>
+                    {/* CHANGE TO LIST */}
                     {/* {projectReadMore} */}
                     {projectLinkGithub}
                     {projectLinkSiteUrl}
@@ -113,6 +115,7 @@ const Project = function (props: IProps) {
             </ProjectPreviewContent>
             <TagsContainer>
                 <TagsSpan>Tags:</TagsSpan>
+                {/* CHANGE TO LIST */}
                 {tags.map((t, index) => {
                     return <Tag text={t} key={`${title}-${index}-${t}`} />
                 })}

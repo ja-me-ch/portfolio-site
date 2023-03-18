@@ -4,17 +4,17 @@ import { MainContext } from "../contexts/MainContext";
 import { IThemeMode, IThemePalette } from "../interfaces/theme.interface";
 
 const darkMode: IThemeMode = {
-    main: "red",
-    light: "",
-    dark: "#363636",
-    contrastText: "",
+    main: "#4D4645",
+    light: "#363636",
+    dark: "#17171A",
+    contrastText: "white",
 };
 
 const lightMode: IThemeMode = {
     main: "#d9d9d9",
-    light: "#C2B4AE",
+    light: "#F0E4D8",
     dark: "#363636",
-    contrastText: "",
+    contrastText: "black",
 };
 
 const aquamarine: IThemePalette = {

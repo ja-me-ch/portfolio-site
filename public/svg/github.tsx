@@ -8,13 +8,13 @@ const GitHubSvg = function () {
             // data-darkreader-inline-fill=""
             // style="--darkreader-inline-fill:#000000;"
         >
-            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+            <g id="GitHubSvg_bgCarrier" strokeWidth="0"></g>
             <g
-                id="SVGRepo_tracerCarrier"
+                id="GitHubSvg_tracerCarrier"
                 strokeLinecap="round"
                 strokeLinejoin="round"
             ></g>
-            <g id="SVGRepo_iconCarrier">
+            <g id="GitHubSvg_iconCarrier">
                 {" "}
                 <title>github</title>{" "}
                 <rect width="24" height="24" fill="none"></rect>{" "}

@@ -6,15 +6,25 @@ import Project from "../../components/projects/Project";
 import Preview from "../../interfaces/preview.interface";
 import { MainContext } from "../../contexts/MainContext";
 
-const RootStyle = styled("div")(({ theme } : {theme: CustomTheme}) => ({
+const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     display: "flex",
     flexDirection: "column",
     marginTop: "1rem",
-    maxWidth: `${theme.breakpoints.keys['lg']}px`,
-    justifySelf: 'center',
-    // height: '100%',
-    // border: '1px solid red',
-    overflow: "hidden",
+    maxWidth: `${theme.breakpoints.values["lg"]}px`,
+
+    justifySelf: "center",
+    ".project-preview:not(:last-child)": {
+        borderBlockEnd: "5px solid",
+        paddingBlockEnd: "1rem",
+        borderImageSlice: "1",
+        borderImageSource: `linear-gradient(45deg, ${
+            theme.themes.themePalettes[theme.themes.selectedTheme].light
+        },
+        ${theme.themes.themePalettes[theme.themes.selectedTheme].main}, ${
+            theme.themes.themePalettes[theme.themes.selectedTheme].dark
+            })`,
+        marginBottom: '2rem'
+    },
 }));
 
 const ProjectItem = styled("div")(() => ({
@@ -24,15 +34,18 @@ const ProjectItem = styled("div")(() => ({
 
 const ProjectsIndex = function () {
     const { selectedTheme } = useContext(MainContext);
+
     const previews = master.map((pv, index) => {
         return (
             <Project preview={pv} key={`${pv.title}-${index}`} index={index} />
         );
     });
-    useEffect(() => {
-        console.log("rerender projects index");
-    }, [selectedTheme.value]);
-    return <RootStyle>{previews}</RootStyle>;
+    // useEffect(() => {
+    //     console.log("rerender projects index");
+    // }, [selectedTheme.value]);
+    return <RootStyle>
+        {previews}
+    </RootStyle>;
 };
 
 export default ProjectsIndex;
