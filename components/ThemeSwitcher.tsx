@@ -9,7 +9,7 @@ const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     // border: "1px solid red",
     // display: 'inline',
     // borderRadius: '50%',
-    width: "100%",
+    minWidth: '70px',
     margin: "0.5rem",
     [theme.breakpoints.down("sm")]: {
         visibility: "hidden",
@@ -21,7 +21,6 @@ const CircleContainer = styled("div")(() => ({
     // display: 'relative',
     borderRadius: "50%",
     // border: "1px solid blue",
-    // width: '100%',
     aspectRatio: "1 / 1",
     // margin: 'auto'
 }));
@@ -63,7 +62,7 @@ const Shape = styled("div")<ICircleProps>(
         // transform: 'translateX(-50%) translateY(-50%)',
         aspectRatio: "1 / 1",
         ":focus": {
-            animation: "elastic-spin 1s ease-in-out",
+            animation: "elastic-spin 1s ease-out",
         },
         ":active": {
             animation: "none",
@@ -73,10 +72,10 @@ const Shape = styled("div")<ICircleProps>(
                 transform: "rotate(0deg) scale(1)",
             },
             "50%": {
-                transform: "rotate(360deg) scale(1.2)",
+                transform: "rotate(180deg) scale(1.1)",
             },
             "100%": {
-                transform: "rotate(720deg) scale(1)",
+                transform: "rotate(360deg) scale(1)",
             },
         },
     })

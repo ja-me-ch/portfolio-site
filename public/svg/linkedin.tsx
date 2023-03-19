@@ -9,6 +9,9 @@ const LinkedInSvg = function ({ modeColor }: { modeColor: string }) {
             xmlnsXlink="http://www.w3.org/1999/xlink"
             viewBox="0 0 455 455"
             xmlSpace="preserve"
+            style={{
+                transition: '1s all ease'
+            }}
         >
             <g>
                 <path

@@ -2,9 +2,8 @@ import React, { useEffect, useContext } from "react";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import { OffsetProps } from "../../types/common";
-import { CustomTheme, styled, alpha } from "@mui/material";
+import { CustomTheme, styled, useMediaQuery } from "@mui/material";
 import { MainContext } from "../../contexts/MainContext";
-import Head from "next/head";
 
 const RootStyle = styled("div")<OffsetProps>(
     ({ theme, offset }: { theme: CustomTheme; offset: string }) => ({
@@ -166,8 +165,10 @@ const ChildrenContainer = styled("div")(
 
 function DefaultLayout({ children }) {
     const { selectedTheme, themeMode } = useContext(MainContext);
-    const verticalOffset = "5";
-    const horizontalOffset = "5";
+    const useDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+    if (useDarkMode === false && themeMode.value === 'light') themeMode.toggle();
+    const verticalOffset = "4";
+    const horizontalOffset = "4";
     // children.props = {s: 's'}
     // useEffect(() => {
     //     console.log('useeffect!')

@@ -62,12 +62,13 @@ const ContactRow = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     boxSizing: "border-box",
     // marginBottom: '1rem',
     padding: "0",
+    marginBottom: '-1px',
     borderBottom: `1px solid ${
         theme.themes.modes[theme.themes.selectedMode].contrastText
     }`,
     "&:hover": {
-        marginBottom: "-1px",
-        borderBottom: `2px solid ${
+        marginBottom: "-4px",
+        borderBottom: `4px solid ${
             theme.themes.modes[theme.themes.selectedMode].contrastText
         }`,
         "h4, svg": {

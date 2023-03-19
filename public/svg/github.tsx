@@ -5,6 +5,9 @@ const GitHubSvg = function ({ modeColor }: { modeColor: string }) {
             xmlns="http://www.w3.org/2000/svg"
             fill={modeColor}
             width="40"
+            style={{
+                transition: "1s all ease",
+            }}
             // data-darkreader-inline-fill=""
             // style="--darkreader-inline-fill:#000000;"
         >

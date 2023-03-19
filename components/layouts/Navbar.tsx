@@ -16,7 +16,6 @@ import NavbarSvg from "../../public/svg/navbar";
 import ThemeSwitcher from "../ThemeSwitcher";
 
 const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
-    position: "sticky",
     top: "0",
     color: theme.themes.modes[theme.themes.selectedMode].contrastText,
     transition: "1s all ease",
@@ -24,8 +23,12 @@ const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     backgroundColor: theme.themes.modes[theme.themes.selectedMode].main,
 }));
 
-const TopBar = styled("div")(() => ({
-    borderBottom: "2px solid black",
+const TopBar = styled("div")(({ theme }: { theme: CustomTheme }) => ({
+    maxHeight: "90px",
+    borderBottom: `2px solid ${
+        theme.themes.modes[theme.themes.selectedMode].contrastText
+    }`,
+    transition: "1s all ease",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
@@ -43,17 +46,38 @@ const HamburgerIconContainer = styled("div")(({ theme }) => ({
     },
 }));
 
-const Title = styled("h1")(({ theme }) => ({
+const SiteName = styled("span")(({ theme }: { theme: CustomTheme }) => ({
+    display: "block",
+    fontWeight: "600",
+    fontSize: "1.5em",
+    color: theme.themes.modes[theme.themes.selectedMode].contrastText,
+    transition: "1s all ease",
+    [theme.breakpoints.down("sm")]: {
+        fontSize: "1rem",
+    },
+}));
+
+const Subtitle = styled("span")(({ theme }: { theme: CustomTheme }) => ({
+    fontWeight: "600",
+    fontSize: "0.75em",
+    color: theme.themes.modes[theme.themes.selectedMode].contrastText,
+    transition: "1s all ease",
+}));
+
+const Title = styled("h1")(({ theme }: { theme: CustomTheme }) => ({
     margin: "0",
     display: "inline",
     // paddingBottom: "0rem",
+    // alignContent: 'center',
     textAlign: "right",
     paddingRight: "1rem",
-    fontSize: "4rem",
-    paddingTop: "0.6rem",
+    fontSize: "3.8rem",
+    marginTop: "0.6rem",
     // borderBottom: "2px solid #000",
+    color: theme.themes.modes[theme.themes.selectedMode].contrastText,
     fontWeight: "400",
     fontFamily: "Yrsa, Roboto",
+    transition: "1s all ease",
     [theme.breakpoints.down("sm")]: {
         fontSize: "2.5rem",
     },
@@ -69,18 +93,17 @@ const Nav = styled("nav")<NavProps>(
         paddingRight: "1rem",
         marginTop: "1rem",
         marginInline: "auto",
-        visibility: "visible",
+        // visibility: "visible",
         // border: '1px solid red',
         maxWidth: `${theme.breakpoints.values["lg"]}px`,
         marginBottom: "1rem",
-        transition: "1s all",
+        transition: "1s all ease",
         [theme.breakpoints.down("sm")]: {
             flexDirection: "column",
             padding: "0",
             marginTop: "2px",
             marginBottom: "0",
             gap: "2px",
-            height: showNavbar ? "auto" : "0",
         },
     })
 );
@@ -89,8 +112,12 @@ const NavItem = styled(Link)<NavItemProps>(
     ({ theme }: { theme: CustomTheme }) => ({
         // border: "1px solid blue",
         position: "relative",
-        borderBottom: "2px solid #000",
-        borderRight: "2px solid #000",
+        borderBottom: `2px solid ${
+            theme.themes.modes[theme.themes.selectedMode].dark
+        }`,
+        borderRight: `2px solid ${
+            theme.themes.modes[theme.themes.selectedMode].dark
+        }`,
         color: theme.themes.modes[theme.themes.selectedMode].contrastText,
         backgroundColor: lighten(
             theme.themes.modes[theme.themes.selectedMode].light,
@@ -248,7 +275,20 @@ function Navbar() {
     return (
         <RootStyle>
             <TopBar>
-                <ThemeSwitcher />
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "row",
+                    }}
+                >
+                    <ThemeSwitcher />
+                    <div style={{
+                        alignSelf: 'center'
+                    }}>
+                        <SiteName>Jacky C.</SiteName>
+                        <Subtitle>Web Developer</Subtitle>
+                    </div>
+                </div>
                 <Title>{getPageTitle(params)}</Title>
             </TopBar>
             <HamburgerIconContainer onClick={onHamburgerClick}>

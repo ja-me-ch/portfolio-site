@@ -1,6 +1,3 @@
-import { CustomTheme } from "@mui/material/styles";
-import { useTheme } from "@mui/system";
-
 const EmailSvg = function ({ modeColor } : { modeColor: string }) {
     return (
         <svg
@@ -8,6 +5,9 @@ const EmailSvg = function ({ modeColor } : { modeColor: string }) {
             fill="none"
             width="40"
             xmlns="http://www.w3.org/2000/svg"
+            style={{
+                transition: "1s all ease",
+            }}
         >
             <g id="EmailSvg_bgCarrier" strokeWidth="0"></g>
             <g

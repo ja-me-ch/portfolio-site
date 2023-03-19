@@ -4,7 +4,7 @@ import { MainContext } from "../contexts/MainContext";
 import { IThemeMode, IThemePalette } from "../interfaces/theme.interface";
 
 const darkMode: IThemeMode = {
-    main: "#4D4645",
+    main: "#423C42",
     light: "#363636",
     dark: "#17171A",
     contrastText: "#FFFFFF",
