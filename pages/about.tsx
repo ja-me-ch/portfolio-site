@@ -5,12 +5,13 @@ import Link from "next/link";
 import EmailSvg from "../public/svg/email";
 import GitHubSvg from "../public/svg/github";
 import LinkedInSvg from "../public/svg/linkedin";
+import Head from "next/head";
 
 const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     display: "flex",
     flexDirection: "row",
     color: theme.themes.modes[theme.themes.selectedMode].contrastText,
-    transition: '1s all ease',
+    transition: "1s all ease",
     maxWidth: `${theme.breakpoints.values["lg"]}px`,
     // border: '1px solid red',
     [theme.breakpoints.down("sm")]: {
@@ -18,7 +19,7 @@ const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     },
 }));
 
-const AboutContent = styled("section")(({ theme }: { theme: CustomTheme }) => ({
+const AboutContent = styled("main")(({ theme }: { theme: CustomTheme }) => ({
     // border: "1px solid blue",
     flexBasis: "60%",
     flexGrow: "1",
@@ -28,13 +29,13 @@ const AboutContent = styled("section")(({ theme }: { theme: CustomTheme }) => ({
     },
 }));
 
-const Title = styled("h3")(() => ({
+const Title = styled("h2")(() => ({
     fontSize: "2rem",
     marginTop: "0.5rem",
     marginBottom: "1rem",
 }));
 
-const ContactContent = styled("section")(
+const ContactContent = styled("aside")(
     ({ theme }: { theme: CustomTheme }) => ({
         // border: "1px solid green",
         // flexBasis: "30%",
@@ -62,7 +63,7 @@ const ContactRow = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     boxSizing: "border-box",
     // marginBottom: '1rem',
     padding: "0",
-    marginBottom: '-1px',
+    marginBottom: "-1px",
     borderBottom: `1px solid ${
         theme.themes.modes[theme.themes.selectedMode].contrastText
     }`,
@@ -77,7 +78,7 @@ const ContactRow = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     },
 }));
 
-const Contact = styled("div")(() => ({
+const Contact = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
@@ -86,127 +87,169 @@ const Contact = styled("div")(() => ({
     // marginBlock: "0.5rem",
 }));
 
-const ContactHeading = styled("h4")(() => ({
+const ContactHeading = styled("h3")(() => ({
     fontSize: "1.3rem",
     padding: "0",
     margin: "0",
     marginRight: "0.5rem",
 }));
 
+const ListStyle = styled("ul")(() => ({
+    paddingLeft: "1.5rem",
+}));
+
+const ListItem = styled("li")(() => ({
+    // listStyle: "none",
+    marginBlock: "0.3rem",
+}));
+
+const LinkStyle = styled(Link)(() => ({
+    fontWeight: "600",
+    "&:hover": {
+        textDecoration: "underline",
+    },
+}));
+
 export default function About() {
     const theme: CustomTheme = useTheme();
     const { selectedTheme, themeMode } = useContext(MainContext);
     return (
-        <RootStyle>
-            <AboutContent>
-                <Title>About</Title>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Amet maxime eaque magni fugiat fugit! Quidem placeat
-                    obcaecati modi officiis, cupiditate aperiam laboriosam
-                    fugiat labore optio velit et, blanditiis exercitationem
-                    dolore? Iusto corrupti maiores illo quae veritatis
-                    exercitationem harum eaque nihil, dolore fugit magni
-                    perspiciatis ratione recusandae est! Cumque ad similique,
-                    deserunt eaque quaerat est atque quo, animi dolores autem
-                    fuga. Itaque sit perferendis totam cupiditate perspiciatis
-                    laboriosam soluta iste sint neque officiis odit, enim nemo
-                    rem et omnis eos nisi autem, deleniti ratione consequuntur
-                    vel odio optio, suscipit repellendus! Quasi? Maxime officiis
-                    ea deserunt itaque quae quos hic libero, nemo, sequi aperiam
-                    dolor. Dignissimos, pariatur! Deserunt, distinctio. Deserunt
-                    optio non excepturi molestias quos! Aliquam expedita numquam
-                    blanditiis possimus deleniti corporis. Nihil reiciendis
-                    excepturi sit dolor reprehenderit eius, blanditiis molestiae
-                    hic est! Et est laborum suscipit asperiores nemo, magnam
-                    deleniti ipsa veritatis rem maiores vitae ullam quidem
-                    dolores, animi voluptas beatae.
-                </p>
+        <>
+            <Head>
+                <title>About - Jacky C.</title>
+            </Head>
+            <RootStyle>
+                <AboutContent>
+                    <Title>About</Title>
+                    <p>
+                        A web developer with a focus on React.js, Next.js, and
+                        related technologies. While simultaneously developing
+                        with accessibility and responsive design in mind.
+                    </p>
+                    <span>Experience in the following technologies:</span>
+                    <ListStyle>
+                        <ListItem>
+                            React.js
+                            <ListStyle>
+                                <ListItem>Next.js</ListItem>
+                                <ListItem>Node.js</ListItem>
+                                <ListItem>MongoDb</ListItem>
+                                <ListItem>JavaScript</ListItem>
+                                <ListItem>TypeScript</ListItem>
+                            </ListStyle>
+                        </ListItem>
+                        <ListItem>
+                            HTML, CSS
+                            <ListStyle>
+                                <ListItem>Material UI, Emotion</ListItem>
+                                <ListItem>Bootstrap</ListItem>
+                            </ListStyle>
+                        </ListItem>
+                        <ListItem>
+                            API
+                            <ListStyle>
+                                <ListItem>REST</ListItem>
+                                <ListItem>GraphQL</ListItem>
+                            </ListStyle>
+                        </ListItem>
+                    </ListStyle>
+                    <p>And more!</p>
+                    <Title>Credits</Title>
+                    Assets Used:
+                    <ListStyle>
+                        <ListItem>
+                            <span>LinkedIn SVG: &nbsp;</span>
+                            <LinkStyle
+                                href="https://www.svgrepo.com/svg/922/linkedin"
+                                rel="noopener noreferrer"
+                                target="_blank"
+                            >
+                                SVG Repo
+                            </LinkStyle>
+                        </ListItem>
+                        <ListItem>
+                            <span>GitHub SVG: &nbsp;</span>
+                            <LinkStyle
+                                href="https://www.svgrepo.com/svg/503359/github"
+                                rel="noopener noreferrer"
+                                target="_blank"
+                            >
+                                SVG Repo
+                            </LinkStyle>
+                        </ListItem>
+                        <ListItem>
+                            <span>Email SVG: &nbsp;</span>
+                            <LinkStyle
+                                href="https://www.svgrepo.com/svg/502648/email"
+                                rel="noopener noreferrer"
+                                target="_blank"
+                            >
+                                SVG Repo
+                            </LinkStyle>
+                        </ListItem>
+                    </ListStyle>
+                </AboutContent>
+                <ContactContent>
+                    <Title>Contact</Title>
+                    {/* CHANGE TO LIST */}
+                    <ContactRow>
+                        <Link
+                            href="https://www.linkedin.com/in/jamech/"
+                            rel="noopener noreferrer"
+                            target="_blank"
+                        >
+                            <Contact>
+                                <ContactHeading>LinkedIn</ContactHeading>
+                                <LinkedInSvg
+                                    modeColor={
+                                        theme.themes.modes[
+                                            theme.themes.selectedMode
+                                        ].contrastText
+                                    }
+                                />
+                            </Contact>
+                        </Link>
+                    </ContactRow>
 
-                <Title>Credits</Title>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Ratione, quisquam deleniti aut amet, magnam minus ducimus
-                    eos hic sed molestias repellendus! Quaerat ullam aliquam
-                    magnam tempore consequatur dolorum placeat itaque? At, ad
-                    doloribus consequatur eius animi, earum dolorum omnis
-                    doloremque cum enim, quaerat nobis debitis ipsa voluptate
-                    deleniti laboriosam? Dolorum vel tempora nemo eveniet sequi
-                    vitae, quod odio neque necessitatibus? Officia quidem ea
-                    necessitatibus mollitia dolor ab, tempore cum voluptatem
-                    adipisci id, beatae alias harum quo tenetur suscipit aliquid
-                    enim asperiores voluptates blanditiis sequi odit velit animi
-                    ipsum fuga. Aperiam? Praesentium cupiditate placeat dolorem
-                    architecto labore voluptas mollitia blanditiis maiores
-                    cumque, modi accusamus nesciunt magnam odio aut, eaque
-                    corporis iusto, impedit voluptate a odit quas delectus
-                    dolore ea deserunt! Vero? Nihil pariatur velit eligendi qui
-                    eveniet nostrum sed dolores, possimus, minima fuga
-                    aspernatur cumque quam cupiditate odio. Obcaecati qui amet,
-                    repudiandae sequi possimus corrupti quasi aliquam rerum
-                    velit architecto maiores!
-                </p>
-            </AboutContent>
-            <ContactContent>
-                <Title>Contact</Title>
-                {/* CHANGE TO LIST */}
-                <ContactRow>
-                    <Link
-                        href="https://www.linkedin.com/in/jamech/"
-                        rel="noopener noreferrer"
-                        target="_blank"
-                    >
-                        <Contact>
-                            <ContactHeading>LinkedIn</ContactHeading>
-                            <LinkedInSvg
-                                modeColor={
-                                    theme.themes.modes[
-                                        theme.themes.selectedMode
-                                    ].contrastText
-                                }
-                            />
-                        </Contact>
-                    </Link>
-                </ContactRow>
+                    <ContactRow>
+                        <Link
+                            href="https://github.com/ja-me-ch"
+                            rel="noopener noreferrer"
+                            target="_blank"
+                        >
+                            <Contact>
+                                <ContactHeading>GitHub</ContactHeading>
+                                <GitHubSvg
+                                    modeColor={
+                                        theme.themes.modes[
+                                            theme.themes.selectedMode
+                                        ].contrastText
+                                    }
+                                />
+                            </Contact>
+                        </Link>
+                    </ContactRow>
 
-                <ContactRow>
-                    <Link
-                        href="https://github.com/ja-me-ch"
-                        rel="noopener noreferrer"
-                        target="_blank"
-                    >
-                        <Contact>
-                            <ContactHeading>GitHub</ContactHeading>
-                            <GitHubSvg
-                                modeColor={
-                                    theme.themes.modes[
-                                        theme.themes.selectedMode
-                                    ].contrastText
-                                }
-                            />
-                        </Contact>
-                    </Link>
-                </ContactRow>
-
-                <ContactRow>
-                    <Link
-                        href="mailto:ja.me.ch.95@gmail.com"
-                        rel="noopener noreferrer"
-                        target="_blank"
-                    >
-                        <Contact>
-                            <ContactHeading>Email</ContactHeading>
-                            <EmailSvg
-                                modeColor={
-                                    theme.themes.modes[
-                                        theme.themes.selectedMode
-                                    ].contrastText
-                                }
-                            />
-                        </Contact>
-                    </Link>
-                </ContactRow>
-            </ContactContent>
-        </RootStyle>
+                    <ContactRow>
+                        <Link
+                            href="mailto:ja.me.ch.95@gmail.com"
+                            rel="noopener noreferrer"
+                            target="_blank"
+                        >
+                            <Contact>
+                                <ContactHeading>Email</ContactHeading>
+                                <EmailSvg
+                                    modeColor={
+                                        theme.themes.modes[
+                                            theme.themes.selectedMode
+                                        ].contrastText
+                                    }
+                                />
+                            </Contact>
+                        </Link>
+                    </ContactRow>
+                </ContactContent>
+            </RootStyle>
+        </>
     );
 }

@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import { CustomTheme, useTheme } from "@mui/material";
+import { CustomTheme, useTheme, useMediaQuery } from "@mui/material";
 // import theme from "../styles/theme";
 
 interface MainContextProps {
@@ -26,16 +26,22 @@ export function MainContextProvider(props) {
     const [themeMode, setThemeMode] = useState("light");
     const [selectedTheme, setSelectedTheme] = useState("aquamarine");
     const theme: CustomTheme = useTheme();
+
+    const useDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
     theme.themes.selectedTheme = selectedTheme;
     theme.themes.selectedMode = themeMode;
-
+    
     const toggleNavbar = function (): void {
         setShowNavbar((s) => !s);
     };
-
+    
     const toggleThemeMode = function (): void {
         setThemeMode((s) => (s === "light" ? "dark" : "light"));
     };
+    
+    if (useDarkMode === false && themeMode === "light") {
+        toggleThemeMode();
+    }
 
     const updateSelectedTheme = function (themeName: string): void {
         setSelectedTheme(themeName);

@@ -127,9 +127,11 @@ const VerticalWave = styled("div")<OffsetProps>(
 
 const ChildrenContainer = styled("div")(
     ({ theme }: { theme: CustomTheme }) => ({
-        display: 'flex',
-        justifyContent: 'center',
-        padding: "1rem",
+        display: "flex",
+        justifyContent: "center",
+        paddingTop: "1rem",
+        paddingInline: '1rem',
+        marginBottom: '1rem',
         height: "100%",
         color: theme.themes.modes[theme.palette.mode].contrastText,
         // maxWidth: '1280px',
@@ -165,8 +167,7 @@ const ChildrenContainer = styled("div")(
 
 function DefaultLayout({ children }) {
     const { selectedTheme, themeMode } = useContext(MainContext);
-    const useDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-    if (useDarkMode === false && themeMode.value === 'light') themeMode.toggle();
+    
     const verticalOffset = "4";
     const horizontalOffset = "4";
     // children.props = {s: 's'}
@@ -183,7 +184,7 @@ function DefaultLayout({ children }) {
                 <Canvas offset={verticalOffset}>
                     <Navbar />
                     <ChildrenContainer>{children}</ChildrenContainer>
-                    <Footer />
+                    {/* <Footer /> */}
                 </Canvas>
                 <HorizontalSpacer offset={verticalOffset}>
                     <VerticalWave offset={verticalOffset} />

@@ -5,6 +5,7 @@ import master from "../../helper-functions/previews/master";
 import Project from "../../components/projects/Project";
 import Preview from "../../interfaces/preview.interface";
 import { MainContext } from "../../contexts/MainContext";
+import Head from "next/head";
 
 const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     display: "flex",
@@ -44,9 +45,14 @@ const ProjectsIndex = function () {
     // useEffect(() => {
     //     console.log("rerender projects index");
     // }, [selectedTheme.value]);
-    return <RootStyle>
-        {previews}
-    </RootStyle>;
+    return (
+        <>
+            <Head>
+                <title>Projects | Jacky C.</title>
+            </Head>
+            <RootStyle>{previews}</RootStyle>
+        </>
+    );
 };
 
 export default ProjectsIndex;

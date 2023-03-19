@@ -15,7 +15,7 @@ import { lighten } from "@mui/material";
 import NavbarSvg from "../../public/svg/navbar";
 import ThemeSwitcher from "../ThemeSwitcher";
 
-const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
+const RootStyle = styled("header")(({ theme }: { theme: CustomTheme }) => ({
     top: "0",
     color: theme.themes.modes[theme.themes.selectedMode].contrastText,
     transition: "1s all ease",
@@ -59,9 +59,12 @@ const SiteName = styled("span")(({ theme }: { theme: CustomTheme }) => ({
 
 const Subtitle = styled("span")(({ theme }: { theme: CustomTheme }) => ({
     fontWeight: "600",
-    fontSize: "0.75em",
+    fontSize: "1em",
     color: theme.themes.modes[theme.themes.selectedMode].contrastText,
     transition: "1s all ease",
+    [theme.breakpoints.down("sm")]: {
+        fontSize: "0.75rem",
+    },
 }));
 
 const Title = styled("h1")(({ theme }: { theme: CustomTheme }) => ({
@@ -282,16 +285,18 @@ function Navbar() {
                     }}
                 >
                     <ThemeSwitcher />
-                    <div style={{
-                        alignSelf: 'center'
-                    }}>
+                    <div
+                        style={{
+                            alignSelf: "center",
+                        }}
+                    >
                         <SiteName>Jacky C.</SiteName>
                         <Subtitle>Web Developer</Subtitle>
                     </div>
                 </div>
                 <Title>{getPageTitle(params)}</Title>
             </TopBar>
-            <HamburgerIconContainer onClick={onHamburgerClick}>
+            <HamburgerIconContainer onClick={onHamburgerClick} role={""}>
                 <NavbarSvg
                     toggle={showNavbar.value}
                     modeColor={

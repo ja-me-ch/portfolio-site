@@ -6,7 +6,7 @@ import LinkTag from "../LinkTag";
 import Image from "next/image";
 import Tag from "../Tag";
 
-const RootStyle = styled("div")(({ index }: { index: number }) => ({
+const RootStyle = styled("section")(({ index }: { index: number }) => ({
     display: "flex",
     flexDirection: "column",
     // marginBlock: "1.3rem",
@@ -32,7 +32,7 @@ const ProjectPreviewContent = styled("div")(() => ({
     
 }));
 
-const Title = styled("h3")(({ index }: { index: number }) => ({
+const Title = styled("h2")(({ index }: { index: number }) => ({
     marginTop: "0",
     marginBottom: "0.3rem",
     fontWeight: "600",
@@ -93,13 +93,13 @@ const Project = function (props: IProps) {
     const projectLinkGithub = <LinkTag text={"GitHub"} link={github} />;
 
     return (
-        <RootStyle index={index} className={'project-preview'}>
+        <RootStyle index={index} className={'project-preview'} aria-label={`${title} Preview`}>
             {/* <PreviewImageContainer>
                 <ImageStyle src={imageUrl} alt={`Preview of ${title}`} />
             </PreviewImageContainer> */}
             <ProjectPreviewContent>
-                <Title index={index}>
-                    <Link href={"/"}>{title}</Link>
+                <Title index={index} role={'heading'}>
+                    <Link href={"/"} role={'link'}>{title}</Link>
                 </Title>
                 <ProjectLinks index={index}>
                     {/* CHANGE TO LIST */}
