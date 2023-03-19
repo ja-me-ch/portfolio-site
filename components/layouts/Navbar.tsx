@@ -276,7 +276,7 @@ function Navbar() {
     const onHamburgerClick = () => showNavbar.toggle();
 
     return (
-        <RootStyle>
+        <RootStyle aria-label="Jacky C. Web Developer">
             <TopBar>
                 <div
                     style={{
@@ -296,7 +296,7 @@ function Navbar() {
                 </div>
                 <Title>{getPageTitle(params)}</Title>
             </TopBar>
-            <HamburgerIconContainer onClick={onHamburgerClick} role={""}>
+            <HamburgerIconContainer onClick={onHamburgerClick} >
                 <NavbarSvg
                     toggle={showNavbar.value}
                     modeColor={
@@ -308,7 +308,7 @@ function Navbar() {
             <Collapse in={showNavbar.value} collapsedSize={0}>
                 <NavContainer>
                     {/* CHANGE TO LIST */}
-                    <Nav showNavbar={showNavbar.value}>
+                    <Nav showNavbar={showNavbar.value} aria-label='Primary Navigation'>
                         <NavItem href={"/"}>
                             Home
                             <Wave

@@ -107,7 +107,7 @@ const Project = function (props: IProps) {
                     {projectLinkGithub}
                     {projectLinkSiteUrl}
                 </ProjectLinks>
-                <Description>{preview.description}</Description>
+                <Description aria-label="Description">{preview.description}</Description>
                 {/* {preview.github}
                 {preview.imageUrl}
                 {preview.siteUrl} */}

@@ -119,15 +119,17 @@ export default function About() {
                 <title>About - Jacky C.</title>
             </Head>
             <RootStyle>
-                <AboutContent>
-                    <Title>About</Title>
-                    <p>
+                <AboutContent aria-labelledby='h2-about'>
+                    <Title id='h2-about'>About</Title>
+                    <p aria-label='About Content'>
                         A web developer with a focus on React.js, Next.js, and
                         related technologies. While simultaneously developing
                         with accessibility and responsive design in mind.
                     </p>
-                    <span>Experience in the following technologies:</span>
-                    <ListStyle>
+                    <h3 id="h3-experience">
+                        Experience in the following technologies:
+                    </h3>
+                    <ListStyle aria-labelledby="h3-experience">
                         <ListItem>
                             React.js
                             <ListStyle>
@@ -154,8 +156,9 @@ export default function About() {
                         </ListItem>
                     </ListStyle>
                     <p>And more!</p>
-                    <Title>Credits</Title>
-                    Assets Used:
+                <section aria-labelledby='h2-credits'>
+                    <Title id='h2-credits'>Credits</Title>
+                    <h3>Assets Used:</h3>
                     <ListStyle>
                         <ListItem>
                             <span>LinkedIn SVG: &nbsp;</span>
@@ -163,7 +166,7 @@ export default function About() {
                                 href="https://www.svgrepo.com/svg/922/linkedin"
                                 rel="noopener noreferrer"
                                 target="_blank"
-                            >
+                                >
                                 SVG Repo
                             </LinkStyle>
                         </ListItem>
@@ -173,7 +176,7 @@ export default function About() {
                                 href="https://www.svgrepo.com/svg/503359/github"
                                 rel="noopener noreferrer"
                                 target="_blank"
-                            >
+                                >
                                 SVG Repo
                             </LinkStyle>
                         </ListItem>
@@ -183,21 +186,22 @@ export default function About() {
                                 href="https://www.svgrepo.com/svg/502648/email"
                                 rel="noopener noreferrer"
                                 target="_blank"
-                            >
+                                >
                                 SVG Repo
                             </LinkStyle>
                         </ListItem>
                     </ListStyle>
-                </AboutContent>
-                <ContactContent>
-                    <Title>Contact</Title>
+                </section>
+                        </AboutContent>
+                <ContactContent aria-labelledby="h2-contact">
+                    <Title id="h2-contact">Contact</Title>
                     {/* CHANGE TO LIST */}
                     <ContactRow>
                         <Link
                             href="https://www.linkedin.com/in/jamech/"
                             rel="noopener noreferrer"
                             target="_blank"
-                        >
+                            >
                             <Contact>
                                 <ContactHeading>LinkedIn</ContactHeading>
                                 <LinkedInSvg
