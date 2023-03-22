@@ -1,3 +1,5 @@
+// import * as dotenv from 'dotenv';
+
 const MakeRequest = function (props) {
     const { query, variables } = props;
 
@@ -7,6 +9,7 @@ const MakeRequest = function (props) {
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
+                "Authorization": `Bearer ${process.env.CLASSIC_TOKEN}`,
             },
             body: JSON.stringify({
                 query: query,
@@ -18,13 +21,15 @@ const MakeRequest = function (props) {
     return fetch(url, options)
         .then((response) => {
             return response.json().then(function (json) {
-                return response.ok ? json : { data: { User: null } };
+                return json
+                // return response.ok ? json : { data: { User: null } };
             });
         })
         .then((data) => {
             return data;
         })
         .catch((err) => {
+            console.log(err)
             return err;
         });
 };

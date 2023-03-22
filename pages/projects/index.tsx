@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import Link from "next/link";
 import { CustomTheme, styled } from "@mui/material";
 import master from "../../helper-functions/previews/master";
-import Project from "../../components/projects/Project";
+import Project from "../../components/projects/Preview";
 import Preview from "../../interfaces/preview.interface";
 import { MainContext } from "../../contexts/MainContext";
 import Head from "next/head";

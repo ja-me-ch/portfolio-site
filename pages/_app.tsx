@@ -6,9 +6,12 @@ import theme from "../styles/theme";
 import { CustomTheme, styled } from "@mui/material";
 import Head from "next/head";
 
+
 const RootStyle = styled("div")(() => ({}));
 
 function MyApp({ Component, pageProps }) {
+    
+
     return (
         <ThemeProvider theme={theme}>
             <MainContextProvider>

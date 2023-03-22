@@ -1,7 +1,8 @@
 import Preview from "../../interfaces/preview.interface";
 
 const AnimeTriviaGamePreview: Preview = {
-    title: 'Anime Trivia Game',
+    title: "Anime Trivia Game",
+    name: "Anime-Trivia-Game",
     //imageUrl: ,
     description:
         "A single page application game that consumes the AniList GraphQL API to generate random trivia questions. This is a fan made app and not affiliated with AniList.",

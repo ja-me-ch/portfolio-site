@@ -2,6 +2,7 @@ import Preview from "../../interfaces/preview.interface";
 
 const KanBanBoardPreview: Preview = {
     title: "Kanban Board",
+    name: 'kanban-board',
     //imageUrl: ,
     description:
         "A sample kanban-board app written with ReactJS and styled with Material UI styled components.",

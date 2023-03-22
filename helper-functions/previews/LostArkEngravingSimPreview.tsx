@@ -4,6 +4,7 @@ import imageUrl from '../../public/previews/Capture.png';
 
 const LostArkEngravingSimPreview: Preview = {
     title: 'Lost Ark Engraving Simulator',
+    name: 'Lost-Ark-Engraving-Simulator-React-',
     imageUrl: imageUrl,
     description:
         "A single page application that simulates the engraving system for the game Lost Ark.",
