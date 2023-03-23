@@ -20,39 +20,29 @@ export async function getServerSideProps() {
         return master.map(async (e) => {
             return await makeCall(e.name).then((res) => {
                 return res.data.repository.defaultBranchRef.target.history
-                    .edges;
+                    .edges.map((e) => {
+                        return e.node;
+                    });
             });
         });
     };
 
-    const data = await getAll();
+    const data = await Promise.all(await getAll());
 
-    // const res = await MakeRequest(Query("anime-trivia-game"));
+    console.log('data:');
+    console.log(data[0]);
 
-    // const data = res.data.repository.defaultBranchRef.target.history.edges;
-
-    // const mapped = data.map((e) => {
-    // console.log(e);
-    // return e.node;
-    // })
-
-    // const newArray = [];
-
-    // for (let i = 0; i < data.length; i++) {
-    //   newArray.push(data[i].node)
-    // }
-
-    console.log(data)
+    
 
     return {
         props: {
-            atg: await Promise.all(data),
+            data: data
         },
     };
 }
 
 export default function Home(props) {
-    console.log(props);
+    // console.log(props);
 
     const time = "2023-03-07T23:22:47Z";
     const currentTime = Date.now();
