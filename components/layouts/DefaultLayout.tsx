@@ -14,7 +14,7 @@ const RootStyle = styled("div")<OffsetProps>(
         height: "100%",
         position: "absolute",
         overflow: "hidden",
-        backgroundColor: theme.themes.modes.light.dark,
+        backgroundColor: "#161618",
         [theme.breakpoints.down("sm")]: {
             gridTemplateRows: "1fr",
             // maxWidth: "100dvw",

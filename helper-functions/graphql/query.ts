@@ -10,10 +10,12 @@ const Query = function (props) {
               node {
                 id
                 message
-                oid
+                abbreviatedOid
                 pushedDate
-                authoredDate
                 url
+                repository {
+                  name
+                }
               }
             }
           }

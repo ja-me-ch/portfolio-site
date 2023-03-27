@@ -13,7 +13,7 @@ const darkMode: IThemeMode = {
 const lightMode: IThemeMode = {
     main: "#d9d9d9",
     light: "#F0E4D8",
-    dark: "#363636",
+    dark: "#D9CDB8",
     contrastText: "#000000",
 };
 

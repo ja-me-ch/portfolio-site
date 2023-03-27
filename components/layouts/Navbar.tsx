@@ -296,7 +296,8 @@ function Navbar() {
                 </div>
                 <Title>{getPageTitle(params)}</Title>
             </TopBar>
-            <HamburgerIconContainer onClick={onHamburgerClick} >
+            <HamburgerIconContainer onClick={onHamburgerClick}>
+                {/* CHANGE TO BUTTON */}
                 <NavbarSvg
                     toggle={showNavbar.value}
                     modeColor={
