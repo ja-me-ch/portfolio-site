@@ -56,12 +56,11 @@ const Shape = styled("div")<ICircleProps>(
         left: prop ? `${prop.offset[1]}%` : "0",
         border:
             selectedMode === "light"
-                ? `2px solid ${theme.themes.modes.light.contrastText}`
-                : `2px solid ${theme.themes.modes.dark.contrastText}`,
+                ? `2px solid ${theme.themes.modes[selectedMode].contrastText}`
+                : `2px solid ${theme.themes.modes[selectedMode].contrastText}`,
         width: "23%",
         overflow: "hidden",
         rotate: "45deg",
-        // transform: 'translateX(-50%) translateY(-50%)',
         aspectRatio: "1 / 1",
         ":focus": {
             animation: "elastic-spin 1s ease-out",
@@ -124,7 +123,7 @@ const ThemeSwitcher = function () {
             palette: "orangePrincess",
         },
     ];
-    
+
     const shapes = props.map((p) => {
         return (
             <Shape
@@ -147,6 +146,7 @@ const ThemeSwitcher = function () {
                     selectedMode.value === "light" ? (
                         <ModeNightIcon
                             sx={{
+                                fill: "black",
                                 height: "100%",
                                 width: "100%",
                                 rotate: "-30deg",
@@ -155,6 +155,7 @@ const ThemeSwitcher = function () {
                     ) : (
                         <LightModeIcon
                             sx={{
+                                fill: "white",
                                 height: "100%",
                                 width: "100%",
                                 rotate: "-45deg",
@@ -168,9 +169,7 @@ const ThemeSwitcher = function () {
     return (
         <RootStyle>
             <CircleContainer>
-                <CircleContents>
-                    {shapes}
-                </CircleContents>
+                <CircleContents>{shapes}</CircleContents>
             </CircleContainer>
         </RootStyle>
     );

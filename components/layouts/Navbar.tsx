@@ -152,15 +152,15 @@ const Nav = styled("nav")(({ theme }: { theme: CustomTheme }) => ({
     },
 }));
 
-const NavItem = styled('div')<NavItemProps>(
+const NavItem = styled("div")<NavItemProps>(
     ({
         theme,
         selectedMode,
-        selectedTheme
+        selectedTheme,
     }: {
         theme: CustomTheme;
-            selectedMode: string,
-        selectedTheme: string,
+        selectedMode: string;
+        selectedTheme: string;
     }) => ({
         // border: "1px solid blue",
         position: "relative",
@@ -175,12 +175,8 @@ const NavItem = styled('div')<NavItemProps>(
         transition: "all 0s ease",
         overflow: "hidden",
         "&:hover": {
-            borderBottom: `2px solid ${
-                theme.themes.themePalettes[selectedTheme].light
-            }`,
-            borderRight: `2px solid ${
-                theme.themes.themePalettes[selectedTheme].light
-            }`,
+            borderBottom: `2px solid ${theme.themes.themePalettes[selectedTheme].light}`,
+            borderRight: `2px solid ${theme.themes.themePalettes[selectedTheme].light}`,
             ".wave": {
                 top: "10px",
                 opacity: "25%",
