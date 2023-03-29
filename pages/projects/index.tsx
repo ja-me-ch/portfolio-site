@@ -1,33 +1,40 @@
 import React, { useContext, useEffect } from "react";
 import Link from "next/link";
-import { CustomTheme, styled } from "@mui/material";
+import { CustomTheme, styled, useTheme } from "@mui/material";
 import master from "../../helper-functions/previews/master";
 import Project from "../../components/projects/Preview";
 import Preview from "../../interfaces/preview.interface";
 import { MainContext } from "../../contexts/MainContext";
+import { ThemeContextProps } from "../../types/common";
 import Head from "next/head";
 
-const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
-    display: "flex",
-    flexDirection: "column",
-    marginTop: "1rem",
-    color: theme.themes.modes[theme.themes.selectedMode].contrastText,
-    maxWidth: `${theme.breakpoints.values["lg"]}px`,
-    justifySelf: "center",
-    transition: '1s all ease',
-    ".project-preview:not(:last-child)": {
-        borderBlockEnd: "5px solid",
-        paddingBlockEnd: "1rem",
-        borderImageSlice: "1",
-        borderImageSource: `linear-gradient(45deg, ${
-            theme.themes.themePalettes[theme.themes.selectedTheme].light
+const RootStyle = styled("div")<ThemeContextProps>(
+    ({
+        theme,
+        selectedTheme,
+        selectedMode,
+    }: {
+        theme: CustomTheme;
+        selectedTheme: string;
+        selectedMode: string;
+    }) => ({
+        display: "flex",
+        flexDirection: "column",
+        marginTop: "1rem",
+        color: theme.themes.modes[selectedMode].contrastText,
+        maxWidth: `${theme.breakpoints.values["lg"]}px`,
+        justifySelf: "center",
+        transition: "1s all ease",
+        ".project-preview:not(:last-child)": {
+            borderBlockEnd: "5px solid",
+            paddingBlockEnd: "1rem",
+            borderImageSlice: "1",
+            borderImageSource: `linear-gradient(45deg, ${theme.themes.themePalettes[selectedTheme].light},
+        ${theme.themes.themePalettes[selectedTheme].main}, ${theme.themes.themePalettes[selectedTheme].dark})`,
+            marginBottom: "2rem",
         },
-        ${theme.themes.themePalettes[theme.themes.selectedTheme].main}, ${
-            theme.themes.themePalettes[theme.themes.selectedTheme].dark
-        })`,
-        marginBottom: "2rem",
-    },
-}));
+    })
+);
 
 const ProjectItem = styled("div")(() => ({
     backgroundColor: "#DEDEDE",
@@ -35,7 +42,8 @@ const ProjectItem = styled("div")(() => ({
 }));
 
 const ProjectsIndex = function () {
-    const { selectedTheme } = useContext(MainContext);
+    const { selectedMode, selectedTheme } = useContext(MainContext);
+    const theme: CustomTheme = useTheme();
 
     const previews = master.map((pv, index) => {
         return (
@@ -50,7 +58,12 @@ const ProjectsIndex = function () {
             <Head>
                 <title>Projects | Jacky C.</title>
             </Head>
-            <RootStyle>{previews}</RootStyle>
+            <RootStyle
+                selectedTheme={selectedTheme.value}
+                selectedMode={selectedMode.value}
+            >
+                {previews}
+            </RootStyle>
         </>
     );
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-import { OffsetProps } from "../../types/common";
+import { OffsetProps, ThemeContextProps } from "../../types/common";
 import { CustomTheme, styled, useMediaQuery } from "@mui/material";
 import { MainContext } from "../../contexts/MainContext";
 
@@ -24,18 +24,18 @@ const RootStyle = styled("div")<OffsetProps>(
 );
 
 const Canvas = styled("div")<OffsetProps>(
-    ({ offset, theme }: { offset: string; theme: CustomTheme }) => ({
+    ({ offset, theme, selectedMode }: { offset: string; theme: CustomTheme, selectedMode: string }) => ({
         display: "flex",
         flexDirection: "column",
         borderRadius: "0.2rem",
         borderTopRightRadius: "unset",
-        color: theme.themes.modes[theme.themes.selectedMode].contrastText,
+        color: theme.themes.modes[selectedMode].contrastText,
         // height: "100%",
         maxHeight: `${100 - Number.parseInt(offset) * 2}vh`,
-        background: theme.themes.modes[theme.themes.selectedMode].main,
+        background: theme.themes.modes[selectedMode].main,
         boxShadow: "3px 5px 5px 5px rgba(0, 0, 0, 0.35)",
         // zIndex: "0",
-        transition: '1s all ease',
+        transition: "1s all ease",
         [theme.breakpoints.down("sm")]: {
             maxHeight: "unset",
         },
@@ -44,7 +44,7 @@ const Canvas = styled("div")<OffsetProps>(
 
 const HorizontalSpacer = styled("div")<OffsetProps>(
     ({ theme, offset }: { theme: CustomTheme; offset: string }) => ({
-        position: 'relative',
+        position: "relative",
         top: `-${offset}vh`,
         height: "100vh",
         width: "100%",
@@ -76,30 +76,17 @@ const CenterColumns = styled("div")<OffsetProps>(
     })
 );
 
-const HorizontalWave = styled("div")(({ theme }: { theme: CustomTheme }) => ({
+const HorizontalWave = styled("div")<ThemeContextProps>(({ theme, selectedTheme }: { theme: CustomTheme, selectedTheme: string }) => ({
     width: "100%",
     height: "12px",
     // zIndex: "10",
     transition: "all 2s ease",
     transformOrigin: "right",
-    background: theme.themes.themePalettes[theme.themes.selectedTheme].light,
-    // background: `linear-gradient(90deg, ${alpha(
-    //     theme.themes.themePalettes[theme.themes.selectedTheme].light,
-    //     0
-    // )} 0%, ${alpha(
-    //     theme.themes.themePalettes[theme.themes.selectedTheme].light,
-    //     0.4
-    // )} 0.01%, ${alpha(
-    //     theme.themes.themePalettes[theme.themes.selectedTheme].light,
-    //     1
-    // )} 60%, ${alpha(
-    //     theme.themes.themePalettes[theme.themes.selectedTheme].light,
-    //     1
-    // )} 100%)`,
+    background: theme.themes.themePalettes[selectedTheme].light,
 }));
 
 const VerticalWave = styled("div")<OffsetProps>(
-    ({ theme, offset }: { theme: CustomTheme; offset: string }) => ({
+    ({ theme, selectedTheme }: { theme: CustomTheme; selectedTheme: string }) => ({
         position: "relative",
         // top: `-${offset}vh`,
         width: "12px",
@@ -107,33 +94,19 @@ const VerticalWave = styled("div")<OffsetProps>(
         zIndex: "5",
         transition: "all 2s ease",
         transformOrigin: "top",
-        background:
-            theme.themes.themePalettes[theme.themes.selectedTheme].light,
-        // background: `linear-gradient(0deg, ${alpha(
-        //     theme.themes.themePalettes[theme.themes.selectedTheme].light,
-        //     0
-        // )} 0%, ${alpha(
-        //     theme.themes.themePalettes[theme.themes.selectedTheme].light,
-        //     0.4
-        // )} 0.01%, ${alpha(
-        //     theme.themes.themePalettes[theme.themes.selectedTheme].light,
-        //     1
-        // )} 60%, ${alpha(
-        //     theme.themes.themePalettes[theme.themes.selectedTheme].light,
-        //     1
-        // )} 100%)`,
+        background: theme.themes.themePalettes[selectedTheme].light,
     })
 );
 
-const ChildrenContainer = styled("div")(
-    ({ theme }: { theme: CustomTheme }) => ({
+const ChildrenContainer = styled("div")<ThemeContextProps>(
+    ({ theme, selectedMode }: { theme: CustomTheme, selectedMode: string }) => ({
         display: "flex",
         justifyContent: "center",
         paddingTop: "1rem",
         paddingInline: '1rem',
         marginBottom: '1rem',
         height: "100%",
-        color: theme.themes.modes[theme.palette.mode].contrastText,
+        color: theme.themes.modes[selectedMode].contrastText,
         // maxWidth: '1280px',
         // margin: 'auto',
         // overflow: "scroll",
@@ -166,7 +139,7 @@ const ChildrenContainer = styled("div")(
 );
 
 function DefaultLayout({ children }) {
-    const { selectedTheme, themeMode } = useContext(MainContext);
+    const { selectedTheme, selectedMode } = useContext(MainContext);
     
     const verticalOffset = "4";
     const horizontalOffset = "4";
@@ -177,17 +150,17 @@ function DefaultLayout({ children }) {
     return (
         <RootStyle offset={verticalOffset}>
             <VerticalSpacer>
-                <HorizontalWave />
+                <HorizontalWave selectedTheme={selectedTheme.value} />
             </VerticalSpacer>
             <CenterColumns offset={horizontalOffset}>
                 <HorizontalSpacer></HorizontalSpacer>
-                <Canvas offset={verticalOffset}>
+                <Canvas offset={verticalOffset} selectedMode={selectedMode.value}>
                     <Navbar />
-                    <ChildrenContainer>{children}</ChildrenContainer>
+                    <ChildrenContainer selectedMode={selectedMode.value}>{children}</ChildrenContainer>
                     {/* <Footer /> */}
                 </Canvas>
                 <HorizontalSpacer offset={verticalOffset}>
-                    <VerticalWave offset={verticalOffset} />
+                    <VerticalWave selectedTheme={selectedTheme.value} />
                 </HorizontalSpacer>
             </CenterColumns>
             <VerticalSpacer></VerticalSpacer>

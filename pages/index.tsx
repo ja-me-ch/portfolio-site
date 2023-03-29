@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Contact from "../components/Contact";
 import MakeRequest from "../helper-functions/graphql/MakeRequest";
 import Query from "../helper-functions/graphql/query";
 import master from "../helper-functions/previews/master";
 import RecentCommit from "../components/projects/RecentCommit";
-import { CustomTheme, styled } from "@mui/material";
+import { CustomTheme, styled, useTheme } from "@mui/material";
 import getRelativeDate from "../helper-functions/relativeDate";
+import NextJsSvg from "../public/svg/technologies/nextjs";
+import EmailSvg from "../public/svg/email";
+import { MainContext } from "../contexts/MainContext";
 
 export async function getServerSideProps() {
     const makeCall = async function (name: string) {
@@ -40,51 +43,68 @@ export async function getServerSideProps() {
     };
 }
 
-const RootStyle = styled('div')(({ theme } : {theme: CustomTheme}) => ({
-    display: 'flex',
-    flexDirection: 'row',
-    maxWidth: '1200px',
-    width: '100%',
-    gap: '1.5rem',
+const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: 'space-between',
+    maxWidth: `${theme.breakpoints.values.lg}px`,
+    width: "100%",
+    gap: "1rem",
     // border: '1px solid red',
-    [theme.breakpoints.down('sm')]: {
-        flexDirection: 'column',
-        gap: '1rem'
-    }
-}))
-
-const RecentCommits = styled('section')(() => ({
-    flexBasis: '70%',
-    flexGrow: '1',
+    [theme.breakpoints.down("sm")]: {
+        flexDirection: "column",
+        gap: "1rem",
+    },
 }));
 
-export default function Home(props) {
-    const [commitState, setCommitState] = useState(null);
+const RecentCommits = styled("section")(() => ({
+    display: "flex",
+    flexDirection: "column",
+    gap: "0rem",
+    flexBasis: "90%",
+    flexGrow: "1",
+}));
 
-    // useEffect(() => {
-    //     if (props.data) {
-    //         setCommitState(props.data);
-    //     }
-    // }, [props.data])
-    const { data } = props;
-    console.log(data);
-
-    const time = "2023-03-27T23:22:47Z";
-    const currentTime = Date.now();
-
-    const diff = Date.now() - Date.parse(time);
-    // console.log(diff / (1000 * 60 * 60 * 24));
+export default function Home({ data }) {
+    const { selectedMode } = useContext(MainContext);
+    const theme: CustomTheme = useTheme();
 
     const recentCommits = data.map((e) => {
-        return <RecentCommit props={e} key={`${e[0].repository.name}-recentCommits`} />
+        return (
+            <RecentCommit
+                props={e}
+                key={`${e[0].repository.name}-recentCommits`}
+            />
+        );
     });
 
     return (
         <RootStyle>
-            <RecentCommits>
-                
-                {recentCommits}
-            </RecentCommits>
+            <div style={{
+                flexGrow: '1'
+            }}>
+                <div>
+                    <NextJsSvg
+                        // modeColor={
+                        //     theme.themes.modes[selectedMode.value]
+                        //         .contrastText
+                        // }
+                        modeColor={
+                            theme.themes.modes[selectedMode.value].contrastText
+                        }
+                        themeColor={
+                            theme.themes.themePalettes[
+                                theme.themes.selectedTheme
+                            ].main
+                        }
+                    />
+                </div>
+                <RecentCommits>{recentCommits}</RecentCommits>
+                <RecentCommits>{recentCommits}</RecentCommits>
+                <RecentCommits>{recentCommits}</RecentCommits>
+                <RecentCommits>{recentCommits}</RecentCommits>
+                <RecentCommits>{recentCommits}</RecentCommits>
+            </div>
             <Contact />
         </RootStyle>
     );

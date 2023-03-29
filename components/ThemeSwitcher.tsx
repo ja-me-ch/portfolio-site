@@ -36,15 +36,17 @@ const Shape = styled("div")<ICircleProps>(
     ({
         prop,
         theme,
+        selectedMode,
     }: {
-        prop?: { color: string; offset: number[] };
+        prop: { color: string; offset: number[] };
         theme: CustomTheme;
+        selectedMode: string;
     }) => ({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         transformOrigin: "center",
-        backgroundColor: prop?.color ?? "red",
+        backgroundColor: prop.color,
         position: "absolute",
         margin: "auto",
         padding: "0",
@@ -53,7 +55,7 @@ const Shape = styled("div")<ICircleProps>(
         bottom: prop ? `${prop.offset[0]}%` : "0",
         left: prop ? `${prop.offset[1]}%` : "0",
         border:
-            theme.themes.selectedMode === "light"
+            selectedMode === "light"
                 ? `2px solid ${theme.themes.modes.light.contrastText}`
                 : `2px solid ${theme.themes.modes.dark.contrastText}`,
         width: "23%",
@@ -82,13 +84,14 @@ const Shape = styled("div")<ICircleProps>(
 );
 
 interface ICircleProps {
-    tabIndex?: number;
+    // tabIndex?: number;
     prop: { offset: number[]; color: string };
     theme?: CustomTheme;
+    selectedMode?: string;
 }
 
 const ThemeSwitcher = function () {
-    const { selectedTheme, themeMode } = useContext(MainContext);
+    const { selectedTheme, selectedMode } = useContext(MainContext);
     const theme: CustomTheme = useTheme();
 
     const handleOnClick = function (e) {
@@ -99,81 +102,74 @@ const ThemeSwitcher = function () {
         ) {
             selectedTheme.update(e.target.id);
         } else {
-            themeMode.toggle();
+            selectedMode.toggle();
         }
     };
 
-    const prop = [
+    const props = [
         {
             offset: [0, 0, 40, 0],
-            color:
-                theme.themes.selectedMode === "light"
-                    ? `2px solid ${theme.themes.modes.light.contrastText}`
-                    : `2px solid ${theme.themes.modes.dark.contrastText}`,
+            palette: "mode",
         },
         {
             offset: [40, 0, 0, 0],
-            color: theme.themes.themePalettes["aquamarine"].main,
+            palette: "aquamarine",
         },
         {
             offset: [0, 0, 0, 40],
-            color: theme.themes.themePalettes["rozenQueen"].main,
+            palette: "rozenQueen",
         },
         {
             offset: [0, 40, 0, 0],
-            color: theme.themes.themePalettes["orangePrincess"].main,
+            palette: "orangePrincess",
         },
     ];
+    
+    const shapes = props.map((p) => {
+        return (
+            <Shape
+                tabIndex={-1}
+                prop={{
+                    color:
+                        p.palette !== "mode"
+                            ? theme.themes.themePalettes[p.palette].main
+                            : selectedMode.value === "dark"
+                            ? theme.themes.modes["dark"].main
+                            : theme.themes.modes["light"].main,
+                    offset: p.offset,
+                }}
+                onClick={handleOnClick}
+                id={p.palette}
+                key={`${p.palette}-shape`}
+                selectedMode={selectedMode.value}
+            >
+                {p.palette === "mode" ? (
+                    selectedMode.value === "light" ? (
+                        <ModeNightIcon
+                            sx={{
+                                height: "100%",
+                                width: "100%",
+                                rotate: "-30deg",
+                            }}
+                        />
+                    ) : (
+                        <LightModeIcon
+                            sx={{
+                                height: "100%",
+                                width: "100%",
+                                rotate: "-45deg",
+                            }}
+                        />
+                    )
+                ) : null}
+            </Shape>
+        );
+    });
     return (
         <RootStyle>
             <CircleContainer>
                 <CircleContents>
-                    <Shape
-                        tabIndex={-1}
-                        prop={prop[0]}
-                        onClick={handleOnClick}
-                        id={"mode"}
-                        key={"mode"}
-                    >
-                        {themeMode.value === "light" ? (
-                            <ModeNightIcon
-                                sx={{
-                                    height: "100%",
-                                    width: "100%",
-                                    rotate: "-30deg",
-                                }}
-                            />
-                        ) : (
-                            <LightModeIcon
-                                sx={{
-                                    height: "100%",
-                                    width: "100%",
-                                    rotate: "-45deg",
-                                }}
-                            />
-                        )}
-                    </Shape>
-                    <Shape
-                        tabIndex={-1}
-                        prop={prop[1]}
-                        onClick={handleOnClick}
-                        id={"aquamarine"}
-                        key={"aquamarine"}
-                    />
-                    <Shape
-                        tabIndex={-1}
-                        prop={prop[2]}
-                        onClick={handleOnClick}
-                        id={"rozenQueen"}
-                        key={"rozenQueen"}
-                    />
-                    <Shape
-                        tabIndex={-1}
-                        prop={prop[3]}
-                        onClick={handleOnClick}
-                        id={"orangePrincess"}
-                        key={"orangePrincess"}
-                    />
+                    {shapes}
                 </CircleContents>
             </CircleContainer>
         </RootStyle>

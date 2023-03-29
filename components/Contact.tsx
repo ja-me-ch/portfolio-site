@@ -5,6 +5,7 @@ import LinkedInSvg from "../public/svg/linkedin";
 import Link from "next/link";
 import { useContext } from "react";
 import { MainContext } from "../contexts/MainContext";
+import { ThemeContextProps } from "../types/common";
 
 const Title = styled("h2")(() => ({
     fontSize: "2rem",
@@ -12,14 +13,14 @@ const Title = styled("h2")(() => ({
     marginBottom: "1rem",
 }));
 
-const ContactContent = styled("aside")(({ theme }: { theme: CustomTheme }) => ({
+const ContactContent = styled("aside")<ThemeContextProps>(({ theme, selectedMode }: { theme: CustomTheme, selectedMode: string }) => ({
     // border: "1px solid green",
     // flexBasis: "30%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "flex-start",
     // alignItems: "flex-start",
-    color: theme.themes.modes[theme.themes.selectedMode].contrastText,
+    color: theme.themes.modes[selectedMode].contrastText,
     transition: "1s all ease",
     gap: "1rem",
     padding: "1rem",
@@ -29,31 +30,29 @@ const ContactContent = styled("aside")(({ theme }: { theme: CustomTheme }) => ({
     },
 }));
 
-const ContactRow = styled("div")(({ theme }: { theme: CustomTheme }) => ({
-    // display: "flex",
-    // flexDirection: "row",
-    // justifyContent: 'space-between',
-    // flexGrow: "1",
-    // gap: "0.5rem",
-    // border: '1px solid red',
-    // width: '100%',
-    boxSizing: "border-box",
-    // marginBottom: '1rem',
-    padding: "0",
-    marginBottom: "-1px",
-    borderBottom: `1px solid ${
-        theme.themes.modes[theme.themes.selectedMode].contrastText
-    }`,
-    "&:hover": {
-        marginBottom: "-4px",
-        borderBottom: `4px solid ${
-            theme.themes.modes[theme.themes.selectedMode].contrastText
-        }`,
-        "h4, svg": {
-            textShadow: "3px 3px 4px rgba(0, 0, 0, 0.25)",
+const ContactRow = styled("div")(
+    ({ borderColor }: { borderColor: string }) => ({
+        // display: "flex",
+        // flexDirection: "row",
+        // justifyContent: 'space-between',
+        // flexGrow: "1",
+        // gap: "0.5rem",
+        // border: '1px solid red',
+        // width: '100%',
+        boxSizing: "border-box",
+        // marginBottom: '1rem',
+        padding: "0",
+        marginBottom: "-1px",
+        borderBottom: `1px solid ${borderColor}`,
+        "&:hover": {
+            marginBottom: "-4px",
+            borderBottom: `4px solid ${borderColor}`,
+            "h4, svg": {
+                textShadow: "3px 3px 4px rgba(0, 0, 0, 0.25)",
+            },
         },
-    },
-}));
+    })
+);
 
 const ContactContainer = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     display: "flex",
@@ -73,64 +72,78 @@ const ContactHeading = styled("h3")(() => ({
 
 const Contact = function () {
     const theme: CustomTheme = useTheme();
-    const { selectedTheme, themeMode } = useContext(MainContext);
-    return <ContactContent aria-labelledby="h2-contact">
-    <Title id="h2-contact">Contact</Title>
-    {/* CHANGE TO LIST */}
-    <ContactRow>
-        <Link
-            href="https://www.linkedin.com/in/jamech/"
-            rel="noopener noreferrer"
-            target="_blank"
+    const { selectedTheme, selectedMode } = useContext(MainContext);
+    return (
+        <ContactContent aria-labelledby="h2-contact" selectedMode={selectedMode.value}>
+            <Title id="h2-contact">Contact</Title>
+            {/* CHANGE TO LIST */}
+            <ContactRow
+                borderColor={
+                    theme.themes.modes[selectedMode.value].contrastText
+                }
             >
-            <ContactContainer>
-                <ContactHeading>LinkedIn</ContactHeading>
-                <LinkedInSvg
-                    modeColor={
-                        theme.themes.modes[theme.themes.selectedMode]
-                        .contrastText
-                    }
-                    />
-            </ContactContainer>
-        </Link>
-    </ContactRow>
-
-    <ContactRow>
-        <Link
-            href="https://github.com/ja-me-ch"
-            rel="noopener noreferrer"
-            target="_blank"
-            >
-            <ContactContainer>
-                <ContactHeading>GitHub</ContactHeading>
-                <GitHubSvg
-                    modeColor={
-                        theme.themes.modes[theme.themes.selectedMode]
-                        .contrastText
-                    }
-                    />
-            </ContactContainer>
-        </Link>
-    </ContactRow>
-
-    <ContactRow>
-        <Link
-            href="mailto:ja.me.ch.95@gmail.com"
-            rel="noopener noreferrer"
-            target="_blank"
-            >
-            <ContactContainer>
-                <ContactHeading>Email</ContactHeading>
-                <EmailSvg
-                    modeColor={
-                        theme.themes.modes[theme.themes.selectedMode]
-                            .contrastText
-                        }
+                <Link
+                    href="https://www.linkedin.com/in/jamech/"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                >
+                    <ContactContainer>
+                        <ContactHeading>LinkedIn</ContactHeading>
+                        <LinkedInSvg
+                            modeColor={
+                                theme.themes.modes[selectedMode.value]
+                                    .contrastText
+                            }
                         />
-            </ContactContainer>
-        </Link>
-    </ContactRow>
-</ContactContent>;
-}
+                    </ContactContainer>
+                </Link>
+            </ContactRow>
+
+            <ContactRow
+                borderColor={
+                    theme.themes.modes[selectedMode.value].contrastText
+                }
+            >
+                <Link
+                    href="https://github.com/ja-me-ch"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                >
+                    <ContactContainer>
+                        <ContactHeading>GitHub</ContactHeading>
+                        <GitHubSvg
+                            modeColor={
+                                theme.themes.modes[selectedMode.value]
+                                    .contrastText
+                            }
+                        />
+                    </ContactContainer>
+                </Link>
+            </ContactRow>
+
+            <ContactRow
+                borderColor={
+                    theme.themes.modes[selectedMode.value].contrastText
+                }
+            >
+                <Link
+                    href="mailto:ja.me.ch.95@gmail.com"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                >
+                    <ContactContainer>
+                        <ContactHeading>Email</ContactHeading>
+                        <EmailSvg
+                            modeColor={
+                                theme.themes.modes[selectedMode.value]
+                                    .contrastText
+                            }
+                        />
+                    </ContactContainer>
+                </Link>
+            </ContactRow>
+        </ContactContent>
+    );
+};
 
 export default Contact;

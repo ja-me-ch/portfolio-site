@@ -10,29 +10,48 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { WaveProps, NavItemProps, NavProps } from "../../types/common";
+import {
+    WaveProps,
+    NavItemProps,
+    NavProps,
+    ThemeContextProps,
+} from "../../types/common";
 import { lighten } from "@mui/material";
 import NavbarSvg from "../../public/svg/navbar";
 import ThemeSwitcher from "../ThemeSwitcher";
 
-const RootStyle = styled("header")(({ theme }: { theme: CustomTheme }) => ({
-    top: "0",
-    color: theme.themes.modes[theme.themes.selectedMode].contrastText,
-    transition: "1s all ease",
-    // maxWidth: '1280px',
-    backgroundColor: theme.themes.modes[theme.themes.selectedMode].main,
-}));
+const RootStyle = styled("header")<ThemeContextProps>(
+    ({
+        theme,
+        selectedMode,
+    }: {
+        theme: CustomTheme;
+        selectedMode: string;
+    }) => ({
+        top: "0",
+        // color: theme.themes.modes[selectedMode].contrastText,
+        transition: "1s all ease",
+        // maxWidth: '1280px',
+        // backgroundColor: theme.themes.modes[selectedMode].main,
+    })
+);
 
-const TopBar = styled("div")(({ theme }: { theme: CustomTheme }) => ({
-    maxHeight: "90px",
-    borderBottom: `2px solid ${
-        theme.themes.modes[theme.themes.selectedMode].contrastText
-    }`,
-    transition: "1s all ease",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-}));
+const TopBar = styled("div")<ThemeContextProps>(
+    ({
+        theme,
+        selectedMode,
+    }: {
+        theme: CustomTheme;
+        selectedMode: string;
+    }) => ({
+        maxHeight: "90px",
+        borderBottom: `2px solid ${theme.themes.modes[selectedMode].contrastText}`,
+        transition: "1s all ease",
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+    })
+);
 
 const HamburgerIconContainer = styled("div")(({ theme }) => ({
     display: "none",
@@ -46,86 +65,109 @@ const HamburgerIconContainer = styled("div")(({ theme }) => ({
     },
 }));
 
-const SiteName = styled("span")(({ theme }: { theme: CustomTheme }) => ({
-    display: "block",
-    fontWeight: "600",
-    fontSize: "1.5em",
-    color: theme.themes.modes[theme.themes.selectedMode].contrastText,
-    transition: "1s all ease",
-    [theme.breakpoints.down("sm")]: {
-        fontSize: "1rem",
-    },
-}));
-
-const Subtitle = styled("span")(({ theme }: { theme: CustomTheme }) => ({
-    fontWeight: "600",
-    fontSize: "1em",
-    color: theme.themes.modes[theme.themes.selectedMode].contrastText,
-    transition: "1s all ease",
-    [theme.breakpoints.down("sm")]: {
-        fontSize: "0.75rem",
-    },
-}));
-
-const Title = styled("h1")(({ theme }: { theme: CustomTheme }) => ({
-    margin: "0",
-    display: "inline",
-    // paddingBottom: "0rem",
-    // alignContent: 'center',
-    textAlign: "right",
-    paddingRight: "1rem",
-    fontSize: "3.8rem",
-    marginTop: "0.6rem",
-    // borderBottom: "2px solid #000",
-    color: theme.themes.modes[theme.themes.selectedMode].contrastText,
-    fontWeight: "400",
-    fontFamily: "Yrsa, Roboto",
-    transition: "1s all ease",
-    [theme.breakpoints.down("sm")]: {
-        fontSize: "2.5rem",
-    },
-}));
-
-const Nav = styled("nav")<NavProps>(
-    ({ theme, showNavbar }: { theme: CustomTheme; showNavbar: boolean }) => ({
-        display: "flex",
-        // justifySelf: 'center',
-        // justifyContent: 'center',
-        width: "100%",
-        flexDirection: "row-reverse",
-        paddingRight: "1rem",
-        marginTop: "1rem",
-        marginInline: "auto",
-        // visibility: "visible",
-        // border: '1px solid red',
-        maxWidth: `${theme.breakpoints.values["lg"]}px`,
-        marginBottom: "1rem",
+const SiteName = styled("span")<ThemeContextProps>(
+    ({
+        theme,
+        selectedMode,
+    }: {
+        theme: CustomTheme;
+        selectedMode: string;
+    }) => ({
+        display: "block",
+        fontWeight: "600",
+        fontSize: "1.5em",
+        color: theme.themes.modes[selectedMode].contrastText,
         transition: "1s all ease",
         [theme.breakpoints.down("sm")]: {
-            flexDirection: "column",
-            padding: "0",
-            marginTop: "2px",
-            marginBottom: "0",
-            gap: "2px",
+            fontSize: "1rem",
         },
     })
 );
 
-const NavItem = styled(Link)<NavItemProps>(
-    ({ theme }: { theme: CustomTheme }) => ({
+const Subtitle = styled("span")<ThemeContextProps>(
+    ({
+        theme,
+        selectedMode,
+    }: {
+        theme: CustomTheme;
+        selectedMode: string;
+    }) => ({
+        fontWeight: "600",
+        fontSize: "1em",
+        color: theme.themes.modes[selectedMode].contrastText,
+        transition: "1s all ease",
+        [theme.breakpoints.down("sm")]: {
+            fontSize: "0.75rem",
+        },
+    })
+);
+
+const Title = styled("h1")<ThemeContextProps>(
+    ({
+        theme,
+        selectedMode,
+    }: {
+        theme: CustomTheme;
+        selectedMode: string;
+    }) => ({
+        margin: "0",
+        display: "inline",
+        // paddingBottom: "0rem",
+        // alignContent: 'center',
+        textAlign: "right",
+        paddingRight: "1rem",
+        fontSize: "3.8rem",
+        marginTop: "0.6rem",
+        // borderBottom: "2px solid #000",
+        color: theme.themes.modes[selectedMode].contrastText,
+        fontWeight: "400",
+        fontFamily: "Yrsa, Roboto",
+        transition: "1s all ease",
+        [theme.breakpoints.down("sm")]: {
+            fontSize: "2.5rem",
+        },
+    })
+);
+
+const Nav = styled("nav")(({ theme }: { theme: CustomTheme }) => ({
+    display: "flex",
+    // justifySelf: 'center',
+    // justifyContent: 'center',
+    width: "100%",
+    flexDirection: "row-reverse",
+    paddingRight: "1rem",
+    marginTop: "1rem",
+    marginInline: "auto",
+    // visibility: "visible",
+    // border: '1px solid red',
+    maxWidth: `${theme.breakpoints.values["lg"]}px`,
+    marginBottom: "1rem",
+    transition: "1s all ease",
+    [theme.breakpoints.down("sm")]: {
+        flexDirection: "column",
+        padding: "0",
+        marginTop: "2px",
+        marginBottom: "0",
+        gap: "2px",
+    },
+}));
+
+const NavItem = styled('div')<NavItemProps>(
+    ({
+        theme,
+        selectedMode,
+        selectedTheme
+    }: {
+        theme: CustomTheme;
+            selectedMode: string,
+        selectedTheme: string,
+    }) => ({
         // border: "1px solid blue",
         position: "relative",
-        borderBottom: `2px solid ${
-            theme.themes.modes[theme.themes.selectedMode].dark
-        }`,
-        borderRight: `2px solid ${
-            theme.themes.modes[theme.themes.selectedMode].dark
-        }`,
-        color: theme.themes.modes[theme.themes.selectedMode].contrastText,
-        backgroundColor: lighten(
-            theme.themes.modes[theme.themes.selectedMode].light,
-            0.4
-        ),
+        borderBottom: `2px solid ${theme.themes.modes[selectedMode].dark}`,
+        borderRight: `2px solid ${theme.themes.modes[selectedMode].dark}`,
+        color: theme.themes.modes[selectedMode].contrastText,
+        backgroundColor: lighten(theme.themes.modes[selectedMode].light, 0.4),
         marginLeft: "0.5rem",
         padding: "0.3rem",
         fontSize: "1.5rem",
@@ -134,10 +176,10 @@ const NavItem = styled(Link)<NavItemProps>(
         overflow: "hidden",
         "&:hover": {
             borderBottom: `2px solid ${
-                theme.themes.themePalettes[theme.themes.selectedTheme].light
+                theme.themes.themePalettes[selectedTheme].light
             }`,
             borderRight: `2px solid ${
-                theme.themes.themePalettes[theme.themes.selectedTheme].light
+                theme.themes.themePalettes[selectedTheme].light
             }`,
             ".wave": {
                 top: "10px",
@@ -153,26 +195,21 @@ const NavItem = styled(Link)<NavItemProps>(
             borderRadius: "0",
             fontWeight: "600",
             backgroundColor: lighten(
-                theme.themes.modes[theme.themes.selectedMode].main,
+                theme.themes.modes[selectedMode].main,
                 0.4
             ),
             "&:hover": {
                 border: "unset",
-                background: darken(
-                    theme.themes.modes[theme.themes.selectedMode].main,
-                    0.1
-                ),
+                background: darken(theme.themes.modes[selectedMode].main, 0.1),
             },
         },
     })
 );
 
-const NavContainer = styled("div")(({ theme }: { theme: CustomTheme }) => ({
+const NavContainer = styled("div")(() => ({
     display: "flex",
     flexDirection: "column",
     justifyItems: "center",
-    // alignItems: 'flex-end',
-    // border: '1px solid blue',
 }));
 
 const Wave = styled("span")<WaveProps>(
@@ -180,18 +217,19 @@ const Wave = styled("span")<WaveProps>(
         duration,
         scale,
         theme,
+        selectedTheme,
     }: {
-        duration: number;
-        scale: number[];
-        theme: CustomTheme;
+        duration: number,
+        scale: number[],
+        theme: CustomTheme,
+        selectedTheme: string;
     }) => ({
         position: "absolute",
         top: "15px",
         left: "-55%",
         height: "12rem",
         width: "12rem",
-        backgroundColor:
-            theme.themes.themePalettes[theme.themes.selectedTheme].main,
+        backgroundColor: theme.themes.themePalettes[selectedTheme].main,
         opacity: "15%",
         borderRadius: "43%",
         border: "1px solid white",
@@ -231,9 +269,11 @@ const Wave = styled("span")<WaveProps>(
 );
 
 function Navbar() {
-    const { showNavbar } = useContext(MainContext);
+    const { showNavbar, selectedMode, selectedTheme } = useContext(MainContext);
     const params = useRouter();
     const theme: CustomTheme = useTheme();
+
+    const pages = ["Home", "Projects", "About", "Glossary"];
 
     const matches = useMediaQuery(theme.breakpoints.up("sm"));
     if (matches && showNavbar.value === false) {
@@ -273,11 +313,42 @@ function Navbar() {
         rndWaveScales = getRandomNumber(waveScale) as number[];
     }, []);
 
+    const navItems = pages.map((p) => {
+        return (
+            <Link
+            href={`/${p === 'Home' ? '' : p.toLowerCase()}`}
+            // passHref
+            key={`${p}-navItem`}
+                id={`${p}-navItem`}
+                style={{
+                    height: 'auto',
+                    // margin: 'auto',
+                }}
+            >
+            <NavItem
+                selectedMode={selectedMode.value}
+                selectedTheme={selectedTheme.value}
+                >
+                {p}
+                <Wave
+                    selectedTheme={selectedTheme.value}
+                    className="wave"
+                    duration={rndWaveDuration}
+                    scale={rndWaveScales}
+                    />
+            </NavItem>
+                    </Link>
+        );
+    });
+
     const onHamburgerClick = () => showNavbar.toggle();
 
     return (
-        <RootStyle aria-label="Jacky C. Web Developer">
-            <TopBar>
+        <RootStyle
+            aria-label="Jacky C. Web Developer"
+            // selectedMode={selectedMode.value}
+        >
+            <TopBar selectedMode={selectedMode.value}>
                 <div
                     style={{
                         display: "flex",
@@ -290,27 +361,28 @@ function Navbar() {
                             alignSelf: "center",
                         }}
                     >
-                        <SiteName>Jacky C.</SiteName>
-                        <Subtitle>Web Developer</Subtitle>
+                        <SiteName selectedMode={selectedMode.value}>
+                            Jacky C.
+                        </SiteName>
+                        <Subtitle selectedMode={selectedMode.value}>
+                            Web Developer
+                        </Subtitle>
                     </div>
                 </div>
-                <Title>{getPageTitle(params)}</Title>
+                <Title selectedMode={selectedMode.value}>
+                    {getPageTitle(params)}
+                </Title>
             </TopBar>
             <HamburgerIconContainer onClick={onHamburgerClick}>
                 {/* CHANGE TO BUTTON */}
-                <NavbarSvg
-                    toggle={showNavbar.value}
-                    modeColor={
-                        theme.themes.modes[theme.themes.selectedMode]
-                            .contrastText
-                    }
-                />
+                <NavbarSvg toggle={showNavbar.value} />
             </HamburgerIconContainer>
             <Collapse in={showNavbar.value} collapsedSize={0}>
                 <NavContainer>
                     {/* CHANGE TO LIST */}
-                    <Nav showNavbar={showNavbar.value} aria-label='Primary Navigation'>
-                        <NavItem href={"/"}>
+                    <Nav aria-label="Primary Navigation">
+                        {navItems}
+                        {/* <NavItem href={"/"}>
                             Home
                             <Wave
                                 className="wave"
@@ -343,7 +415,7 @@ function Navbar() {
                                 duration={rndWaveDuration}
                                 scale={rndWaveScales}
                             />
-                        </NavItem>
+                        </NavItem> */}
                     </Nav>
                 </NavContainer>
             </Collapse>

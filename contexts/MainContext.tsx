@@ -7,13 +7,13 @@ interface MainContextProps {
         value: boolean;
         toggle: () => void;
     };
-    themeMode: {
-        value: string;
-        toggle: () => void;
-    };
     selectedTheme: {
         value: string;
         update: (themeName: string) => void;
+    };
+    selectedMode: {
+        value: string;
+        toggle: () => void;
     };
 }
 
@@ -30,15 +30,15 @@ export function MainContextProvider(props) {
     const useDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
     theme.themes.selectedTheme = selectedTheme;
     theme.themes.selectedMode = themeMode;
-    
+
     const toggleNavbar = function (): void {
         setShowNavbar((s) => !s);
     };
-    
+
     const toggleThemeMode = function (): void {
         setThemeMode((s) => (s === "light" ? "dark" : "light"));
     };
-    
+
     if (useDarkMode === false && themeMode === "light") {
         toggleThemeMode();
     }
@@ -55,13 +55,13 @@ export function MainContextProvider(props) {
                         value: showNavbar,
                         toggle: toggleNavbar,
                     },
-                    themeMode: {
-                        value: themeMode,
-                        toggle: toggleThemeMode,
-                    },
                     selectedTheme: {
                         value: selectedTheme,
                         update: updateSelectedTheme,
+                    },
+                    selectedMode: {
+                        value: themeMode,
+                        toggle: toggleThemeMode,
                     },
                 } as MainContextProps
             }

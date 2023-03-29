@@ -1,33 +1,37 @@
-import { CustomTheme, styled } from "@mui/material";
+import { useContext } from "react";
+import { CustomTheme, styled, useTheme } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 import Link from "next/link";
+import { MainContext } from "../../contexts/MainContext";
 import getRelativeDate from "../../helper-functions/relativeDate";
 
-const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
-    // border: "1px dashed green",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    color: theme.themes.modes[theme.themes.selectedMode].contrastText,
-    // marginBottom: "1rem",
-    paddingInline: "0.5rem",
-    paddingBlock: "0.4rem",
-    fontFamily: "Roboto Mono",
-    "&:hover": {
-        backgroundColor: alpha(theme.themes.themePalettes[theme.themes.selectedTheme].light, 0.3),
-        // borderRadius: "0.5rem",
-        // margin: '0'
-        // borderTopRightRadius: "unset",
-        // borderTopLeftRadius: "unset",
-        // borderBottomRightRadius: "unset",
-        // borderBottom: `2px solid ${
-        //     theme.themes.themePalettes[theme.themes.selectedTheme].dark
-        // }`,
-        // borderLeft: `2px solid ${
-        //     theme.themes.themePalettes[theme.themes.selectedTheme].dark
-        // }`,
-    },
-}));
+const RootStyle = styled("div")(
+    ({ fontColor, bgColor }: { fontColor: string; bgColor: string }) => ({
+        // border: "1px dashed green",
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        color: fontColor,
+        // marginBottom: "1rem",
+        paddingInline: "0.5rem",
+        paddingBlock: "0.4rem",
+        fontFamily: "Roboto Mono",
+        "&:hover": {
+            backgroundColor: alpha(bgColor, 0.3),
+            // borderRadius: "0.5rem",
+            // margin: '0'
+            // borderTopRightRadius: "unset",
+            // borderTopLeftRadius: "unset",
+            // borderBottomRightRadius: "unset",
+            // borderBottom: `2px solid ${
+            //     theme.themes.themePalettes[selectedTheme.value].dark
+            // }`,
+            // borderLeft: `2px solid ${
+            //     theme.themes.themePalettes[selectedTheme.value].dark
+            // }`,
+        },
+    })
+);
 
 const LeftSide = styled("div")(() => ({
     display: "flex",
@@ -73,9 +77,14 @@ type CommitProps = {
 
 const Commit = function (props: CommitProps) {
     const { message, abbreviatedOid, pushedDate, url } = props;
-
+    const { selectedMode, selectedTheme } = useContext(MainContext);
+    const theme: CustomTheme = useTheme();
     return (
-        <RootStyle className="commit-item">
+        <RootStyle
+            className="commit-item"
+            fontColor={theme.themes.modes[selectedMode.value].contrastText}
+            bgColor={theme.themes.themePalettes[selectedTheme.value].light}
+        >
             <LeftSide>
                 <Message>
                     <Link href={url} rel="noopener noreferrer" target="_blank">

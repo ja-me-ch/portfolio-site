@@ -5,11 +5,12 @@ import Link from "next/link";
 
 import Head from "next/head";
 import Contact from "../components/Contact";
+import { ThemeContextProps } from '../types/common';
 
-const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
+const RootStyle = styled("div")<ThemeContextProps>(({ theme, selectedMode }: { theme: CustomTheme, selectedMode: string }) => ({
     display: "flex",
     flexDirection: "row",
-    color: theme.themes.modes[theme.themes.selectedMode].contrastText,
+    color: theme.themes.modes[selectedMode].contrastText,
     transition: "1s all ease",
     maxWidth: `${theme.breakpoints.values["lg"]}px`,
     // border: '1px solid red',
@@ -51,14 +52,13 @@ const LinkStyle = styled(Link)(() => ({
 }));
 
 export default function About() {
-    const theme: CustomTheme = useTheme();
-    const { selectedTheme, themeMode } = useContext(MainContext);
+    const { selectedMode } = useContext(MainContext);
     return (
         <>
             <Head>
                 <title>About - Jacky C.</title>
             </Head>
-            <RootStyle>
+            <RootStyle selectedMode={selectedMode.value}>
                 <AboutContent aria-labelledby="h2-about">
                     <Title id="h2-about">About</Title>
                     <p aria-label="About Content">
