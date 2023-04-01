@@ -56,7 +56,7 @@ export default function About() {
     return (
         <>
             <Head>
-                <title>About - Jacky C.</title>
+                <title>About | Jacky C.</title>
             </Head>
             <RootStyle selectedMode={selectedMode.value}>
                 <AboutContent aria-labelledby="h2-about">
@@ -101,7 +101,7 @@ export default function About() {
                         <h3>Assets Used:</h3>
                         <ListStyle>
                             <ListItem>
-                                <span>LinkedIn SVG: &nbsp;</span>
+                                <span>Linkedin SVG Vector: &nbsp;</span>
                                 <LinkStyle
                                     href="https://www.svgrepo.com/svg/922/linkedin"
                                     rel="noopener noreferrer"
@@ -111,7 +111,7 @@ export default function About() {
                                 </LinkStyle>
                             </ListItem>
                             <ListItem>
-                                <span>GitHub SVG: &nbsp;</span>
+                                <span>Github SVG Vector: &nbsp;</span>
                                 <LinkStyle
                                     href="https://www.svgrepo.com/svg/503359/github"
                                     rel="noopener noreferrer"
@@ -121,9 +121,49 @@ export default function About() {
                                 </LinkStyle>
                             </ListItem>
                             <ListItem>
-                                <span>Email SVG: &nbsp;</span>
+                                <span>Email SVG Vector: &nbsp;</span>
                                 <LinkStyle
                                     href="https://www.svgrepo.com/svg/502648/email"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                >
+                                    SVG Repo
+                                </LinkStyle>
+                            </ListItem>
+                            <ListItem>
+                                <span>Nextjs Icon SVG Vector: &nbsp;</span>
+                                <LinkStyle
+                                    href="https://www.svgrepo.com/svg/354113/nextjs-icon"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                >
+                                    SVG Repo
+                                </LinkStyle>
+                            </ListItem>
+                            <ListItem>
+                                <span>Nodejs02 SVG Vector: &nbsp;</span>
+                                <LinkStyle
+                                    href="https://www.svgrepo.com/svg/508935/nodejs02"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                >
+                                    SVG Repo
+                                </LinkStyle>
+                            </ListItem>
+                            <ListItem>
+                                <span>Mongodb SVG Vector: &nbsp;</span>
+                                <LinkStyle
+                                    href="https://www.svgrepo.com/svg/473729/mongodb"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                >
+                                    SVG Repo
+                                </LinkStyle>
+                            </ListItem>
+                            <ListItem>
+                                <span>Javascript 155 SVG Vector : &nbsp;</span>
+                                <LinkStyle
+                                    href="https://www.svgrepo.com/svg/512400/javascript-155"
                                     rel="noopener noreferrer"
                                     target="_blank"
                                 >

@@ -9,6 +9,8 @@ import getRelativeDate from "../helper-functions/relativeDate";
 import NextJsSvg from "../public/svg/technologies/nextjs";
 import EmailSvg from "../public/svg/email";
 import { MainContext } from "../contexts/MainContext";
+import Head from "next/head";
+import Technologies from "../components/technologies/Technologies";
 
 export async function getServerSideProps() {
     const makeCall = async function (name: string) {
@@ -78,34 +80,19 @@ export default function Home({ data }) {
         );
     });
 
-    return (
+    return (<>
+        <Head>
+            <title>Home | Jacky C.</title>
+        </Head>
         <RootStyle>
             <div style={{
                 flexGrow: '1'
             }}>
-                <div>
-                    <NextJsSvg
-                        // modeColor={
-                        //     theme.themes.modes[selectedMode.value]
-                        //         .contrastText
-                        // }
-                        modeColor={
-                            theme.themes.modes[selectedMode.value].contrastText
-                        }
-                        themeColor={
-                            theme.themes.themePalettes[
-                                theme.themes.selectedTheme
-                            ].main
-                        }
-                    />
-                </div>
-                <RecentCommits>{recentCommits}</RecentCommits>
-                <RecentCommits>{recentCommits}</RecentCommits>
-                <RecentCommits>{recentCommits}</RecentCommits>
-                <RecentCommits>{recentCommits}</RecentCommits>
+                <Technologies/>
                 <RecentCommits>{recentCommits}</RecentCommits>
             </div>
             <Contact />
         </RootStyle>
+                            </>
     );
 }

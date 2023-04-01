@@ -15,13 +15,7 @@ const SvgStyle = styled("svg")(
     })
 );
 
-const NextJsSvg = function ({
-    modeColor,
-    themeColor,
-}: {
-    modeColor: string;
-    themeColor: string;
-    }) {
+const NextJsSvg = function () {
     const { selectedMode, selectedTheme } = useContext(MainContext);
     const theme: CustomTheme = useTheme();
     return (
