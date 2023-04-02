@@ -8,7 +8,7 @@ const SvgStyle = styled("svg")(
         path: {
             transition: "0.3s all ease-out",
         },
-        "path:hover": {
+        ":hover": {
             // transition: "0.5s all linear",
             fill: alpha(themeColor, 1),
         },

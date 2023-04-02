@@ -141,6 +141,16 @@ export default function About() {
                                 </LinkStyle>
                             </ListItem>
                             <ListItem>
+                                <span>React SVG Vector: &nbsp;</span>
+                                <LinkStyle
+                                    href="https://www.svgrepo.com/svg/394388/react"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                >
+                                    SVG Repo
+                                </LinkStyle>
+                            </ListItem>
+                            <ListItem>
                                 <span>Nodejs02 SVG Vector: &nbsp;</span>
                                 <LinkStyle
                                     href="https://www.svgrepo.com/svg/508935/nodejs02"
@@ -161,9 +171,69 @@ export default function About() {
                                 </LinkStyle>
                             </ListItem>
                             <ListItem>
-                                <span>Javascript 155 SVG Vector : &nbsp;</span>
+                                <span>Javascript 155 SVG Vector: &nbsp;</span>
                                 <LinkStyle
                                     href="https://www.svgrepo.com/svg/512400/javascript-155"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                >
+                                    SVG Repo
+                                </LinkStyle>
+                            </ListItem>
+                            <ListItem>
+                                <span>Typescript SVG Vector: &nbsp;</span>
+                                <LinkStyle
+                                    href="https://www.svgrepo.com/svg/342317/typescript"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                >
+                                    SVG Repo
+                                </LinkStyle>
+                            </ListItem>
+                            <ListItem>
+                                <span>Html 124 SVG Vector: &nbsp;</span>
+                                <LinkStyle
+                                    href="https://www.svgrepo.com/svg/512355/html-124"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                >
+                                    SVG Repo
+                                </LinkStyle>
+                            </ListItem>
+                            <ListItem>
+                                <span>Css3 02 SVG Vector: &nbsp;</span>
+                                <LinkStyle
+                                    href="https://www.svgrepo.com/svg/508795/css3-02"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                >
+                                    SVG Repo
+                                </LinkStyle>
+                            </ListItem>
+                            <ListItem>
+                                <span>Material Ui SVG Vector: &nbsp;</span>
+                                <LinkStyle
+                                    href="https://www.svgrepo.com/svg/306383/material-ui"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                >
+                                    SVG Repo
+                                </LinkStyle>
+                            </ListItem>
+                            <ListItem>
+                                <span>Rest Api SVG Vector: &nbsp;</span>
+                                <LinkStyle
+                                    href="https://www.svgrepo.com/svg/447473/rest-api"
+                                    rel="noopener noreferrer"
+                                    target="_blank"
+                                >
+                                    SVG Repo
+                                </LinkStyle>
+                            </ListItem>
+                            <ListItem>
+                                <span>Graphql SVG Vector: &nbsp;</span>
+                                <LinkStyle
+                                    href="https://www.svgrepo.com/svg/306155/graphql"
                                     rel="noopener noreferrer"
                                     target="_blank"
                                 >

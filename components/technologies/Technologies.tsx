@@ -23,7 +23,7 @@ const RootStyle = styled("div")<ThemeContextProps>(
 
 function Technologies() {
     const { selectedMode, selectedTheme } = useContext(MainContext);
-    const { nextjs, react, nodejs, mongodb, javascript, typescript } = glossary;
+    const { nextjs, react, nodejs, mongodb, javascript, typescript, html, css, materialui, restapi, graphql } = glossary;
     const theme: CustomTheme = useTheme();
     return (
         <RootStyle
@@ -36,6 +36,11 @@ function Technologies() {
             <mongodb.logo />
             <javascript.logo />
             <typescript.logo />
+            <html.logo />
+            <css.logo />
+            <materialui.logo />
+            <restapi.logo />
+            <graphql.logo />
             {/* <div><span>{NextJs.description}</span></div> */}
         </RootStyle>
     );
