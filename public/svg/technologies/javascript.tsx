@@ -25,7 +25,7 @@ const JavaScriptSvg = function () {
     const theme: CustomTheme = useTheme();
     return (
         <SvgStyle
-            width="100"
+            width="75"
             viewBox="0 0 20 20"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +41,7 @@ const JavaScriptSvg = function () {
             ></g>
             <g id="SVGRepo_iconCarrier">
                 {" "}
-                <title>Javascript Logo</title> <desc>Javascript Logo Vector</desc>{" "}
+                <title>JavaScript</title> <desc>Javascript Logo Vector</desc>{" "}
                 <defs> </defs>{" "}
                 <g id="Page-1" stroke="none" strokeWidth="1">
                     {" "}

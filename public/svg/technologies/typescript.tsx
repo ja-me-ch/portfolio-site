@@ -20,14 +20,14 @@ const TypeScriptSvg = function () {
     const theme: CustomTheme = useTheme();
     return (
         <SvgStyle
-            width="100"
+            width="75"
             viewBox="0 0 32 32"
             xmlns="http://www.w3.org/2000/svg"
             modeColor={theme.themes.modes[selectedMode.value].contrastText}
             themeColor={theme.themes.themePalettes[selectedTheme.value].main}
         >
             <title>TypeScript</title>
-            <desc>TypeScript Logo</desc>
+            <desc>TypeScript Logo Vector</desc>
             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
             <g
                 id="SVGRepo_tracerCarrier"

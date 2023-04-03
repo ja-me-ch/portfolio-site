@@ -26,7 +26,7 @@ const HtmlSvg = function () {
     const theme: CustomTheme = useTheme();
     return (
         <SvgStyle
-            width="100"
+            width="75"
             viewBox="-1 0 20 20"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
@@ -41,13 +41,14 @@ const HtmlSvg = function () {
             ></g>
             <g id="SVGRepo_iconCarrier">
                 {" "}
-                <title>HTML</title> <desc>HTML Logo Vector</desc> <defs> </defs>{" "}
+                <title>HTML</title>
+                <desc>HTML Logo Vector</desc> <defs> </defs>{" "}
                 <g
                     id="Page-1"
                     stroke="none"
                     strokeWidth="1"
                     fill="none"
-                    fill-rule="evenodd"
+                    fillRule="evenodd"
                 >
                     {" "}
                     <g

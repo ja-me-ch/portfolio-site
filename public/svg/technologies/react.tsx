@@ -20,14 +20,15 @@ const ReactSvg = function () {
     const theme: CustomTheme = useTheme();
     return (
         <SvgStyle
-            fill="#000000"
-            width="100"
+            width="75"
             viewBox="0 -1.5 27 27"
             xmlns="http://www.w3.org/2000/svg"
             preserveAspectRatio="xMidYMid"
             modeColor={theme.themes.modes[selectedMode.value].contrastText}
             themeColor={theme.themes.themePalettes[selectedTheme.value].main}
         >
+            <title>React.js</title>
+            <desc>React.js Logo Vector</desc>
             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
             <g
                 id="SVGRepo_tracerCarrier"

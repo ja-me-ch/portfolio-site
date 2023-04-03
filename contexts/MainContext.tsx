@@ -15,6 +15,10 @@ interface MainContextProps {
         value: string;
         toggle: () => void;
     };
+    selectedTech: {
+        value: string | null;
+        update: (tech: string) => void;
+    }
 }
 
 export const MainContext = createContext<MainContextProps | undefined>(
@@ -25,6 +29,7 @@ export function MainContextProvider(props) {
     const [showNavbar, setShowNavbar] = useState(true);
     const [themeMode, setThemeMode] = useState("light");
     const [selectedTheme, setSelectedTheme] = useState("aquamarine");
+    const [selectedTech, setSelectedTech] = useState(null);
     const theme: CustomTheme = useTheme();
 
     const useDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -47,6 +52,10 @@ export function MainContextProvider(props) {
         setSelectedTheme(themeName);
     };
 
+    const updateSelectedTech = function (tech: string): void {
+        setSelectedTech(tech);
+    }
+
     return (
         <MainContext.Provider
             value={
@@ -63,6 +72,10 @@ export function MainContextProvider(props) {
                         value: themeMode,
                         toggle: toggleThemeMode,
                     },
+                    selectedTech: {
+                        value: selectedTech,
+                        update: updateSelectedTech
+                    }
                 } as MainContextProps
             }
         >

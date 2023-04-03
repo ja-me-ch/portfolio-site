@@ -27,10 +27,12 @@ const RestApiSvg = function () {
         <SvgStyle
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
-            width='100'
+            width="75"
             modeColor={theme.themes.modes[selectedMode.value].contrastText}
             themeColor={theme.themes.themePalettes[selectedTheme.value].main}
         >
+            <title>REST API</title>
+            <desc>REST API Logo Vector</desc>
             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
             <g
                 id="SVGRepo_tracerCarrier"

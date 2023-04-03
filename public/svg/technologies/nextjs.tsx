@@ -21,13 +21,16 @@ const NextJsSvg = function () {
     return (
         <SvgStyle
             viewBox="0 0 256 256"
-            width="100"
+            width="75"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             preserveAspectRatio="xMidYMid"
             modeColor={theme.themes.modes[selectedMode.value].contrastText}
             themeColor={theme.themes.themePalettes[selectedTheme.value].main}
+            id='nextjs'
         >
+            <title>Next.js</title>
+            <desc>Next.js Logo Vector</desc>
             <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
             <g
                 id="SVGRepo_tracerCarrier"

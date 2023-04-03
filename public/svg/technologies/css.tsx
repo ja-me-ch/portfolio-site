@@ -28,7 +28,7 @@ const CssSvg = function () {
         <SvgStyle
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
-            width="100"
+            width="75"
             viewBox="0 0 512 512"
             enable-background="new 0 0 512 512"
             modeColor={theme.themes.modes[selectedMode.value].contrastText}
