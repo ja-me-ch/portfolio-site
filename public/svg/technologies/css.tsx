@@ -33,6 +33,7 @@ const CssSvg = function () {
             enable-background="new 0 0 512 512"
             modeColor={theme.themes.modes[selectedMode.value].contrastText}
             themeColor={theme.themes.themePalettes[selectedTheme.value].main}
+            id='css-logo'
         >
             <title>CSS3</title>
             <desc>CSS3 Logo Vector</desc>

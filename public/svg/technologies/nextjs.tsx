@@ -27,7 +27,7 @@ const NextJsSvg = function () {
             preserveAspectRatio="xMidYMid"
             modeColor={theme.themes.modes[selectedMode.value].contrastText}
             themeColor={theme.themes.themePalettes[selectedTheme.value].main}
-            id='nextjs'
+            id='nextjs-logo'
         >
             <title>Next.js</title>
             <desc>Next.js Logo Vector</desc>
