@@ -20,7 +20,7 @@ const MongoDbSVG = function () {
     const theme: CustomTheme = useTheme();
     return (
         <SvgStyle
-            width="75"
+            width="100"
             viewBox="0 0 32 32"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"

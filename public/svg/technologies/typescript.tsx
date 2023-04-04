@@ -20,7 +20,7 @@ const TypeScriptSvg = function () {
     const theme: CustomTheme = useTheme();
     return (
         <SvgStyle
-            width="75"
+            width="100"
             viewBox="0 0 32 32"
             xmlns="http://www.w3.org/2000/svg"
             modeColor={theme.themes.modes[selectedMode.value].contrastText}

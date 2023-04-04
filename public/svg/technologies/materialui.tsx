@@ -26,7 +26,7 @@ const MaterialUiSvg = function () {
         <SvgStyle
             // fill="#000000"
             viewBox="0 0 24 24"
-            width="75"
+            width="100"
             role="img"
             xmlns="http://www.w3.org/2000/svg"
             modeColor={theme.themes.modes[selectedMode.value].contrastText}

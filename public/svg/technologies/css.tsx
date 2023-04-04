@@ -28,12 +28,12 @@ const CssSvg = function () {
         <SvgStyle
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
-            width="75"
+            width="100"
             viewBox="0 0 512 512"
             enable-background="new 0 0 512 512"
             modeColor={theme.themes.modes[selectedMode.value].contrastText}
             themeColor={theme.themes.themePalettes[selectedTheme.value].main}
-            id='css-logo'
+            id="css-logo"
         >
             <title>CSS3</title>
             <desc>CSS3 Logo Vector</desc>

@@ -23,6 +23,7 @@ const RootStyle = styled("div")<ThemeContextProps>(
     }) => ({
         display: "flex",
         flexDirection: "row",
+        borderRadius: '0.2rem',
         background: alpha(theme.themes.themePalettes[selectedTheme].main, 0.15),
         color: theme.themes.modes[selectedMode].contrastText,
         marginBottom: "1rem",
@@ -31,10 +32,18 @@ const RootStyle = styled("div")<ThemeContextProps>(
 
 const LogoContainer = styled("div")(() => ({
     flexBasis: "50%",
+    padding: '0.5rem',
+    ['div:not(:last-child)']: {
+        marginBottom: '0.5rem',
+    }
 }));
 
 const DescriptionContainer = styled("div")(() => ({
     flexBasis: "50%",
+}));
+
+const Title = styled('h3')(() => ({
+
 }));
 
 const RadioButtonStyle = styled("input")<ThemeContextProps>(
@@ -49,6 +58,7 @@ const RadioButtonStyle = styled("input")<ThemeContextProps>(
         position: "absolute",
         width: "0",
         ":checked+svg": {
+            filter: 'drop-shadow(2px 2px 2px rgb(0 0 0 / 0.2))',
             fill: theme.themes.themePalettes[selectedTheme].main,
             path: {
                 fill: theme.themes.themePalettes[selectedTheme].main,
@@ -56,6 +66,14 @@ const RadioButtonStyle = styled("input")<ThemeContextProps>(
         },
     })
 );
+
+const LogoRow = styled('div')(() => ({
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: '1rem',
+    
+}))
 
 function Technologies() {
     const { selectedMode, selectedTheme, selectedTech } =
@@ -79,147 +97,40 @@ function Technologies() {
         selectedTech.update(e.target.value);
     };
 
+    const getLogos = function (logos: string[]) {
+        return logos.map((l) => {
+            const logo = glossary[l];
+            return (
+                <label htmlFor={l} key={`${l}-label`}>
+                    <RadioButtonStyle
+                        type="radio"
+                        name="technologies"
+                        value={l}
+                        id={l}
+                        onClick={handleOnClick}
+                        selectedTheme={selectedTheme.value}
+                    />
+                    <logo.logo />
+                </label>
+            );
+        });
+    };
+
     return (
         <RootStyle
             selectedTheme={selectedTheme.value}
             selectedMode={selectedMode.value}
         >
             <LogoContainer>
-                <div>
-                    <label htmlFor="nextjs">
-                        <RadioButtonStyle
-                            type="radio"
-                            name="technologies"
-                            value="nextjs"
-                            id="nextjs"
-                            onClick={handleOnClick}
-                            selectedTheme={selectedTheme.value}
-                        />
-                        <nextjs.logo />
-                    </label>
+                <LogoRow>{getLogos(['nextjs', 'react', 'materialui'])}</LogoRow>
+                <LogoRow>{ getLogos(['javascript', 'typescript', 'html', 'css'])}</LogoRow>
+                <LogoRow>{ getLogos(['nodejs', 'mongodb', 'graphql','restapi'])}</LogoRow>
 
-                    <label htmlFor="react">
-                        <RadioButtonStyle
-                            type="radio"
-                            name="technologies"
-                            value="react"
-                            id="react"
-                            onClick={handleOnClick}
-                            selectedTheme={selectedTheme.value}
-                        />
-                        <react.logo />
-                    </label>
-                </div>
-
-                <label htmlFor="nodejs">
-                    <RadioButtonStyle
-                        type="radio"
-                        name="technologies"
-                        value="nodejs"
-                        id="nodejs"
-                        onClick={handleOnClick}
-                        selectedTheme={selectedTheme.value}
-                    />
-                    <nodejs.logo />
-                </label>
-
-                <label htmlFor="mongodb">
-                    <RadioButtonStyle
-                        type="radio"
-                        name="technologies"
-                        value="mongodb"
-                        id="mongodb"
-                        onClick={handleOnClick}
-                        selectedTheme={selectedTheme.value}
-                    />
-                    <mongodb.logo />
-                </label>
-
-                <label htmlFor="javascript">
-                    <RadioButtonStyle
-                        type="radio"
-                        name="technologies"
-                        value="javascript"
-                        id="javascript"
-                        onClick={handleOnClick}
-                        selectedTheme={selectedTheme.value}
-                    />
-                    <javascript.logo />
-                </label>
-
-                <label htmlFor="typescript">
-                    <RadioButtonStyle
-                        type="radio"
-                        name="technologies"
-                        value="typescript"
-                        id="typescript"
-                        onClick={handleOnClick}
-                        selectedTheme={selectedTheme.value}
-                    />
-                    <typescript.logo />
-                </label>
-                <label htmlFor="html">
-                    <RadioButtonStyle
-                        type="radio"
-                        name="technologies"
-                        value="html"
-                        id="html"
-                        onClick={handleOnClick}
-                        selectedTheme={selectedTheme.value}
-                    />
-                    <html.logo />
-                </label>
-                <label htmlFor="css">
-                    <RadioButtonStyle
-                        type="radio"
-                        name="technologies"
-                        value="css"
-                        id="css"
-                        onClick={handleOnClick}
-                        selectedTheme={selectedTheme.value}
-                    />
-                    <css.logo />
-                </label>
-
-                <label htmlFor="materialui">
-                    <RadioButtonStyle
-                        type="radio"
-                        name="technologies"
-                        value="materialui"
-                        id="materialui"
-                        onClick={handleOnClick}
-                        selectedTheme={selectedTheme.value}
-                    />
-                    <materialui.logo />
-                </label>
-
-                <label htmlFor="restapi">
-                    <RadioButtonStyle
-                        type="radio"
-                        name="technologies"
-                        value="restapi"
-                        id="restapi"
-                        onClick={handleOnClick}
-                        selectedTheme={selectedTheme.value}
-                    />
-                    <restapi.logo />
-                </label>
-
-                <label htmlFor="graphql">
-                    <RadioButtonStyle
-                        type="radio"
-                        name="technologies"
-                        value="graphql"
-                        id="graphql"
-                        onClick={handleOnClick}
-                        selectedTheme={selectedTheme.value}
-                    />
-                    <graphql.logo />
-                </label>
+                
             </LogoContainer>
             <DescriptionContainer>
                 {selectedTech.value === null
-                    ? "The Web Developer Stack"
+                    ? <Title>The Web Developer Stack</Title>
                     : glossary[selectedTech.value].description}
             </DescriptionContainer>
         </RootStyle>

@@ -27,7 +27,7 @@ const RestApiSvg = function () {
         <SvgStyle
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
-            width="75"
+            width="100"
             modeColor={theme.themes.modes[selectedMode.value].contrastText}
             themeColor={theme.themes.themePalettes[selectedTheme.value].main}
         >

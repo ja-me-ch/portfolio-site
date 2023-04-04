@@ -20,7 +20,7 @@ const ReactSvg = function () {
     const theme: CustomTheme = useTheme();
     return (
         <SvgStyle
-            width="75"
+            width="100"
             viewBox="0 -1.5 27 27"
             xmlns="http://www.w3.org/2000/svg"
             preserveAspectRatio="xMidYMid"
