@@ -5,26 +5,38 @@ import Link from "next/link";
 
 import Head from "next/head";
 import Contact from "../components/Contact";
-import { ThemeContextProps } from '../types/common';
+import credits from "../helper-functions/credits";
+import { ThemeContextProps } from "../types/common";
 
-const RootStyle = styled("div")<ThemeContextProps>(({ theme, selectedMode }: { theme: CustomTheme, selectedMode: string }) => ({
-    display: "flex",
-    flexDirection: "row",
-    color: theme.themes.modes[selectedMode].contrastText,
-    transition: "1s all ease",
-    maxWidth: `${theme.breakpoints.values["lg"]}px`,
-    // border: '1px solid red',
-    [theme.breakpoints.down("sm")]: {
+const RootStyle = styled("div")<ThemeContextProps>(
+    ({
+        theme,
+        selectedMode,
+    }: {
+        theme: CustomTheme;
+        selectedMode: string;
+    }) => ({
+        display: "flex",
         flexDirection: "column",
-    },
-}));
+        color: theme.themes.modes[selectedMode].contrastText,
+        transition: "1s all ease",
+        maxWidth: `${theme.breakpoints.values["lg"]}px`,
+        // border: '1px solid red',
+        [theme.breakpoints.down("sm")]: {
+            flexDirection: "column",
+        },
+    })
+);
 
 const AboutContent = styled("main")(({ theme }: { theme: CustomTheme }) => ({
     // border: "1px solid blue",
-    flexBasis: "60%",
-    flexGrow: "1",
+    // flexBasis: "60%",
+    // flexGrow: "1",
+    display: 'flex',
+    flexDirection: 'row',
     paddingRight: "1rem",
     [theme.breakpoints.down("sm")]: {
+        flexDirection: 'column',
         paddingRight: "0",
     },
 }));
@@ -32,7 +44,7 @@ const AboutContent = styled("main")(({ theme }: { theme: CustomTheme }) => ({
 const Title = styled("h2")(() => ({
     fontSize: "2rem",
     marginTop: "0.5rem",
-    marginBottom: "1rem",
+    marginBottom: "0.5rem",
 }));
 
 const ListStyle = styled("ul")(() => ({
@@ -44,6 +56,12 @@ const ListItem = styled("li")(() => ({
     marginBlock: "0.3rem",
 }));
 
+const CreditsSection = styled("section")(() => ({
+    display: "flex",
+    flexDirection: "row",
+    // width: "100%",
+}));
+
 const LinkStyle = styled(Link)(() => ({
     fontWeight: "600",
     "&:hover": {
@@ -53,6 +71,42 @@ const LinkStyle = styled(Link)(() => ({
 
 export default function About() {
     const { selectedMode } = useContext(MainContext);
+
+    const creditsMap = new Map();
+    credits.forEach((c) => {
+        if (creditsMap.has(c.type)) {
+            creditsMap.get(c.type).push(c);
+        } else {
+            creditsMap.set(c.type, [c]);
+        }
+        // console.log(creditsMap)
+    });
+
+    const creditColumns = [];
+
+    for (const key of creditsMap.keys()) {
+        const listItems = creditsMap.get(key).map((c) => {
+            return (
+                <ListItem key={`${c.name}-${c.type}`}>
+                    <span>{`${c.name}: `}</span>
+                    <LinkStyle
+                        href={c.site}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                    >
+                        {c.siteName}
+                    </LinkStyle>
+                </ListItem>
+            );
+        });
+        creditColumns.push(
+            <div>
+                <h3>{`${key}:`}</h3>
+                <ListStyle>{listItems}</ListStyle>
+            </div>
+        );
+    }
+
     return (
         <>
             <Head>
@@ -60,6 +114,8 @@ export default function About() {
             </Head>
             <RootStyle selectedMode={selectedMode.value}>
                 <AboutContent aria-labelledby="h2-about">
+                    <div>
+
                     <Title id="h2-about">About</Title>
                     <p aria-label="About Content">
                         A web developer with a focus on React.js, Next.js, and
@@ -96,154 +152,13 @@ export default function About() {
                         </ListItem>
                     </ListStyle>
                     <p>And more!</p>
-                    <section aria-labelledby="h2-credits">
-                        <Title id="h2-credits">Credits</Title>
-                        <h3>Assets Used:</h3>
-                        <ListStyle>
-                            <ListItem>
-                                <span>Linkedin SVG Vector: &nbsp;</span>
-                                <LinkStyle
-                                    href="https://www.svgrepo.com/svg/922/linkedin"
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                >
-                                    SVG Repo
-                                </LinkStyle>
-                            </ListItem>
-                            <ListItem>
-                                <span>Github SVG Vector: &nbsp;</span>
-                                <LinkStyle
-                                    href="https://www.svgrepo.com/svg/503359/github"
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                >
-                                    SVG Repo
-                                </LinkStyle>
-                            </ListItem>
-                            <ListItem>
-                                <span>Email SVG Vector: &nbsp;</span>
-                                <LinkStyle
-                                    href="https://www.svgrepo.com/svg/502648/email"
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                >
-                                    SVG Repo
-                                </LinkStyle>
-                            </ListItem>
-                            <ListItem>
-                                <span>Nextjs Icon SVG Vector: &nbsp;</span>
-                                <LinkStyle
-                                    href="https://www.svgrepo.com/svg/354113/nextjs-icon"
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                >
-                                    SVG Repo
-                                </LinkStyle>
-                            </ListItem>
-                            <ListItem>
-                                <span>React SVG Vector: &nbsp;</span>
-                                <LinkStyle
-                                    href="https://www.svgrepo.com/svg/394388/react"
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                >
-                                    SVG Repo
-                                </LinkStyle>
-                            </ListItem>
-                            <ListItem>
-                                <span>Nodejs02 SVG Vector: &nbsp;</span>
-                                <LinkStyle
-                                    href="https://www.svgrepo.com/svg/508935/nodejs02"
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                >
-                                    SVG Repo
-                                </LinkStyle>
-                            </ListItem>
-                            <ListItem>
-                                <span>Mongodb SVG Vector: &nbsp;</span>
-                                <LinkStyle
-                                    href="https://www.svgrepo.com/svg/473729/mongodb"
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                >
-                                    SVG Repo
-                                </LinkStyle>
-                            </ListItem>
-                            <ListItem>
-                                <span>Javascript 155 SVG Vector: &nbsp;</span>
-                                <LinkStyle
-                                    href="https://www.svgrepo.com/svg/512400/javascript-155"
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                >
-                                    SVG Repo
-                                </LinkStyle>
-                            </ListItem>
-                            <ListItem>
-                                <span>Typescript SVG Vector: &nbsp;</span>
-                                <LinkStyle
-                                    href="https://www.svgrepo.com/svg/342317/typescript"
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                >
-                                    SVG Repo
-                                </LinkStyle>
-                            </ListItem>
-                            <ListItem>
-                                <span>Html 124 SVG Vector: &nbsp;</span>
-                                <LinkStyle
-                                    href="https://www.svgrepo.com/svg/512355/html-124"
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                >
-                                    SVG Repo
-                                </LinkStyle>
-                            </ListItem>
-                            <ListItem>
-                                <span>Css3 02 SVG Vector: &nbsp;</span>
-                                <LinkStyle
-                                    href="https://www.svgrepo.com/svg/508795/css3-02"
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                >
-                                    SVG Repo
-                                </LinkStyle>
-                            </ListItem>
-                            <ListItem>
-                                <span>Material Ui SVG Vector: &nbsp;</span>
-                                <LinkStyle
-                                    href="https://www.svgrepo.com/svg/306383/material-ui"
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                >
-                                    SVG Repo
-                                </LinkStyle>
-                            </ListItem>
-                            <ListItem>
-                                <span>Rest Api SVG Vector: &nbsp;</span>
-                                <LinkStyle
-                                    href="https://www.svgrepo.com/svg/447473/rest-api"
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                >
-                                    SVG Repo
-                                </LinkStyle>
-                            </ListItem>
-                            <ListItem>
-                                <span>Graphql SVG Vector: &nbsp;</span>
-                                <LinkStyle
-                                    href="https://www.svgrepo.com/svg/306155/graphql"
-                                    rel="noopener noreferrer"
-                                    target="_blank"
-                                >
-                                    SVG Repo
-                                </LinkStyle>
-                            </ListItem>
-                        </ListStyle>
-                    </section>
+                    </div>
+                    <Contact />
                 </AboutContent>
-                <Contact />
+                <Title id="h2-credits">Credits</Title>
+                <CreditsSection aria-labelledby="h2-credits">
+                    {creditColumns}
+                </CreditsSection>
             </RootStyle>
         </>
     );

@@ -26,6 +26,9 @@ const ContactContent = styled("aside")<ThemeContextProps>(({ theme, selectedMode
     padding: "1rem",
     paddingTop: "0",
     [theme.breakpoints.down("sm")]: {
+        transition: '0s all',
+        padding: '0',
+        marginBottom: '2rem',
         justifyContent: "center",
     },
 }));
