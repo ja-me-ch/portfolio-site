@@ -1,21 +1,34 @@
 import '../styles/globals.css';
 import { MainContextProvider } from '../contexts/MainContext';
 import DefaultLayout from "../components/layouts/DefaultLayout";
-import { ThemeProvider } from "@mui/material/styles";
+import { Theme, ThemeProvider } from "@mui/material/styles";
 import theme from "../styles/theme";
-import { CustomTheme, styled } from "@mui/material";
-import Head from "next/head";
+import { styled } from "@mui/material";
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 
-const RootStyle = styled("div")(() => ({}));
+const RootStyle = styled("div")(
+    ({ reducedMotion, theme }: { reducedMotion: boolean, theme:Theme }) => ({
+        "*": {
+            transitionDuration: reducedMotion ?? "0s all ease",
+        },
+        [theme.breakpoints.down("sm")]: {
+            '*': {
+                transitionDuration: reducedMotion ?? "0s"
+            }
+        },
+    })
+);
 
 function MyApp({ Component, pageProps }) {
-    
+    const reducedMotion = useMediaQuery('(prefers-reduced-motion');
 
+
+    console.log(reducedMotion);
     return (
         <ThemeProvider theme={theme}>
             <MainContextProvider>
-                <RootStyle>
+                <RootStyle reducedMotion={reducedMotion}>
                     <DefaultLayout>
                         <Component {...pageProps} />
                     </DefaultLayout>
