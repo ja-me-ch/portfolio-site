@@ -5,7 +5,7 @@ const PortfolioSitePreview: Preview = {
     name: "portfolio-site",
     // imageUrl: '',
     description:
-        "A single page application that simulates the engraving system for the game Lost Ark.",
+        "A portfolio site made in React.js that houses my projects. (You are currently browsing it!)",
     siteUrl: "https://github.com/ja-me-ch/portfolio-site",
     github: "https://github.com/ja-me-ch/portfolio-site",
     tags: [

@@ -19,9 +19,9 @@ const RootStyle = styled("div")(({ theme }: { theme: Theme }) => ({
 }));
 
 function MyApp({ Component, pageProps }) {
-    const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce");
+    // const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce");
 
-    console.log(reducedMotion);
+    // console.log(reducedMotion);
     return (
         <ThemeProvider theme={theme}>
             <MainContextProvider>
