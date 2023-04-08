@@ -104,7 +104,7 @@ const LogoRow = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     [theme.breakpoints.down("sm")]: {
         label: {
             svg: {
-                width: "90px",
+                width: "60px",
             },
         },
     },
@@ -127,8 +127,6 @@ function Technologies() {
         graphql,
     } = glossary;
     const theme: CustomTheme = useTheme();
-
-    console.log(theme.breakpoints);
 
     const handleOnClick = function (e) {
         selectedTech.update(e.target.value);

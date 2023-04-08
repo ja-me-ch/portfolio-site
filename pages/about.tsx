@@ -100,7 +100,7 @@ export default function About() {
             );
         });
         creditColumns.push(
-            <div>
+            <div key={`${key}-column`}>
                 <h3>{`${key}:`}</h3>
                 <ListStyle>{listItems}</ListStyle>
             </div>

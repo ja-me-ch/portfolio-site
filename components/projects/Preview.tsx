@@ -11,6 +11,7 @@ const RootStyle = styled("section")(({ index }: { index: number }) => ({
     flexDirection: "column",
     // marginBlock: "1.3rem",
     paddingBlock: '1.3rem',
+    paddingInline: '2rem',
     alignItems: index % 2 === 0 ? 'flex-start' : 'flex-end'
 }));
 

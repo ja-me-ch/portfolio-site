@@ -23,6 +23,7 @@ const NodeJsSvg = function () {
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             width="100"
+            role="img"
             viewBox="0 0 512 512"
             enable-background="new 0 0 512 512"
             modeColor={theme.themes.modes[selectedMode.value].contrastText}
@@ -30,13 +31,9 @@ const NodeJsSvg = function () {
         >
             <title>Node.js</title>
             <desc>Node.js Logo Vector</desc>
-            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-            <g
-                id="SVGRepo_tracerCarrier"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            ></g>
-            <g id="SVGRepo_iconCarrier">
+            <g strokeWidth="0"></g>
+            <g strokeLinecap="round" strokeLinejoin="round"></g>
+            <g>
                 {" "}
                 <g id="5151e0c8492e5103c096af88a51f17e3">
                     {" "}

@@ -12,7 +12,10 @@ const LinkedInSvg = function ({ modeColor }: { modeColor: string }) {
             style={{
                 transition: "1s all ease",
             }}
+            role="img"
         >
+            <title>LinkedIn</title>
+            <desc>LinkedIn Logo Vector</desc>
             <g>
                 <path
                     // style="fillRule:evenodd;clip-rule:evenodd;"

@@ -97,7 +97,7 @@ const RecentCommit = function ({ props }: { props: CommitInfoProps[] }) {
         >
             <TopBar>
                 <Title>{props[0].repository.name}</Title>
-                <ShowMoreButton onClick={toggleShowMore}>
+                <ShowMoreButton onClick={toggleShowMore} aria-label="Expand-Menu">
                     <NavbarSvg toggle={showMore} />
                 </ShowMoreButton>
             </TopBar>

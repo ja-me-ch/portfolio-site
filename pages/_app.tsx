@@ -7,28 +7,25 @@ import { styled } from "@mui/material";
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 
-const RootStyle = styled("div")(
-    ({ reducedMotion, theme }: { reducedMotion: boolean, theme:Theme }) => ({
+const RootStyle = styled("div")(({ theme }: { theme: Theme }) => ({
+    "*": {
+        animation: "none",
+    },
+    [theme.breakpoints.down("sm")]: {
         "*": {
-            transitionDuration: reducedMotion ?? "0s all ease",
+            animation: "none",
         },
-        [theme.breakpoints.down("sm")]: {
-            '*': {
-                transitionDuration: reducedMotion ?? "0s"
-            }
-        },
-    })
-);
+    },
+}));
 
 function MyApp({ Component, pageProps }) {
-    const reducedMotion = useMediaQuery('(prefers-reduced-motion');
-
+    const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce");
 
     console.log(reducedMotion);
     return (
         <ThemeProvider theme={theme}>
             <MainContextProvider>
-                <RootStyle reducedMotion={reducedMotion}>
+                <RootStyle>
                     <DefaultLayout>
                         <Component {...pageProps} />
                     </DefaultLayout>

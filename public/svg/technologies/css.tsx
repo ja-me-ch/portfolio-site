@@ -34,16 +34,13 @@ const CssSvg = function () {
             modeColor={theme.themes.modes[selectedMode.value].contrastText}
             themeColor={theme.themes.themePalettes[selectedTheme.value].main}
             id="css-logo"
+            role="img"
         >
             <title>CSS3</title>
             <desc>CSS3 Logo Vector</desc>
-            <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
-            <g
-                id="SVGRepo_tracerCarrier"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-            ></g>
-            <g id="SVGRepo_iconCarrier">
+            <g strokeWidth="0"></g>
+            <g strokeLinecap="round" strokeLinejoin="round"></g>
+            <g>
                 {" "}
                 <g id="c133de6af664cd4f011a55de6b001b19">
                     {" "}

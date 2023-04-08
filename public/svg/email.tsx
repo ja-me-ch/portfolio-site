@@ -8,7 +8,10 @@ const EmailSvg = function ({ modeColor } : { modeColor: string }) {
             style={{
                 transition: "1s all ease",
             }}
+            role="img"
         >
+            <title>Email</title>
+            <desc>Email Icon Vector</desc>
             <g id="EmailSvg_bgCarrier" strokeWidth="0"></g>
             <g
                 id="EmailSvg_tracerCarrier"
