@@ -32,23 +32,24 @@ export async function getServerSideProps() {
     const data = await Promise.all(await getAll());
 
     return {
-        props: {
-            data: data.sort((a: Number, b: Number) => {
-                if (
-                    Date.parse(a[0].pushedDate) - Date.parse(b[0].pushedDate) >
-                    0
-                )
-                    return -1;
-                else return 1;
-            }),
-        },
+        props: {},
+        // props: {
+        //     data: data.sort((a: Number, b: Number) => {
+        //         if (
+        //             Date.parse(a[0].pushedDate) - Date.parse(b[0].pushedDate) >
+        //             0
+        //         )
+        //             return -1;
+        //         else return 1;
+        //     }),
+        // },
     };
 }
 
 const RootStyle = styled("div")(({ theme }: { theme: CustomTheme }) => ({
     display: "flex",
     flexDirection: "row",
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     maxWidth: `${theme.breakpoints.values.lg}px`,
     width: "100%",
     gap: "1rem",
@@ -71,28 +72,41 @@ export default function Home({ data }) {
     const { selectedMode } = useContext(MainContext);
     const theme: CustomTheme = useTheme();
 
-    const recentCommits = data.map((e) => {
-        return (
-            <RecentCommit
-                props={e}
-                key={`${e[0].repository.name}-recentCommits`}
-            />
-        );
-    });
+    const getRecentCommits = function (data) {
+        if (data) {
+            return data.map((e) => {
+                return (
+                    <RecentCommit
+                        props={e}
+                        key={`${e[0].repository.name}-recentCommits`}
+                    />
+                );
+            });
+        }
+    };
+    // const recentCommits = data.map((e) => {
+    //     return (
 
-    return (<>
-        <Head>
-            <title>Home | Jacky C.</title>
-        </Head>
-        <RootStyle>
-            <div style={{
-                flexGrow: '1'
-            }}>
-                <Technologies/>
-                <RecentCommits>{recentCommits}</RecentCommits>
-            </div>
-            <Contact />
-        </RootStyle>
-                            </>
+    //     );
+    // });
+
+    return (
+        <>
+            <Head>
+                <title>Home | Jacky C.</title>
+            </Head>
+            <RootStyle>
+                <div
+                    style={{
+                        flexGrow: "1",
+                    }}
+                >
+                    <Technologies />
+
+                    <RecentCommits>{getRecentCommits(data)}</RecentCommits>
+                </div>
+                <Contact />
+            </RootStyle>
+        </>
     );
 }
