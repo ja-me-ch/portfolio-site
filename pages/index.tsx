@@ -72,8 +72,9 @@ export default function Home({ data }) {
     const { selectedMode } = useContext(MainContext);
     const theme: CustomTheme = useTheme();
 
+    // console.log(data);
     const getRecentCommits = function (data) {
-        if (data) {
+        if (data !== undefined) {
             return data.map((e) => {
                 return (
                     <RecentCommit
