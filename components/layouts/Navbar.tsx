@@ -269,7 +269,7 @@ function Navbar() {
     const params = useRouter();
     const theme: CustomTheme = useTheme();
 
-    const pages = ["Home", "Projects", "About", "Glossary"];
+    const pages = ["Home", "Projects", "About"];
 
     const matches = useMediaQuery(theme.breakpoints.up("sm"));
     if (matches && showNavbar.value === false) {
