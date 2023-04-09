@@ -12,7 +12,7 @@ import { MainContext } from "../contexts/MainContext";
 import Head from "next/head";
 import Technologies from "../components/technologies/Technologies";
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
     const makeCall = async function (name: string) {
         return await MakeRequest(Query(name));
     };
