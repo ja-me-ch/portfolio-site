@@ -4,6 +4,7 @@ import { useContext, useState } from "react";
 import { MainContext } from "../../contexts/MainContext";
 import Commit from "./Commit";
 import NavbarSvg from "../../public/svg/navbar";
+import Link from "next/link";
 
 const RootStyle = styled("div")(
     ({ contrastText, bgColor }: { contrastText: string; bgColor: string }) => ({
@@ -32,6 +33,9 @@ const Title = styled("h2")(() => ({
     margin: "0",
     paddingBlock: "1rem",
     paddingLeft: "0.5rem",
+    "&:hover": {
+        textDecoration: "underline",
+    },
 }));
 
 const Commits = styled("div")(({ borderColor }: { borderColor: string }) => ({
@@ -96,8 +100,19 @@ const RecentCommit = function ({ props }: { props: CommitInfoProps[] }) {
             bgColor={theme.themes.themePalettes[selectedTheme.value].main}
         >
             <TopBar>
-                <Title>{props[0].repository.name}</Title>
-                <ShowMoreButton onClick={toggleShowMore} aria-label="Expand-Menu">
+                <Title>
+                    <Link
+                        href={props[0].url.split("commit")[0]}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                    >
+                        {props[0].repository.name}
+                    </Link>
+                </Title>
+                <ShowMoreButton
+                    onClick={toggleShowMore}
+                    aria-label="Expand-Menu"
+                >
                     <NavbarSvg toggle={showMore} />
                 </ShowMoreButton>
             </TopBar>

@@ -27,3 +27,6 @@ A summary/preview of projects along with the link to site if it is hosted anywhe
 - About: A summary of related technologies, techniques and experience.
 - Contact: Links to contact information along with corresponding icons.
 - Credits: A collection of links to assets and attributions I used to make this site.
+
+## Potential Future Updates
+- More In-depth Breakdowns of Projects and dedicated Project pages.
