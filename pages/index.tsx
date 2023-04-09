@@ -32,17 +32,17 @@ export async function getStaticProps() {
     const data = await Promise.all(await getAll());
 
     return {
-        props: {},
-        // props: {
-        //     data: data.sort((a: Number, b: Number) => {
-        //         if (
-        //             Date.parse(a[0].pushedDate) - Date.parse(b[0].pushedDate) >
-        //             0
-        //         )
-        //             return -1;
-        //         else return 1;
-        //     }),
-        // },
+        // props: {},
+        props: {
+            data: data.sort((a: Number, b: Number) => {
+                if (
+                    Date.parse(a[0].pushedDate) - Date.parse(b[0].pushedDate) >
+                    0
+                )
+                    return -1;
+                else return 1;
+            }),
+        },
     };
 }
 
