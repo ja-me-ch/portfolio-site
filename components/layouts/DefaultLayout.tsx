@@ -99,12 +99,18 @@ const VerticalWave = styled("div")<OffsetProps>(
 );
 
 const ChildrenContainer = styled("div")<ThemeContextProps>(
-    ({ theme, selectedMode }: { theme: CustomTheme, selectedMode: string }) => ({
+    ({
+        theme,
+        selectedMode,
+    }: {
+        theme: CustomTheme;
+        selectedMode: string;
+    }) => ({
         display: "flex",
         justifyContent: "center",
         paddingTop: "1rem",
-        paddingInline: '1rem',
-        marginBottom: '1rem',
+        paddingInline: "1rem",
+        marginBottom: "1rem",
         height: "100%",
         color: theme.themes.modes[selectedMode].contrastText,
         // maxWidth: '1280px',
@@ -113,9 +119,9 @@ const ChildrenContainer = styled("div")<ThemeContextProps>(
         // border: '1px solid blue',
         // overflowY: 'auto',
         overflow: "overlay",
-        overflowX: "hidden",
+        // overflowX: "hidden",
         "&::-webkit-scrollbar": {
-            width: "0px",
+            width: "5px",
             transition: "all 1s ease",
         },
         "&::-webkit-scrollbar-track": {
@@ -123,13 +129,15 @@ const ChildrenContainer = styled("div")<ThemeContextProps>(
             marginBottom: "0.5rem",
         },
         "&::-webkit-scrollbar-thumb": {
-            background: "rgba(26, 26, 26, 0.3)",
             borderRadius: "100vw",
             position: "relative",
         },
         "&:hover": {
             "&::-webkit-scrollbar": {
                 width: "5px",
+            },
+            "&::-webkit-scrollbar-thumb": {
+                background: "rgba(26, 26, 26, 0.3)",
             },
         },
         [theme.breakpoints.down("sm")]: {
