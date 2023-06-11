@@ -5,11 +5,11 @@ import { MainContext } from "../../contexts/MainContext";
 import glossary from "../../helper-functions/glossary";
 import { ThemeContextProps } from "../../types/common";
 
-interface IProps {
-    theme: CustomTheme;
-    selectedTheme: string;
-    selectedMode: string;
-}
+// interface IProps {
+//     theme: CustomTheme;
+//     selectedTheme: string;
+//     selectedMode: string;
+// }
 
 const RootStyle = styled("div")<ThemeContextProps>(
     ({
@@ -79,6 +79,9 @@ const RadioButtonStyle = styled("input")<ThemeContextProps>(
                 fill: theme.themes.themePalettes[selectedTheme].main,
             },
         },
+        "+svg": {
+            cursor: "pointer",
+        },
     })
 );
 
@@ -132,6 +135,8 @@ function Technologies() {
         selectedTech.update(e.target.value);
     };
 
+
+    //add cursor pointer to radios
     const getLogos = function (logos: string[]) {
         return logos.map((l) => {
             const logo = glossary[l];
